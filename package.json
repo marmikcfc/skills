@@ -6,6 +6,6 @@
   "engines": { "node": ">=22" },
   "scripts": {
     "test": "node --test 'tests/unit/**/*.test.mjs'",
-    "test:fixtures": "node --test tests/"
+    "test:fixtures": "node --test 'tests/**/*.test.mjs'"
   }
 }
