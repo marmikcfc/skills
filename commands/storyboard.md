@@ -1,27 +1,21 @@
 ---
-description: Storyboard a Vox-style explainer video without generating code yet
+description: Run only stages 1+2 of video-gen (context + storyboard). For iterating the script before any TTS spend.
 argument-hint: <topic>
 ---
 
-Produce a Vox-style storyboard for: **$ARGUMENTS**
+Run ONLY the context-gathering and storyboarding stages of the video-gen pipeline for: **$ARGUMENTS**
 
-Invoke the `explainer-director` subagent. Do not generate any Manim or Remotion code in this command — just return the storyboard. The user will iterate on the storyboard before any code is written.
+This command stops after Stage 2. No TTS, no animation, no render. Use it when you want to iterate on the script before committing to TTS spend.
 
-Output format:
-```
-# Storyboard: <title>
-Runtime estimate: <e.g. 2:15>
-Recommended tool: <manim | remotion> — <one-sentence why>
+# What happens
 
-## Scene 1 — Hook (0:00–0:08)
-Visual: ...
-Narration: "..."
+Invoke the `explainer-director` subagent. It will:
+1. Read Claude memory and detect sibling context plugins.
+2. Ask 1–2 audience questions.
+3. Write `<cwd>/.video-gen/<slug>/audience-brief.md`.
+4. Write `<cwd>/.video-gen/<slug>/storyboard.md` (human review) and `narration.txt` (TTS input).
 
-## Scene 2 — Tension (0:08–0:25)
-...
+# After it finishes
 
-[continue through all 5 Vox beats]
-
-## Open questions
-- ...
-```
+Tell the user:
+> "Storyboard at `<workdir>/storyboard.md`. Edit it directly, then run `/narrate` when ready for TTS. Or re-run `/storyboard` to regenerate."
