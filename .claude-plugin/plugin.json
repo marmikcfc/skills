@@ -1,7 +1,7 @@
 {
   "name": "video-gen",
   "version": "0.1.0",
-  "description": "Generate Vox-style animated explainer videos using Remotion (React) and Manim (Python). Pick a topic, plan the narrative, produce the code, render the video.",
+  "description": "Generate Vox-style animated explainer videos via a 5-stage pipeline. Reads memory for personalization. Uses HyperFrames for rendering, Manim for math scenes, Cartesia or ElevenLabs for narration.",
   "author": {
     "name": "Marmik Pandya",
     "url": "https://github.com/marmikcfc"
@@ -9,5 +9,5 @@
   "homepage": "https://github.com/marmikcfc/video-gen",
   "repository": "https://github.com/marmikcfc/video-gen",
   "license": "MIT",
-  "keywords": ["video", "animation", "remotion", "manim", "explainer", "vox"]
+  "keywords": ["video", "animation", "explainer", "hyperframes", "manim", "vox", "tts", "cartesia", "elevenlabs"]
 }

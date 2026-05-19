@@ -8,7 +8,7 @@
     {
       "name": "video-gen",
       "source": ".",
-      "description": "Generate Vox-style animated explainer videos using Remotion and Manim."
+      "description": "5-stage Vox-style explainer video pipeline (HyperFrames + Manim + Cartesia/ElevenLabs)."
     }
   ]
 }
