@@ -1,16 +1,21 @@
 # video-gen
 
-A Claude Code plugin for generating Vox-style animated explainer videos using **Remotion** (React) and **Manim** (Python). Pick a topic, plan the narrative, produce the code, render the video.
+A Claude Code plugin for generating Vox-style animated explainer videos. Topic in, MP4 out — via a 5-stage pipeline you can checkpoint, edit, and resume.
 
 ## What it does
 
-You give Claude a topic. The plugin:
-1. Decides whether **Manim** or **Remotion** is the right tool for the topic
-2. Plans a Vox-style 5-beat storyboard (hook → tension → metaphor → reveal → recap)
-3. Generates runnable code that produces the video
-4. Hands you the render command
+```
+/explain "why does ice float"
+```
 
-The goal isn't a generic AI video. It's an **explainer that actually teaches**, structured the way the best explainer channels structure theirs.
+Runs five stages:
+1. **Context** — director reads your Claude memory, asks 1–2 audience questions.
+2. **Storyboard** — Vox-style 5-beat plan with per-scene engine (Manim vs HyperFrames).
+3. **Narrate** — Cartesia or ElevenLabs TTS with word-level timestamps. Scenes' timing is derived from those timestamps.
+4. **Animate** — engineer subagents generate Manim Python or HyperFrames HTML, parallelized per scene.
+5. **Render** — HyperFrames composes audio + visuals into a single MP4.
+
+You approve cheap artifacts (storyboard, voice) before expensive ones (animation, render). You can edit any artifact and re-run from that stage.
 
 ## Install
 
@@ -20,35 +25,49 @@ The goal isn't a generic AI video. It's an **explainer that actually teaches**, 
 /plugin install video-gen@video-gen
 ```
 
-## Usage
-
+Then one-time setup:
 ```
-/explain why does ice float
-/storyboard the friend paradox in social networks
-/render
+/video-gen-setup
 ```
-
-## What's inside
-
-| Surface | What it is |
-|---|---|
-| `/explain <topic>` | End-to-end: storyboard → code → render command |
-| `/storyboard <topic>` | Just the storyboard, no code |
-| `/render` | Detect Manim/Remotion in cwd and print the render command |
-| `explainer-director` agent | Vox-style narrative planning |
-| `manim-engineer` agent | Generates Manim Community Edition code |
-| `remotion-engineer` agent | Generates Remotion (React + TS) projects |
-| `vox-explainer-structure` skill | The 5-beat pedagogy |
-| `choosing-the-tool` skill | When to pick Manim vs Remotion |
-| `manim-essentials` skill | Manim conventions and pitfalls |
-| `remotion-essentials` skill | Remotion conventions and pitfalls |
 
 ## Requirements
 
-- **For Manim videos:** Python 3.9+, `pip install manim`, and a working LaTeX install (`brew install --cask mactex-no-gui` on macOS).
-- **For Remotion videos:** Node 18+, `npx remotion --help` should work.
+- **Node.js ≥22** + **FFmpeg** (HyperFrames requirements)
+- **[HyperFrames](https://github.com/heygen-com/hyperframes)** — `npm i -g hyperframes` (or via its skills package)
+- **Manim Community Edition + LaTeX** — only when a video uses math scenes
+- **TTS API key** — Cartesia or ElevenLabs
 
-The plugin generates code; you install the toolchains.
+## Surface
+
+| Surface | What it is |
+|---|---|
+| `/explain <topic>` | Full 5-stage pipeline |
+| `/storyboard <topic>` | Stages 1+2 only |
+| `/narrate` | Re-run Stage 3 |
+| `/animate` | Re-run Stage 4 |
+| `/render` | Re-run Stage 5 |
+| `/video-gen-setup` | One-time setup |
+| `explainer-director` agent | Memory-aware Vox storyboarding |
+| `manim-engineer` agent | Math scene → Manim Python |
+| `hyperframes-engineer` agent | Narrative scene → HyperFrames HTML |
+| Skills | `vox-explainer-structure`, `choosing-the-tool`, `manim-essentials`, `hyperframes-essentials`, `narration-writing`, `voice-driven-timing`, `using-claude-memory` |
+
+## Working directory
+
+Each video gets its own directory under cwd: `.video-gen/<topic-slug>/`. State on disk — no hidden state, no in-memory persistence. You can inspect, edit, archive, or commit anything in there.
+
+## Privacy
+
+The plugin reads your Claude memory (`~/.claude/projects/.../memory/`) to personalize narration tone and framing. **It never embeds raw memory content in the storyboard, narration, or final video.** Memory references are listed by filename in `audience-brief.md` for traceability.
+
+## Testing
+
+```bash
+npm test               # Layer 1 unit tests (fast, CI)
+npm run test:fixtures  # Layers 1 + 2 (still fast, no network)
+```
+
+Layers 3 (smoke) and 4 (agent evals) are manual checklists in `tests/SMOKE.md` and `tests/agent-evals/`.
 
 ## License
 
