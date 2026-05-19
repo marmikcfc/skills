@@ -1,13 +1,13 @@
 ---
 name: choosing-the-tool
-description: Use when deciding between Manim and Remotion for an explainer video. Maps topic characteristics to the right tool and explains the trade-offs.
+description: Use when deciding between Manim and HyperFrames for an explainer video scene. Maps content characteristics to the right tool and explains the trade-offs.
 ---
 
-# Manim vs Remotion: when to use which
+# Manim vs HyperFrames: when to use which
 
-Both can make a good explainer video. They optimize for different content shapes. Pick wrong and you'll fight the tool the whole way.
+Each video can mix engines scene-by-scene. The director picks per scene; the user can override.
 
-## Manim (Python)
+## Manim (Python + LaTeX)
 
 **Strengths**
 - Math typesetting via LaTeX is unbeatable
@@ -17,54 +17,54 @@ Both can make a good explainer video. They optimize for different content shapes
 
 **Weaknesses**
 - Anything text-heavy or UI-flavored fights you
-- No native HTML/image composition workflow
 - Iteration loop is slower (re-render to see changes)
 - Layout is positional/imperative — no flexbox equivalent
 
-**Use Manim when the video is about:**
+**Pick Manim when the scene is about:**
 - Equations, proofs, derivations
 - Geometry, topology, linear algebra
 - Functions, graphs, calculus
 - Algorithms expressed mathematically (Fourier, gradient descent)
 - Anything where the core object IS a mathematical structure
 
-## Remotion (React + TypeScript)
+## HyperFrames (HTML + GSAP/Tailwind/Lottie)
 
 **Strengths**
 - Anything you can render in a browser, you can put in a video
-- Real-time preview (Remotion Studio) — iterate in seconds
+- Real-time preview (`npx hyperframes preview`) — iterate in seconds
 - Flexbox / CSS / web fonts / SVG just work
-- Easy to integrate real imagery, video clips, audio
-- TypeScript catches errors before render
+- Easy to integrate real imagery, video clips
+- Built for AI agents: agents already speak HTML
 
 **Weaknesses**
 - LaTeX-quality math requires extra effort (KaTeX or images)
 - Imperative timing via frame numbers can get fiddly
-- Render is slower than Manim's low-quality preview
 
-**Use Remotion when the video is about:**
-- History, current events, social/policy topics (Vox's bread and butter)
+**Pick HyperFrames when the scene is about:**
+- Hooks, tensions, recaps (narrative beats)
+- History, current events, social/policy topics
 - Software, APIs, UI walkthroughs
 - Data viz mixed with imagery, charts, maps
 - Anything text-driven or comparison-heavy
-- Topics where photos, logos, or real screenshots matter
 
 ## The deciding question
 
-> "Is the core thing I'm animating a *mathematical object* or a *narrative composition*?"
+> "Is the core thing in this scene a *mathematical object* or a *narrative composition*?"
 
-- Mathematical object → Manim
-- Narrative composition → Remotion
+Mathematical object → Manim. Narrative composition → HyperFrames.
 
-If you're explaining the Mandelbrot set, that's a mathematical object — Manim. If you're explaining why housing in San Francisco is expensive, that's a narrative composition with charts and maps — Remotion.
+## Typical 5-beat assignment
 
-## Edge cases
+For a math-heavy explainer (e.g. "gradient descent"):
+- Hook → HyperFrames (a question, an image)
+- Tension → HyperFrames (the misconception)
+- Metaphor → **Manim** (the math)
+- Reveal → **Manim** (the math paying off)
+- Recap → HyperFrames (one sentence)
 
-- **Code walkthroughs:** Remotion (easier to render code with syntax highlighting).
-- **Statistics / probability with formulas:** Manim if formulas dominate; Remotion if it's mostly charts and intuition.
-- **ML/AI concepts:** Depends on the angle. Gradient descent visualized as a ball on a surface → Manim. "How ChatGPT works" with UI mockups → Remotion.
-- **Physics:** Manim is the safer bet; Remotion can work for non-quantitative physics history/concept videos.
+For a narrative explainer (e.g. "why is housing expensive"):
+- All 5 beats → HyperFrames
 
-## What if I want both?
+## Hybrid scenes
 
-You can render Manim clips and import them as `<Video>` assets into a Remotion composition. This is overkill for most short explainers but works for hybrid documentaries (e.g. a Vox-style narrative with a 30-second Manim insert for the math beat).
+Manim outputs MP4 clips that HyperFrames embeds as video assets. So even a HyperFrames scene can include a Manim sub-clip if a specific visual is mathematical. Don't over-use this — single-tool per scene keeps the engineering simpler.
