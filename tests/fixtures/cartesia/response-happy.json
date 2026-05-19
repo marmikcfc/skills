@@ -1,0 +1,10 @@
+{
+  "voice_id": "test-cartesia-voice",
+  "duration": 5.42,
+  "word_timestamps": [
+    {"word": "Why",   "start": 0.42, "end": 0.61},
+    {"word": "does",  "start": 0.62, "end": 0.79},
+    {"word": "ice",   "start": 0.80, "end": 1.02},
+    {"word": "float", "start": 1.03, "end": 1.45}
+  ]
+}
