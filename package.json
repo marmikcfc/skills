@@ -1,0 +1,11 @@
+{
+  "name": "video-gen-plugin-scripts",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test tests/unit/",
+    "test:fixtures": "node --test tests/"
+  }
+}
