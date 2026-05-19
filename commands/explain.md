@@ -1,43 +1,65 @@
 ---
-description: Plan and generate a Vox-style explainer video about a topic
-argument-hint: <topic to explain>
+description: Generate a Vox-style explainer video on a topic via the full 5-stage pipeline
+argument-hint: <topic>
 ---
 
-You are helping the user create a short Vox-style animated explainer video about: **$ARGUMENTS**
+Generate a Vox-style explainer video about: **$ARGUMENTS**
 
-Follow this pipeline. Do NOT skip steps — the value of a Vox-style video comes from doing the pedagogy work *before* the code work.
+You will orchestrate the full 5-stage pipeline with **three checkpoint pauses** for user approval. Do NOT skip checkpoints — they exist so the user doesn't burn TTS quota or render minutes on something they'd reject.
 
-## Step 1 — Choose the tool
+# Working directory
 
-Decide whether this topic is better served by **Manim** (math, equations, geometry, graphs, abstract proofs) or **Remotion** (text/UI, comparisons, timelines, data viz with imagery, anything narrative-heavy). If unsure, invoke the `choosing-the-tool` skill.
+Slug the topic for the directory name (lowercase, hyphens, alphanumeric). Working directory is `<cwd>/.video-gen/<slug>/`. Create it if missing.
 
-State your choice and one sentence on why before continuing.
+# Stage 1 — Context
 
-## Step 2 — Storyboard (delegate to explainer-director)
+Invoke the `explainer-director` subagent. It will:
+- Read Claude memory (`using-claude-memory` skill).
+- Detect sibling context plugins if present.
+- Ask the user 1–2 audience questions.
+- Write `audience-brief.md` in the working dir.
 
-Use the `explainer-director` subagent to produce a structured storyboard following the Vox pattern:
-1. **Hook** (5–10s) — a question, paradox, or surprising claim
-2. **Tension** (10–20s) — why the obvious answer is incomplete
-3. **Visual metaphor** (30–60s) — the core idea made spatial / tangible
-4. **Reveal** (20–40s) — the insight, with the metaphor paying off
-5. **Recap** (5–10s) — one-sentence takeaway the viewer leaves with
+# Stage 2 — Storyboard
 
-Return the storyboard to the user and pause for approval before generating code.
+Continue with `explainer-director`. It will write:
+- `storyboard.md` — human-readable plan with per-scene engine choices.
+- `narration.txt` — clean TTS input with `[SCENE:]` markers.
 
-## Step 3 — Generate code
+⏸ **CHECKPOINT — pause for user approval of `storyboard.md`.** Tell the user:
+> "Review `<workdir>/storyboard.md`. When ready, I'll run TTS via `/narrate`. Reply 'approved' or describe changes."
 
-Once the storyboard is approved:
-- For Manim: delegate to the `manim-engineer` subagent
-- For Remotion: delegate to the `remotion-engineer` subagent
+# Stage 3 — Narrate
 
-The subagent should produce a runnable project (or a single scene file if a project already exists in the cwd).
+When the user approves: run `node scripts/narrate.mjs --workdir <workdir>`. This writes:
+- `audio.mp3`
+- `word-timestamps.json` (with marker pseudo-entries)
+- (Stage 4 setup will write `scenes.json` after merging storyboard metadata)
 
-## Step 4 — Render
+If neither `CARTESIA_API_KEY` nor `ELEVENLABS_API_KEY` is set and no config file exists, point user at `/video-gen-setup`.
 
-Provide the exact command to render (e.g. `manim -pql scene.py Explainer` or `npx remotion render`). Do not auto-run rendering — it can take minutes and the user should kick it off when ready.
+⏸ **CHECKPOINT — pause for user approval of audio.** Tell the user:
+> "TTS done. Listen to `<workdir>/audio.mp3`. Reply 'approved' or describe changes (re-run `/narrate` after editing)."
 
-## Constraints
+# Stage 4 — Animate
 
-- Keep total runtime under 3 minutes unless the user asks for longer.
-- Default aspect ratio 16:9 unless the user requests vertical/square.
-- Prefer **one strong visual metaphor** over many weak ones. Vox-style restraint > maximalism.
+When approved: run `/animate` logic (see that command for details). It will:
+- Run `npx hyperframes init <workdir>/hyperframes` if missing.
+- Copy `audio.mp3` to `<workdir>/hyperframes/public/`.
+- Derive `scenes.json` from word timestamps + storyboard metadata.
+- Dispatch engineer subagents per scene (in parallel where possible).
+- Write the top-level HyperFrames composition referencing all scenes + audio.
+
+⏸ **CHECKPOINT — pause for user preview.** Tell the user:
+> "Preview ready. Run `cd <workdir>/hyperframes && npx hyperframes preview`. When satisfied, reply 'approved'."
+
+# Stage 5 — Render
+
+When approved: run `/render` logic. Shell out to `npx hyperframes render`. Print the path to the final MP4 (`<workdir>/hyperframes/out/video.mp4`).
+
+# Resuming
+
+If the user re-runs `/explain` on the same topic, detect existing artifacts in the workdir and resume from the earliest stale stage (use `scripts/lib/staleness.mjs` logic). Print which stage is being resumed.
+
+# Failures
+
+If any stage fails, surface the error verbatim. Do not auto-retry. Suggest the appropriate per-stage command (`/narrate`, `/animate`, `/render`) for the user to re-run after fixing.
