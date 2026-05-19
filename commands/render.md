@@ -1,13 +1,31 @@
 ---
-description: Print the exact command to render the current Manim or Remotion project
+description: Run Stage 5 (final render) — shell out to npx hyperframes render
 ---
 
-Detect whether the current directory is a Manim or Remotion project:
-- Manim: look for `.py` files with `from manim import` and/or a `manim.cfg`
-- Remotion: look for `package.json` with a `remotion` dependency and a `src/Root.tsx` or similar entry
+Run Stage 5 of the video-gen pipeline: the final render to MP4.
 
-Then print the exact render command, including:
-- For Manim: quality flag (`-pql` low, `-pqm` medium, `-pqh` high), the scene file, and the scene class name
-- For Remotion: `npx remotion render <entry> <composition-id> <output.mp4>` with sensible defaults
+# Preflight
 
-If both or neither are detected, ask the user to clarify which project to render. Do NOT execute the render — only print the command and let the user run it.
+- Find working dir.
+- Verify `<workdir>/hyperframes/` exists. If not: "Run `/animate` first."
+- Verify `<workdir>/hyperframes/public/audio.mp3` exists.
+
+# Run
+
+```bash
+cd <workdir>/hyperframes && npx hyperframes render
+```
+
+HyperFrames writes the final video to `<workdir>/hyperframes/out/video.mp4` (or wherever its config points).
+
+# On success
+
+Print:
+- Final video path.
+- File size and duration (use `ffprobe` if available).
+- "Done. Final video: `<workdir>/hyperframes/out/video.mp4`"
+
+# On failure
+
+- Capture stderr to `<workdir>/render.error.log`.
+- Do NOT attempt automatic fixes. Suggest invoking HyperFrames' own `/hyperframes-cli` skill for debugging.
