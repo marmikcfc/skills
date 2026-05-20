@@ -1,16 +1,20 @@
 # video-gen
 
-A Claude Code plugin for generating Vox-style animated explainer videos. Topic in, MP4 out — via a 5-stage pipeline you can checkpoint, edit, and resume.
+A Claude Code plugin for generating short animated videos — explainers, product launches, demos, codebase walkthroughs. Description in, MP4 out — via a 5-stage pipeline you can checkpoint, edit, and resume.
 
 ## What it does
 
 ```
-/explain "why does ice float"
+/generate "why does ice float"                       # an explainer
+/generate "launch video for my CLI tool, Acme"       # a product launch
+/generate "how auth works in this codebase"          # a codebase walkthrough
 ```
 
+The director picks the right **narrative structure** (explainer = 5-beat pedagogy, launch = 4-beat problem→reveal→CTA, etc.) and **visual style** (punchy Vox-style motion graphics, or a clean on-brand look) for what you asked for. These are independent choices — not every video is a Vox-style explainer.
+
 Runs five stages:
-1. **Context** — director reads your Claude memory, asks 1–2 audience questions.
-2. **Storyboard** — Vox-style 5-beat plan with per-scene engine (Manim vs HyperFrames).
+1. **Brief** — director reads your Claude memory, gathers source material (a codebase, a product page), asks 1–2 questions, picks structure + style.
+2. **Storyboard** — beat-by-beat plan with per-scene engine (Manim vs HyperFrames).
 3. **Narrate** — Cartesia or ElevenLabs TTS with word-level timestamps. Scenes' timing is derived from those timestamps.
 4. **Animate** — engineer subagents generate Manim Python or HyperFrames HTML, parallelized per scene.
 5. **Render** — HyperFrames composes audio + visuals into a single MP4.
@@ -41,16 +45,18 @@ Then one-time setup:
 
 | Surface | What it is |
 |---|---|
-| `/explain <topic>` | Full 5-stage pipeline |
-| `/storyboard <topic>` | Stages 1+2 only |
+| `/generate <description>` | Full 5-stage pipeline |
+| `/storyboard <description>` | Stages 1+2 only |
 | `/narrate` | Re-run Stage 3 |
 | `/animate` | Re-run Stage 4 |
 | `/render` | Re-run Stage 5 |
 | `/video-gen-setup` | One-time setup |
-| `explainer-director` agent | Memory-aware Vox storyboarding |
+| `video-director` agent | Memory-aware storyboarding; picks structure + style |
 | `manim-engineer` agent | Math scene → Manim Python |
 | `hyperframes-engineer` agent | Narrative scene → HyperFrames HTML |
-| Skills | `vox-explainer-structure`, `choosing-the-tool`, `manim-essentials`, `hyperframes-essentials`, `narration-writing`, `voice-driven-timing`, `using-claude-memory` |
+| Structure skills | `vox-explainer-structure` (5-beat explainer), `launch-video-structure` (4-beat launch) |
+| Style skills | `vox-style` (kinetic motion graphics) — optional, default is clean/on-brand |
+| Craft skills | `choosing-the-tool`, `manim-essentials`, `hyperframes-essentials`, `narration-writing`, `voice-driven-timing`, `using-claude-memory` |
 
 ## Working directory
 

@@ -2,7 +2,7 @@
 description: One-time setup — store TTS keys and verify HyperFrames is installed
 ---
 
-One-time setup for video-gen. Run this before your first `/explain`.
+One-time setup for video-gen. Run this before your first `/generate`.
 
 # Steps
 
@@ -66,4 +66,4 @@ Run a no-op narrate dry-check (just provider selection):
 node -e "import('./scripts/lib/provider-select.mjs').then(m => console.log(m.selectProvider({ flag:null, env:process.env, config_keys: JSON.parse(require('fs').readFileSync(require('os').homedir() + '/.config/video-gen/keys.json'))})))"
 ```
 
-Print: "Setup complete. Try `/explain <topic>`."
+Print: "Setup complete. Try `/generate <description>`."

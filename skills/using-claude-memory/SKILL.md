@@ -1,6 +1,6 @@
 ---
 name: using-claude-memory
-description: Use when the explainer-director agent reads Claude Code memory to personalize a video. Covers what to look for, what to ignore, and the privacy rule (never embed raw memory content in narration).
+description: Use when the video-director agent reads Claude Code memory to personalize a video. Covers what to look for, what to ignore, and the privacy rule (never embed raw memory content in narration).
 ---
 
 # Reading Claude memory respectfully

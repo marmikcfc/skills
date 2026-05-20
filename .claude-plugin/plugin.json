@@ -1,7 +1,7 @@
 {
   "name": "video-gen",
   "version": "0.1.0",
-  "description": "Generate Vox-style animated explainer videos via a 5-stage pipeline. Reads memory for personalization. Uses HyperFrames for rendering, Manim for math scenes, Cartesia or ElevenLabs for narration.",
+  "description": "Generate short animated videos — explainers, product launches, demos, codebase walkthroughs — via a 5-stage pipeline. Picks narrative structure and visual style per video. Reads memory for personalization. Uses HyperFrames for rendering, Manim for math scenes, Cartesia or ElevenLabs for narration.",
   "author": {
     "name": "Marmik Pandya",
     "url": "https://github.com/marmikcfc"
