@@ -6,14 +6,14 @@
 
 ## Summary
 
-`video-gen` is a Claude Code plugin that generates Vox-style animated explainer videos. It orchestrates a five-stage pipeline that turns a topic into a final MP4: context-gathering, storyboarding, voice-over generation, scene animation, and rendering. The plugin is voice-driven — TTS word-level timestamps determine when each scene starts and ends, not the storyboard.
+`video-gen` is a Claude Code plugin that generates short animated videos across communication use cases: hard-concept explainers, deep-research videos, product launches, demos, codebase walkthroughs, animated stories, and book/idea summaries. It orchestrates a five-stage pipeline that turns a description into a final MP4: context-gathering, storyboarding, voice-over generation, scene animation, and rendering. The plugin is voice-driven — TTS word-level timestamps determine when each scene starts and ends, not the storyboard.
 
-The plugin does not reimplement rendering. It treats [HyperFrames](https://github.com/heygen-com/hyperframes) as the rendering engine (HTML compositions, deterministic MP4 output, FFmpeg-based) and adds the layers above it: pedagogical structure (Vox 5-beat narrative), personalization (Claude memory + sibling-plugin context), math animation via Manim, voice-over via Cartesia or ElevenLabs, and the scene-timing logic that aligns word timestamps to scene boundaries.
+The plugin does not reimplement rendering. It treats [HyperFrames](https://github.com/heygen-com/hyperframes) as the rendering engine (HTML compositions, deterministic MP4 output, FFmpeg-based) and adds the layers above it: purpose-specific narrative structures, personalization (Claude memory + sibling-plugin context), math animation via Manim, voice-over via Cartesia or ElevenLabs, and the scene-timing logic that aligns word timestamps to scene boundaries.
 
 ## Goals and non-goals
 
 ### Goals
-- Generate short (90s–3min) explainer videos that actually teach, in the style of Vox/Kurzgesagt/3Blue1Brown.
+- Generate short (90s–3min) animated videos that actually communicate: explain hard concepts, synthesize research, launch products, walk through demos or codebases, and turn books or ideas into animated stories.
 - Personalize narration to the user's audience, expertise, and prior context (via Claude Code memory and optional sibling plugins).
 - Support mixed-engine videos — Manim for math-heavy scenes, HyperFrames for narrative/HTML scenes — composed into a single output.
 - Provide a checkpointed pipeline so users approve cheap artifacts (storyboard, voice) before expensive ones (animation, render).
@@ -38,11 +38,11 @@ The plugin does not reimplement rendering. It treats [HyperFrames](https://githu
 
 ### Pipeline overview
 
-The user runs `/explain <topic>` (or the per-stage commands). The pipeline progresses through five stages, with three checkpoint pauses where the user approves cheap artifacts before more expensive ones are produced:
+The user runs `/generate <description>` (or the per-stage commands). The pipeline progresses through five stages, with three checkpoint pauses where the user approves cheap artifacts before more expensive ones are produced:
 
 ```
 1. CONTEXT   → director reads ~/.claude/.../memory/, asks audience questions
-2. STORYBOARD → director writes Vox 5-beat plan with scene markers + per-scene engine
+2. STORYBOARD → director picks structure + style, then writes scene markers + per-scene engine
                 ⏸ USER APPROVES
 3. NARRATE   → TTS the narration once, derive scene timestamps
                 ⏸ USER LISTENS & APPROVES
@@ -74,7 +74,7 @@ Per video:
     out/video.mp4                # stage 5 final output
 ```
 
-Re-running `/explain <topic>` from the same cwd is idempotent — the plugin reads existing artifacts and resumes from the earliest stale stage.
+Re-running `/generate <description>` from the same cwd is idempotent — the plugin reads existing artifacts and resumes from the earliest stale stage.
 
 ## Components
 
@@ -82,20 +82,20 @@ Re-running `/explain <topic>` from the same cwd is idempotent — the plugin rea
 
 | Command | Stage(s) | Purpose |
 |---|---|---|
-| `/explain <topic>` | 1→5 | Full pipeline with checkpoints. The default user entry point. |
+| `/generate <description>` | 1→5 | Full pipeline with checkpoints. The default user entry point. |
 | `/storyboard <topic>` | 1+2 | Only context-gathering + storyboard. For users who want to iterate the script before any TTS spend. |
 | `/narrate` | 3 | Re-run TTS against the current `storyboard.md` in the cwd's `.video-gen/<slug>/`. |
 | `/animate` | 4 | Re-run scene code generation against the current `scenes.json`. |
 | `/render` | 5 | Shell out to `npx hyperframes render`. |
 | `/video-gen-setup` | — | One-time helper. Prompts for Cartesia/ElevenLabs keys, writes `~/.config/video-gen/keys.json` with `chmod 600`. Checks HyperFrames is installed; prints install command if not. |
 
-`/explain` is the happy path. The others let a user re-enter the middle of the pipeline without re-running upstream stages.
+`/generate` is the happy path. The others let a user re-enter the middle of the pipeline without re-running upstream stages.
 
 ### Subagents (`agents/`)
 
 | Agent | Responsibility | Tools |
 |---|---|---|
-| `explainer-director` | Stages 1+2: reads memory, detects sibling plugins, asks 1–2 audience questions, writes storyboard with scene markers + per-scene engine choice. | Read, Write, WebFetch, WebSearch, Bash |
+| `video-director` | Stages 1+2: reads memory, detects sibling plugins, asks 1–2 audience questions, picks video type + visual style, writes storyboard with scene markers + per-scene engine choice. | Read, Write, WebFetch, WebSearch, Bash |
 | `manim-engineer` | One Manim scene → runnable Python → MP4 sized to the scene's duration. Stateless: sees only one scene at a time. | Read, Write, Edit, Bash, Glob, Grep |
 | `hyperframes-engineer` | One HyperFrames scene → HTML composition. Delegates to HyperFrames' own `/hyperframes` skill for deep questions. Stateless. | Read, Write, Edit, Bash, Glob, Grep |
 
@@ -105,7 +105,9 @@ The director is the brain. Engineer agents are dumb codegen — they receive a s
 
 | Skill | Status | Purpose |
 |---|---|---|
-| `vox-explainer-structure` | Keep (from initial scaffold) | The 5-beat pedagogy. Universal across engines. |
+| `vox-explainer-structure` | Keep (from initial scaffold) | The 5-beat pedagogy for hard-concept explainers. |
+| `research-video-structure` | New | The thesis-driven structure for deep-research and synthesis videos. |
+| `animated-story-structure` | New | The narrative structure for animated stories and book/idea summaries. |
 | `choosing-the-tool` | Update | Frame the choice as Manim (math) vs HyperFrames (everything else). Remove Remotion. |
 | `manim-essentials` | Keep | Manim Community Edition conventions. |
 | `hyperframes-essentials` | New | When to use which HyperFrames adapter (GSAP, Tailwind, Lottie). Notes that we delegate to HyperFrames' own `/hyperframes` skill for deep questions. |
@@ -139,7 +141,7 @@ Node ESM (`.mjs`) since HyperFrames is Node.
 - **Memory hints used:** [list of memory file names cited; no raw content]
 ```
 
-**`storyboard.md`** — the human-readable plan. Five scenes (hook, tension, metaphor, reveal, recap), each with engine, visual intent, and verbatim narration:
+**`storyboard.md`** — the human-readable plan. Scenes follow the selected structure (for example: hook/tension/metaphor/reveal/recap for explainers, question/landscape/evidence/synthesis/implications for research, or premise/world/conflict/idea-turn/takeaway for stories), each with engine, visual intent, and verbatim narration:
 ```markdown
 ## Storyboard: <slug>
 **The ONE thing:** ...
@@ -350,7 +352,7 @@ Tests exercise `narrate.mjs` against fixtures only (no network). `scripts/captur
 Documented as `tests/SMOKE.md`. Two passes (one per TTS provider), ~15 minutes:
 
 1. Clean test dir, both TTS keys exported, Manim + HyperFrames installed.
-2. `/explain "pythagorean theorem"` → approve storyboard verbatim.
+2. `/generate "pythagorean theorem"` → approve storyboard verbatim.
 3. Verify: 5 scenes; scene 3 chose Manim.
 4. Approve narration; verify audio plays cleanly, word-timestamps.json has expected count ± 5.
 5. Approve animation preview; verify Manim scene plays in its window.

@@ -1,16 +1,18 @@
 # video-gen
 
-A Claude Code plugin for generating short animated videos — explainers, product launches, demos, codebase walkthroughs. Description in, MP4 out — via a 5-stage pipeline you can checkpoint, edit, and resume.
+A Claude Code plugin for generating short animated videos for almost any communication use case: hard-concept explainers, deep-research videos, product launches, demos, codebase walkthroughs, and animated story/book-summary videos. Description in, MP4 out — via a 5-stage pipeline you can checkpoint, edit, and resume.
 
 ## What it does
 
 ```
-/generate "why does ice float"                       # an explainer
-/generate "launch video for my CLI tool, Acme"       # a product launch
-/generate "how auth works in this codebase"          # a codebase walkthrough
+/generate "why does ice float"                       # hard-concept explainer
+/generate "deep research video on AI agents in 2026" # research synthesis
+/generate "launch video for my CLI tool, Acme"       # product launch
+/generate "what The Beginning of Infinity says"      # book/idea story
+/generate "how auth works in this codebase"          # codebase walkthrough
 ```
 
-The director picks the right **narrative structure** (explainer = 5-beat pedagogy, launch = 4-beat problem→reveal→CTA, etc.) and **visual style** (punchy Vox-style motion graphics, or a clean on-brand look) for what you asked for. These are independent choices — not every video is a Vox-style explainer.
+The director picks the right **narrative structure** (explainer = 5-beat pedagogy, research = question→evidence→synthesis, launch = 4-beat problem→reveal→CTA, story = premise→conflict→takeaway, etc.) and **visual style** (MinutePhysics/3Blue1Brown clarity, Kurzgesagt-like illustrated systems, punchy Vox-style motion graphics, or a clean on-brand look) for what you asked for. These are independent choices — not every video is a Vox-style explainer.
 
 Runs five stages:
 1. **Brief** — director reads your Claude memory, gathers source material (a codebase, a product page), asks 1–2 questions, picks structure + style.
@@ -25,14 +27,16 @@ You approve cheap artifacts (storyboard, voice) before expensive ones (animation
 
 ```bash
 # In Claude Code
-/plugin marketplace add marmikcfc/video-gen
-/plugin install video-gen@video-gen
+/plugin marketplace add marmikcfc/skills
+/plugin install video-gen@skills
 ```
 
-Then one-time setup:
+Restart Claude Code so the plugin's commands, skills, and agents load, then run the one-time setup:
 ```
 /video-gen-setup
 ```
+
+`/video-gen-setup` verifies HyperFrames and stores your TTS key (Cartesia or ElevenLabs) in `~/.config/video-gen/keys.json` (chmod 600) — the key is never written into the repo or a video.
 
 ## Requirements
 
@@ -54,7 +58,7 @@ Then one-time setup:
 | `video-director` agent | Memory-aware storyboarding; picks structure + style |
 | `manim-engineer` agent | Math scene → Manim Python |
 | `hyperframes-engineer` agent | Narrative scene → HyperFrames HTML |
-| Structure skills | `vox-explainer-structure` (5-beat explainer), `launch-video-structure` (4-beat launch) |
+| Structure skills | `vox-explainer-structure` (5-beat explainer), `research-video-structure` (research synthesis), `animated-story-structure` (book/idea story), `launch-video-structure` (4-beat launch) |
 | Style skills | `vox-style` (kinetic motion graphics) — optional, default is clean/on-brand |
 | Craft skills | `choosing-the-tool`, `manim-essentials`, `hyperframes-essentials`, `narration-writing`, `voice-driven-timing`, `using-claude-memory` |
 

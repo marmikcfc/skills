@@ -1,11 +1,11 @@
 ---
-description: Generate a short video (explainer, product launch, demo, etc.) via the full 5-stage pipeline
+description: Generate a short video (explainer, research video, launch, story, demo, etc.) via the full 5-stage pipeline
 argument-hint: <description of the video you want>
 ---
 
 Generate a short video: **$ARGUMENTS**
 
-This produces ANY kind of short video — an explainer, a product launch, a demo, a codebase walkthrough. The director picks the right narrative structure and visual style for what you asked for; it does NOT assume everything is a Vox-style explainer.
+This produces almost any kind of short animated communication video — a hard-concept explainer, deep-research synthesis, product launch, demo, codebase walkthrough, animated story, or book/idea summary. The director picks the right narrative structure and visual style for what you asked for; it does NOT assume everything is a Vox-style explainer.
 
 You will orchestrate the full 5-stage pipeline with **three checkpoint pauses** for user approval. Do NOT skip checkpoints — they exist so the user doesn't burn TTS quota or render minutes on something they'd reject.
 
