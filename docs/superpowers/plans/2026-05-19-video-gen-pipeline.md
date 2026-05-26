@@ -2,9 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Implement the `video-gen` Claude Code plugin per spec at `docs/superpowers/specs/2026-05-19-video-gen-pipeline-design.md`. Turns a topic into a Vox-style explainer MP4 via a 5-stage checkpointed pipeline (context → storyboard → narrate → animate → render) using HyperFrames as the rendering engine, Manim for math scenes, and Cartesia/ElevenLabs for TTS.
+**Goal:** Implement the `video-gen` Claude Code plugin per spec at `docs/superpowers/specs/2026-05-19-video-gen-pipeline-design.md`. Turns a video description into a short animated MP4 for hard-concept explainers, research videos, launches, demos, codebase walkthroughs, and animated story/book-summary videos via a 5-stage checkpointed pipeline (context → storyboard → narrate → animate → render) using HyperFrames as the rendering engine, Manim for math scenes, and Cartesia/ElevenLabs for TTS.
 
-**Architecture:** Plugin with slash commands + subagents + skills + Node helper scripts. State on disk in `<cwd>/.video-gen/<slug>/`. No long-running server; TTS keys via env or `~/.config/video-gen/keys.json`. Stateless engineer subagents enable parallel per-scene dispatch in Stage 4.
+**Architecture:** Plugin with slash commands + subagents + skills + Node helper scripts. The director routes each request to the right narrative structure and visual style, then state lives on disk in `<cwd>/.video-gen/<slug>/`. No long-running server; TTS keys via env or `~/.config/video-gen/keys.json`. Stateless engineer subagents enable parallel per-scene dispatch in Stage 4.
+
+**Current-scope note:** The detailed historical task list below was originally written for a narrower `/explain` + `explainer-director` scaffold. The implemented surface now uses `/generate` + `video-director`, and adds research/story/book-summary routing alongside explainers and launches. Treat the top-level goal, current spec, and actual files as authoritative when the older task snippets conflict.
 
 **Tech Stack:** Claude Code plugin (markdown + JSON manifests), Node ESM (`.mjs`) for helper scripts, `node:test` runner, FFmpeg via HyperFrames, Manim Community Edition for math, Cartesia + ElevenLabs HTTP APIs.
 
@@ -16,7 +18,7 @@ Phases build on each other. **Within a phase**, many tasks are independent and c
 
 - **Phase 0** — Foundation cleanup (1 task): drop the Remotion scaffold
 - **Phase 1** — Helper scripts with full TDD (8 tasks)
-- **Phase 2** — Knowledge skills (5 tasks, all parallel)
+- **Phase 2** — Knowledge skills (7 tasks, all parallel)
 - **Phase 3** — Subagents (3 tasks, all parallel)
 - **Phase 4** — Slash commands (6 tasks, mostly parallel)
 - **Phase 5** — Plugin manifest + test infra (3 tasks)

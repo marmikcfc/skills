@@ -1,13 +1,13 @@
 {
   "name": "video-gen",
   "version": "0.1.0",
-  "description": "Generate short animated videos — explainers, product launches, demos, codebase walkthroughs — via a 5-stage pipeline. Picks narrative structure and visual style per video. Reads memory for personalization. Uses HyperFrames for rendering, Manim for math scenes, Cartesia or ElevenLabs for narration.",
+  "description": "Generate short animated videos for many use cases — hard-concept explainers, deep-research videos, product launches, demos, codebase walkthroughs, and animated story/book-summary videos — via a 5-stage pipeline. Picks narrative structure and visual style per video. Reads memory for personalization. Uses HyperFrames for rendering, Manim for math scenes, Cartesia or ElevenLabs for narration.",
   "author": {
     "name": "Marmik Pandya",
     "url": "https://github.com/marmikcfc"
   },
-  "homepage": "https://github.com/marmikcfc/video-gen",
-  "repository": "https://github.com/marmikcfc/video-gen",
+  "homepage": "https://github.com/marmikcfc/skills",
+  "repository": "https://github.com/marmikcfc/skills",
   "license": "MIT",
-  "keywords": ["video", "animation", "explainer", "hyperframes", "manim", "vox", "tts", "cartesia", "elevenlabs"]
+  "keywords": ["video", "animation", "explainer", "research", "launch", "story", "book-summary", "hyperframes", "manim", "vox", "kurzgesagt", "minutephysics", "3blue1brown", "tts", "cartesia", "elevenlabs"]
 }

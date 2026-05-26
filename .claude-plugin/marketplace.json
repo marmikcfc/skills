@@ -1,5 +1,6 @@
 {
-  "name": "video-gen",
+  "name": "skills",
+  "description": "Marmik's Claude Code plugins and skills.",
   "owner": {
     "name": "Marmik Pandya",
     "url": "https://github.com/marmikcfc"
@@ -7,7 +8,7 @@
   "plugins": [
     {
       "name": "video-gen",
-      "source": ".",
+      "source": "./",
       "description": "5-stage Vox-style explainer video pipeline (HyperFrames + Manim + Cartesia/ElevenLabs)."
     }
   ]
