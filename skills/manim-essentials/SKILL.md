@@ -44,7 +44,8 @@ class Explainer(Scene):
         Recap.construct(self)
 ```
 
-To render a single beat: `manim -pql scene.py Tension`. To render the full video: `manim -pqh scene.py Explainer`.
+To render a single beat while iterating by hand: `manim -pql scene.py Tension`.
+In the pipeline (headless), drop the `p`: `manim -qh --fps 30 --format=mp4 scene.py Explainer`.
 
 ## Animation primitives you'll use 90% of the time
 
@@ -150,9 +151,21 @@ Note: this requires `MovingCameraScene`, not the default `Scene`.
 
 | Flag | Quality | Use case |
 |---|---|---|
-| `-pql` | Low (480p15) | Iteration |
-| `-pqm` | Medium (720p30) | Review |
-| `-pqh` | High (1080p60) | Final render |
-| `-pqk` | 4K | Only when you need it; long render times |
+| `-ql` | Low (480p15) | Iteration |
+| `-qm` | Medium (720p30) | Review |
+| `-qh` | High (1080p **60**) | Final render |
+| `-qk` | 4K | Only when you need it; long render times |
 
-The `p` means "preview" — opens the file when done. The `q*` is the quality.
+The `q*` is the quality. Adding `p` (`-pqh`) means **preview** — it opens a video
+player when the render finishes. That is fine when you are working by hand and
+wrong in an automated pipeline, where it hangs or errors with no display.
+
+**In the video-gen pipeline, always pass `--fps` explicitly:**
+
+```bash
+manim -qh --fps 30 --format=mp4 -o <out>.mp4 scene.py SceneClass
+```
+
+`-qh` defaults to 60fps, but a HyperFrames composition renders at 30 unless told
+otherwise. Mismatched fps does not error — FFmpeg decimates 2:1 during frame
+extraction, silently discarding half the animation.

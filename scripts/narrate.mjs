@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { join } from "node:path";
-import { homedir } from "node:os";
 import { parseNarration } from "./lib/marker-parser.mjs";
-import { selectProvider } from "./lib/provider-select.mjs";
+import { loadConfig, loadKeys, resolveNarration } from "./lib/providers.mjs";
 import { normalizeCartesia } from "./lib/normalize-cartesia.mjs";
 import { normalizeElevenLabs } from "./lib/normalize-elevenlabs.mjs";
 import { reconcileWords } from "./lib/reconcile-words.mjs";
@@ -11,43 +10,58 @@ import { callCartesia } from "./lib/cartesia-client.mjs";
 import { callElevenLabs } from "./lib/elevenlabs-client.mjs";
 
 function parseArgs(argv) {
-  const out = { workdir: null, provider: null };
+  const out = { workdir: null, provider: null, align: null };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--workdir") out.workdir = argv[++i];
     else if (argv[i] === "--provider") out.provider = argv[++i];
+    else if (argv[i] === "--align") out.align = argv[++i];
   }
   if (!out.workdir) throw new Error("--workdir <path> is required");
   return out;
 }
 
-async function loadConfigKeys() {
-  try {
-    const path = join(homedir(), ".config", "video-gen", "keys.json");
-    return JSON.parse(await readFile(path, "utf8"));
-  } catch { return {}; }
-}
+/**
+ * TTS adapters that actually exist. The provider registry intentionally lists more
+ * providers than are implemented — it is the extension point — so resolution can
+ * succeed for a provider we cannot yet call. Fail here with a precise message
+ * rather than pretending support we don't have.
+ */
+const TTS_ADAPTERS = {
+  cartesia:   { call: callCartesia,   normalize: normalizeCartesia },
+  elevenlabs: { call: callElevenLabs, normalize: normalizeElevenLabs },
+};
 
-export async function narrate({ workdir, providerFlag = null, fetchFn = fetch }) {
+export async function narrate({ workdir, providerFlag = null, alignProvider = null, fetchFn = fetch }) {
   const narrationPath = join(workdir, "narration.txt");
   const narration = await readFile(narrationPath, "utf8");
   const { clean_text, marker_positions } = parseNarration(narration);
 
-  const config_keys = await loadConfigKeys();
-  const { provider, key } = selectProvider({
-    flag: providerFlag,
-    env: process.env,
-    config_keys,
-    warn: msg => console.warn(`warn: ${msg}`),
+  const config = await loadConfig({ cwd: workdir });
+  const keys = await loadKeys();
+  const { tts, align } = resolveNarration({
+    config, env: process.env, keys, ttsFlag: providerFlag, alignFlag: alignProvider,
   });
 
-  console.log(`narrating ${clean_text.split(/\s+/).length} words via ${provider}...`);
-  const rawCall = provider === "cartesia"
-    ? await callCartesia({ text: clean_text, apiKey: key, fetchFn })
-    : await callElevenLabs({ text: clean_text, apiKey: key, fetchFn });
+  const adapter = TTS_ADAPTERS[tts.provider];
+  if (!adapter) {
+    throw new Error(
+      `provider "${tts.provider}" resolved for tts but no adapter is implemented.\n` +
+      `  implemented: ${Object.keys(TTS_ADAPTERS).join(", ")}\n` +
+      `  fix: pin an implemented provider (--provider), or add scripts/lib/<provider>-client.mjs ` +
+      `plus a normalize-<provider>.mjs and register it in TTS_ADAPTERS.`,
+    );
+  }
+  if (align.provider !== "native") {
+    throw new Error(
+      `provider "${tts.provider}" emits no word timings, so alignment via "${align.provider}" is required, ` +
+      `but no align adapter is implemented yet.\n` +
+      `  fix: use a TTS with native word timings (cartesia, elevenlabs) until an align adapter lands.`,
+    );
+  }
 
-  const normalized = provider === "cartesia"
-    ? normalizeCartesia(rawCall.raw)
-    : normalizeElevenLabs(rawCall.raw);
+  console.log(`narrating ${clean_text.split(/\s+/).length} words via ${tts.provider} (timings: ${align.provider})...`);
+  const rawCall = await adapter.call({ text: clean_text, apiKey: tts.key, fetchFn });
+  const normalized = adapter.normalize(rawCall.raw);
 
   const expectedWords = clean_text.split(/\s+/).filter(Boolean);
   reconcileWords(expectedWords, normalized.words);
@@ -76,13 +90,13 @@ export async function narrate({ workdir, providerFlag = null, fetchFn = fetch })
   );
 
   console.log(`wrote ${normalized.words.length} words, ${normalized.audio_duration_s.toFixed(2)}s audio`);
-  return { provider, audio_duration_s: normalized.audio_duration_s };
+  return { provider: tts.provider, align: align.provider, audio_duration_s: normalized.audio_duration_s };
 }
 
 // CLI
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const { workdir, provider } = parseArgs(process.argv.slice(2));
-  narrate({ workdir, providerFlag: provider }).catch(e => {
+  const { workdir, provider, align } = parseArgs(process.argv.slice(2));
+  narrate({ workdir, providerFlag: provider, alignProvider: align }).catch(e => {
     console.error(`error: ${e.message}`);
     if (e.debug) console.error(JSON.stringify(e.debug, null, 2));
     process.exit(1);

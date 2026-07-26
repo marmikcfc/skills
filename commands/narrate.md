@@ -24,7 +24,9 @@ Execute (from the plugin install dir, typically `~/.claude/plugins/...`):
 node scripts/narrate.mjs --workdir <abs-workdir-path>
 ```
 
-The script handles provider selection (per `provider-select.mjs`), TTS call, normalization, marker reattachment, and writes `audio.mp3` + `word-timestamps.json`.
+The script resolves the `tts` and `align` capabilities via `scripts/lib/providers.mjs` (see the `provider-config` skill), calls TTS, normalizes word timings, reattaches scene markers, and writes `audio.mp3` + `word-timestamps.json`.
+
+Pin a provider with `--provider <id>`; override the alignment source with `--align <id>`.
 
 # On success
 

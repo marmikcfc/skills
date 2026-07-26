@@ -48,12 +48,13 @@ Choose based on the video's *purpose*, then apply the matching structure skill:
 
 | Video type | Structure skill | Beats |
 |---|---|---|
-| Explainer (teach a concept) | `vox-explainer-structure` | hook → tension → metaphor → reveal → recap (5) |
+| Explainer (teach a concept) | `explainer-structure` | hook → tension → metaphor → reveal → recap (5) |
 | Deep research / synthesis | `research-video-structure` | question → landscape → evidence → synthesis → implications (5) |
 | Product launch | `launch-video-structure` | problem → why-now → reveal → call-to-action (4) |
 | Animated story / book insight | `animated-story-structure` | premise → world → conflict → idea-turn → takeaway (5) |
 | Demo / walkthrough | `launch-video-structure` (adapt) or ask | varies |
-| Codebase explainer | `vox-explainer-structure` | 5-beat, narration grounded in actual code you read |
+| Codebase explainer | `explainer-structure` | 5-beat, narration grounded in actual code you read |
+| Presenter + animation | `explainer-structure` + `talking-head-composite` | Any structure; footage becomes a per-scene engine |
 
 If the type is ambiguous, ask the user before proceeding. Do NOT force an explainer structure onto a launch video — they have different shapes.
 
@@ -64,7 +65,7 @@ This is SEPARATE from structure. Apply a style skill only if requested or clearl
 | Style | Skill | When |
 |---|---|---|
 | Vox-style motion graphics | `vox-style` | Punchy editorial look — kinetic typography, bold palette. Great for explainers and social. |
-| MinutePhysics / 3Blue1Brown clarity | `vox-explainer-structure` + `manim-essentials` as needed | Sparse drawings, progressive construction, math-first reasoning, one idea per visual step. |
+| MinutePhysics / 3Blue1Brown clarity | `explainer-structure` + `manim-essentials` as needed | Sparse drawings, progressive construction, math-first reasoning, one idea per visual step. |
 | Kurzgesagt-like illustrated systems | `vox-style` adapted | Flat illustrated systems, clear hierarchy, polished transitions. Avoid implying exact brand imitation; use it as a clarity reference. |
 | Clean / on-brand (default) | none | Product launches, corporate, anything needing brand consistency. Use restrained typography and the product's own colors. |
 
@@ -92,6 +93,23 @@ Defaults by video type:
 
 **The single most valuable check:** discovery-order narration must NOT open with an agenda ("In this video we'll cover…"). Across the 8-video corpus behind `voice-3b1b`, zero videos do. Contract-first narration, by contrast, *should* state its agenda — 8 of 13 in that corpus do. Getting this backwards is the most common narration failure.
 
+## Decide presenter layout (only if there is footage)
+
+If the video mixes presenter footage with generated visuals, apply
+`talking-head-composite` and record a per-scene `layout`
+(`cut` | `stack` | `pip` | `split`) plus `presenter: true|false`. Long-form defaults
+to `cut`; vertical short-form defaults to `stack`. Modes may mix within one video.
+
+For **existing** footage that should play untouched under designed cards, this is
+not our workflow — route to HyperFrames' `/talking-head-recut`.
+
+## Decide the soundtrack
+
+Apply `soundtrack`. Ask whether the user has their own track before generating one;
+most people with a channel do, and licensing is theirs to decide. "No music" is a
+legitimate answer for a short explainer. Music is selected after `/narrate`, because
+ducking is derived from real word timings.
+
 ## Write the storyboard
 
 `storyboard.md` (human-readable):
@@ -101,6 +119,8 @@ Defaults by video type:
 **Video type:** explainer | research | launch | demo | codebase | story | book-summary
 **Visual style:** clean | vox-style | minutephysics | kurzgesagt | 3blue1brown | on-brand
 **Narration voice:** neutral | discovery-order | contract-first | custom
+**Aspect / target:** 16:9 youtube | 9:16 shorts | 4:5 feed | both (author two compositions)
+**Soundtrack:** none | user-supplied | generated
 **The ONE thing:** <single sentence — the takeaway or the value prop>
 **Estimated runtime:** m:ss
 **Recommended provider:** cartesia | elevenlabs (suggest based on voice fit; user can override)
@@ -108,6 +128,7 @@ Defaults by video type:
 ### Scene 1 — <beat name per the chosen structure> (engine: hyperframes | manim)
 **Visual intent:** ...
 **Style notes:** <how the chosen visual style applies to this scene>
+**Layout:** cut | stack | pip | split   (omit if no presenter footage)
 **Narration:** "..."
 
 [... one section per beat in the chosen structure ...]
@@ -122,6 +143,25 @@ Defaults by video type:
 
 [... etc. ...]
 ```
+
+## Emit STORYBOARD.md for visual review
+
+After writing `storyboard.md`, also emit HyperFrames' own format so their Studio
+renders the plan as a reviewable contact sheet:
+
+```bash
+node -e "import('./scripts/lib/storyboard.mjs').then(async m=>{
+  const fs=await import('node:fs/promises');
+  const sb=m.parseStoryboard(await fs.readFile('<workdir>/storyboard.md','utf8'));
+  sb.warnings.forEach(w=>console.warn('warn:',w));
+  await fs.writeFile('<workdir>/hyperframes/STORYBOARD.md', m.toHyperframesStoryboard(sb));
+})"
+```
+
+This is interop, not duplication: conforming to their schema buys their review UI
+(contact sheet, poster frames, per-frame comment boxes) without us building one.
+Surface any parser warnings to the user before they approve the storyboard —
+that is the cheapest point to catch a missing engine or an unnarrated scene.
 
 # Choosing engine per scene
 

@@ -58,10 +58,14 @@ Restart Claude Code so the plugin's commands, skills, and agents load, then run 
 | `video-director` agent | Memory-aware storyboarding; picks structure + visual style + narration voice |
 | `manim-engineer` agent | Math scene → Manim Python |
 | `hyperframes-engineer` agent | Narrative scene → HyperFrames HTML |
-| Structure skills | `vox-explainer-structure` (5-beat explainer), `research-video-structure` (research synthesis), `animated-story-structure` (book/idea story), `launch-video-structure` (4-beat launch) |
+| Structure skills | `explainer-structure` (5-beat explainer), `research-video-structure` (research synthesis), `animated-story-structure` (book/idea story), `launch-video-structure` (4-beat launch) |
 | Style skills | `vox-style` (kinetic motion graphics) — optional, default is clean/on-brand |
+| Composite / footage | `talking-head-composite` (presenter + generated visuals; cut/stack/pip/split, 16:9 + 9:16) |
+| Audio | `soundtrack` (music bed, ducking against word timings, SFX) |
+| Providers | `provider-config` (capability→provider config; swap or add any model vendor) |
 | Voice skills | `voice-3b1b` (discovery-order narration), `voice-gaurav-sen` (contract-first), `explaining-technical-concepts` (neutral, L0→L3 depth tiers), `voice-extractor` (build a profile from samples) |
-| Craft skills | `choosing-the-tool`, `manim-essentials`, `hyperframes-essentials`, `narration-writing`, `voice-driven-timing`, `using-claude-memory` |
+| Craft skills | `choosing-the-tool`, `manim-essentials`, `narration-writing`, `voice-driven-timing`, `soundtrack`, `using-claude-memory` |
+| Composition contract | delegated to HyperFrames' own `hyperframes-core` / `hyperframes-animation` skills — we keep no local copy |
 
 ## Working directory
 

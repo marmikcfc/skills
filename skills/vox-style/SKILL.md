@@ -5,7 +5,7 @@ description: Use when a video should have the Vox-style motion-graphics aestheti
 
 # Vox-style visual aesthetic
 
-This skill defines a **look**, not a structure. It is orthogonal to the narrative skills (`vox-explainer-structure`, `launch-video-structure`). Any structure can be rendered in Vox-style — or not. Most product launches should NOT be; they want their own brand. Reach for this style when you want the punchy, editorial, social-media-explainer feel.
+This skill defines a **look**, not a structure. It is orthogonal to the narrative skills (`explainer-structure`, `launch-video-structure`). Any structure can be rendered in Vox-style — or not. Most product launches should NOT be; they want their own brand. Reach for this style when you want the punchy, editorial, social-media-explainer feel.
 
 ## What "Vox-style" actually means visually
 

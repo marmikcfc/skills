@@ -63,7 +63,7 @@ npx skills add heygen-com/hyperframes
 
 Run a no-op narrate dry-check (just provider selection):
 ```bash
-node -e "import('./scripts/lib/provider-select.mjs').then(m => console.log(m.selectProvider({ flag:null, env:process.env, config_keys: JSON.parse(require('fs').readFileSync(require('os').homedir() + '/.config/video-gen/keys.json'))})))"
+node -e "import('./scripts/lib/providers.mjs').then(async m => { const c = await m.loadConfig(); const k = await m.loadKeys(); console.log(m.resolveNarration({ config: c, env: process.env, keys: k })); })"
 ```
 
 Print: "Setup complete. Try `/generate <description>`."

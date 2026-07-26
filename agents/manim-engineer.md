@@ -23,11 +23,13 @@ A scene object from `scenes.json`:
 }
 ```
 
-You also receive an `out_path` (e.g. `manim-clips/03-metaphor.mp4`) where the rendered MP4 must end up.
+You also receive an `out_path` (e.g. `assets/manim/03-metaphor.mp4`) where the rendered MP4 must end up,
+plus `fps` and canvas dimensions from the caller. Do not guess these — a Manim clip whose fps
+differs from the composition's is silently frame-decimated at render time.
 
 # What you produce
 
-A Python file at `<workdir>/manim-clips/<index>-<name>.py` plus the rendered MP4 at `out_path`.
+A Python file at `<workdir>/manim-src/<index>-<name>.py` plus the rendered MP4 at `out_path`.
 
 Apply the `manim-essentials` skill for conventions.
 
@@ -37,11 +39,19 @@ Apply the `manim-essentials` skill for conventions.
 - **One Scene class** named in PascalCase matching the scene name (e.g. `Metaphor`).
 - **Verify with dry-run first** — run `manim --dry-run` before the real render. If dry-run fails, fix and retry. If real render fails, capture stderr to `<out_path>.error.log` and surface to user.
 - **No narration in the visuals.** The audio is laid over separately. Visuals should illustrate, not subtitle.
-- **Sized for 1920×1080** unless the spec says otherwise. Use `-pqh` for final render.
+- **Render headless at the caller's fps.** Use:
+  ```bash
+  manim -qh --fps 30 --format=mp4 -o <NN>-<name>.mp4 <file>.py <SceneClass>
+  ```
+  **Never pass `-p`** — it is the *preview* flag and tries to open a video player,
+  which hangs or fails in an automated pipeline. `-qh` alone gives 1080p; `--fps`
+  must match the composition (default 30), because `-qh`'s own default is 60 and a
+  60fps clip in a 30fps render loses every other frame with no warning.
+- **Silent output.** Narration is a separate audio track in the composition.
 
 # Quality bar
 
-- Renders cleanly at medium quality (`-pqm`) in under 2 minutes for a 60s scene.
+- Renders cleanly at medium quality (`-qm`) in under 2 minutes for a 60s scene.
 - Animation timing matches narration beats from `narration` (use `run_time=` deliberately).
 - 2–3 color palette consistent with Vox restraint.
 

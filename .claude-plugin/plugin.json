@@ -1,7 +1,7 @@
 {
   "name": "video-gen",
-  "version": "0.2.0",
-  "description": "Generate short animated videos for many use cases — hard-concept explainers, deep-research videos, product launches, demos, codebase walkthroughs, and animated story/book-summary videos — via a 5-stage pipeline. Picks narrative structure, visual style, and narration voice per video. Includes measured voice-extraction skills for writing in a specific explainer's style. Reads memory for personalization. Uses HyperFrames for rendering, Manim for math scenes, Cartesia or ElevenLabs for narration.",
+  "version": "0.3.0",
+  "description": "Generate short animated videos — explainers, deep-research videos, product launches, demos, codebase walkthroughs, presenter+animation composites, and animated story/book summaries — via a 5-stage pipeline. Structure, visual style, and narration voice are independent choices. Manim for math scenes and HyperFrames for everything else, mixable in one video. Pluggable model providers for TTS, alignment, image, music, and video.",
   "author": {
     "name": "Marmik Pandya",
     "url": "https://github.com/marmikcfc"
@@ -31,6 +31,13 @@
     "voice-extraction",
     "stylometry",
     "technical-writing",
-    "gaurav-sen"
+    "gaurav-sen",
+    "talking-head",
+    "shorts",
+    "tiktok",
+    "youtube",
+    "soundtrack",
+    "providers",
+    "multi-provider"
   ]
 }

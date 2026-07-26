@@ -1,0 +1,63 @@
+{
+  "$comment": "Shipped defaults. User config at ~/.config/video-gen/providers.json and project .video-gen/providers.json override this by capability. Credentials NEVER live here.",
+  "version": 1,
+
+  "registry": {
+    "cartesia":         { "capabilities": ["tts"],            "word_timings": true,  "key_env": "CARTESIA_API_KEY",   "paid": true },
+    "elevenlabs":       { "capabilities": ["tts"],            "word_timings": true,  "key_env": "ELEVENLABS_API_KEY", "paid": true,
+                          "note": "no word API, but character-level alignment is converted to words by normalize-elevenlabs.mjs" },
+    "openai-tts":       { "capabilities": ["tts"],            "word_timings": false, "key_env": "OPENAI_API_KEY",     "paid": true },
+    "gemini-tts":       { "capabilities": ["tts"],            "word_timings": false, "key_env": "GEMINI_API_KEY",     "paid": true },
+    "deepgram-tts":     { "capabilities": ["tts"],            "word_timings": false, "key_env": "DEEPGRAM_API_KEY",   "paid": true },
+    "hume-tts":         { "capabilities": ["tts"],            "word_timings": false, "key_env": "HUME_API_KEY",       "paid": true },
+    "heygen-tts":       { "capabilities": ["tts"],            "word_timings": true,  "key_env": "HEYGEN_API_KEY",     "paid": true },
+    "kokoro":           { "capabilities": ["tts"],            "word_timings": false, "local": true },
+
+    "deepgram":         { "capabilities": ["align", "asr"],   "key_env": "DEEPGRAM_API_KEY",   "paid": true },
+    "assemblyai":       { "capabilities": ["align", "asr"],   "key_env": "ASSEMBLYAI_API_KEY", "paid": true },
+    "openai-whisper":   { "capabilities": ["align", "asr"],   "key_env": "OPENAI_API_KEY",     "paid": true },
+    "groq-whisper":     { "capabilities": ["align", "asr"],   "key_env": "GROQ_API_KEY",       "paid": true },
+    "whisper-local":    { "capabilities": ["align", "asr"],   "local": true },
+    "parakeet-local":   { "capabilities": ["align", "asr"],   "local": true },
+
+    "openai-image":     { "capabilities": ["image"],  "key_env": "OPENAI_API_KEY",    "paid": true },
+    "gemini-image":     { "capabilities": ["image"],  "key_env": "GEMINI_API_KEY",    "paid": true },
+    "flux":             { "capabilities": ["image"],  "key_env": "BFL_API_KEY",       "paid": true },
+    "ideogram":         { "capabilities": ["image"],  "key_env": "IDEOGRAM_API_KEY",  "paid": true },
+    "recraft":          { "capabilities": ["image"],  "key_env": "RECRAFT_API_KEY",   "paid": true },
+    "mflux-local":      { "capabilities": ["image"],  "local": true },
+
+    "elevenlabs-music": { "capabilities": ["music"],  "key_env": "ELEVENLABS_API_KEY", "paid": true },
+    "suno":             { "capabilities": ["music"],  "key_env": "SUNO_API_KEY",       "paid": true },
+    "stability-audio":  { "capabilities": ["music"],  "key_env": "STABILITY_API_KEY",  "paid": true },
+    "musicgen-local":   { "capabilities": ["music"],  "local": true },
+
+    "runway":           { "capabilities": ["video"],  "key_env": "RUNWAY_API_KEY",  "paid": true },
+    "veo":              { "capabilities": ["video"],  "key_env": "GEMINI_API_KEY",  "paid": true },
+    "kling":            { "capabilities": ["video"],  "key_env": "KLING_API_KEY",   "paid": true },
+    "luma":             { "capabilities": ["video"],  "key_env": "LUMA_API_KEY",    "paid": true },
+    "heygen-avatar":    { "capabilities": ["video", "avatar"], "key_env": "HEYGEN_API_KEY", "paid": true },
+    "ltx-local":        { "capabilities": ["video"],  "local": true },
+
+    "anthropic":        { "capabilities": ["llm"],    "key_env": "ANTHROPIC_API_KEY", "paid": true },
+    "openai":           { "capabilities": ["llm"],    "key_env": "OPENAI_API_KEY",    "paid": true },
+    "gemini":           { "capabilities": ["llm"],    "key_env": "GEMINI_API_KEY",    "paid": true },
+    "ollama":           { "capabilities": ["llm"],    "local": true }
+  },
+
+  "capabilities": {
+    "tts":   { "chain": ["cartesia", "elevenlabs", "openai-tts", "gemini-tts", "heygen-tts", "kokoro"], "pin": null, "require": [], "options": {} },
+    "align": { "chain": ["native", "deepgram", "openai-whisper", "whisper-local"], "pin": null, "options": {},
+               "$comment": "'native' means the TTS provider supplied word timings itself; the rest are forced-alignment fallbacks over the generated audio." },
+    "image": { "chain": ["openai-image", "gemini-image", "flux", "mflux-local"], "pin": null, "options": {} },
+    "music": { "chain": ["elevenlabs-music", "suno", "musicgen-local"], "pin": null, "options": {} },
+    "video": { "chain": ["runway", "veo", "ltx-local"], "pin": null, "options": {} },
+    "llm":   { "chain": ["anthropic", "openai", "gemini", "ollama"], "pin": null, "options": {} }
+  },
+
+  "policy": {
+    "offline": false,
+    "confirm_paid": true,
+    "max_cost_usd": null
+  }
+}

@@ -29,7 +29,16 @@ You also receive an `out_path` (e.g. `hyperframes/src/scenes/01-hook.html`).
 
 A single HTML file at `out_path`.
 
-Apply the `hyperframes-essentials` skill for adapter choices. For canonical HyperFrames syntax, **invoke HyperFrames' own `/hyperframes` skill** — do not guess at attribute names.
+**Read `hyperframes-core` before writing any composition HTML.** HyperFrames owns
+and versions the authoring contract — attribute names, the timing model, media
+rules — and we deliberately keep no local copy of it, because a local paraphrase
+drifts silently and produces compositions that fail at render rather than at lint.
+For animation adapters (GSAP, Lottie, Three.js, CSS, WAAPI), read `hyperframes-animation`.
+
+Two constraints from the caller you must honour and cannot infer:
+- **Your id prefix** (`s<NN>-`). Every id you emit must start with it. Duplicate ids
+  across scene files render BLANK and cross-file duplicates slip past `lint`.
+- **Canvas dimensions and fps.** Do not assume 1920×1080@30.
 
 # Hard rules
 
