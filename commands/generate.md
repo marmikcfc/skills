@@ -24,7 +24,7 @@ Invoke the `video-director` subagent. It will:
 
 # Stage 2 — Storyboard
 
-Continue with `video-director`. It picks a narrative structure (explainer = 5-beat, launch = 4-beat, etc.) and a visual style (vox-style or clean/default), then writes:
+Continue with `video-director`. It picks a narrative structure (explainer = 5-beat, launch = 4-beat, etc.) a visual style (vox-style or clean/default), and a narration voice (discovery-order, contract-first, or neutral), then writes:
 - `storyboard.md` — human-readable plan with video type, visual style, and per-scene engine choices.
 - `narration.txt` — clean TTS input with `[SCENE:]` markers named per the chosen structure.
 

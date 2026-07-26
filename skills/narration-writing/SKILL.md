@@ -5,6 +5,13 @@ description: Use when writing narration text that will be sent to TTS (Cartesia 
 
 # Writing narration for TTS
 
+> **This skill covers the *format* — markers, pacing punctuation, what TTS can't say.
+> It does not tell you how the prose should sound.** For that, apply the narration
+> voice chosen in the brief: `voice-3b1b` (discovery-order), `voice-gaurav-sen`
+> (contract-first), or `explaining-technical-concepts` (neutral). Use `voice-extractor`
+> to build a profile for a voice the user names. Format and voice are independent —
+> get the markers right here, get the words right there.
+
 Narration goes into a single file: `<workdir>/narration.txt`. The TTS provider produces audio + word-level timestamps. Our marker parser strips `[SCENE: name]` tags before TTS sees the text.
 
 ## The required shape

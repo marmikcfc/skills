@@ -9,7 +9,7 @@
     {
       "name": "video-gen",
       "source": "./",
-      "description": "5-stage Vox-style explainer video pipeline (HyperFrames + Manim + Cartesia/ElevenLabs)."
+      "description": "5-stage explainer video pipeline (HyperFrames + Manim + Cartesia/ElevenLabs), with structure / visual-style / narration-voice decoupled."
     }
   ]
 }
