@@ -35,6 +35,14 @@ rules — and we deliberately keep no local copy of it, because a local paraphra
 drifts silently and produces compositions that fail at render rather than at lint.
 For animation adapters (GSAP, Lottie, Three.js, CSS, WAAPI), read `hyperframes-animation`.
 
+Your output is a **sub-composition**, not a standalone page: a full HTML document
+whose `<body>` contains one `<template>`, with the root element *inside* that
+template carrying `data-composition-id` (matching the host mount), `data-width`,
+and `data-height`. Styles, markup, and the `window.__timelines[<id>]` registration
+all live inside the template — the runtime clones template contents only and
+discards `<head>`. Read `hyperframes-core/references/sub-compositions.md` before
+writing; each of these was a real `check` failure on first attempt.
+
 Two constraints from the caller you must honour and cannot infer:
 - **Your id prefix** (`s<NN>-`). Every id you emit must start with it. Duplicate ids
   across scene files render BLANK and cross-file duplicates slip past `lint`.

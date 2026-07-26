@@ -10,14 +10,19 @@
 import { readFile } from "node:fs/promises";
 import { basename } from "node:path";
 
-const ID_RE = /\bid\s*=\s*"([^"]+)"/g;
+// Must NOT match data-composition-id / aria-labelledby / any *-id attribute.
+// \b is not enough: in `data-composition-id`, the char before "id" is "-", a
+// non-word char, so \bid matches. HyperFrames legitimately repeats a
+// data-composition-id across host and sub-comp, so this false positive would
+// flag every correct composition.
+const ID_RE = /(?<![-\w])id\s*=\s*"([^"]+)"/g;
 
 export function extractIds(html) {
   return [...html.matchAll(ID_RE)].map((m) => m[1]);
 }
 
 /** Scene files must namespace ids as s<NN>-*; the host file uses reserved roots. */
-const HOST_ALLOWED = new Set(["root", "narration", "soundtrack"]);
+const HOST_ALLOWED = new Set(["root", "narration", "soundtrack", "main"]);
 const SCENE_PREFIX = /^s\d{2}-/;
 
 export async function assertUniqueIds(files) {

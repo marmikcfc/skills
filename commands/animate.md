@@ -95,6 +95,21 @@ its own timeline must animate it (see rule 2):
 Manim MP4s are **silent** — all narration comes from the single `<audio>`.
 Never add an `<audio>` for a Manim clip.
 
+## What `check` rejects — verified on a real render
+
+These four came out of an actual `hyperframes check` run, in the order it raised
+them. Read `hyperframes-core/references/sub-compositions.md` for the shapes; this
+list is only what to confirm before you run `check`:
+
+- [ ] Each scene file's root element (**inside** `<template>`) carries its own
+      `data-composition-id`, `data-width`, `data-height`.
+- [ ] The host mount `<div>` *also* carries `data-width`/`data-height`, and its
+      `data-composition-id` matches the scene file's.
+- [ ] `index.html` registers its own `window.__timelines["main"]`, not just the
+      scenes'. A main composition with no timeline fails lint.
+- [ ] Every `<style>` and `<script>` a scene needs is **inside** its `<template>`.
+      The runtime clones only template contents; `<head>` is discarded.
+
 ## Four rules that fail silently if broken
 
 These are the seam's real failure modes. Every one is silent: no error, wrong output.

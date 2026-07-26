@@ -68,3 +68,13 @@ test("host file may use reserved root ids", async () => {
     assert.equal((await assertUniqueIds(paths)).ok, true);
   } finally { await rm(dir, { recursive: true }); }
 });
+
+test("data-composition-id is NOT an id — HyperFrames repeats it by design", () => {
+  const html = '<div data-composition-id="s01-hook" data-composition-src="x.html"></div>';
+  assert.deepEqual(extractIds(html), [], "matching data-composition-id flags every valid composition");
+});
+
+test("other *-id attributes are not ids either", () => {
+  assert.deepEqual(extractIds('<div aria-owns-id="q" data-track-id="7"></div>'), []);
+  assert.deepEqual(extractIds('<div id="s01-real" data-composition-id="s01-hook"></div>'), ["s01-real"]);
+});
