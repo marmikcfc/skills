@@ -8,6 +8,8 @@ import { normalizeElevenLabs } from "./lib/normalize-elevenlabs.mjs";
 import { reconcileWords } from "./lib/reconcile-words.mjs";
 import { callCartesia } from "./lib/cartesia-client.mjs";
 import { callElevenLabs } from "./lib/elevenlabs-client.mjs";
+import { callFalTts, fetchFalAudio } from "./lib/fal-tts.mjs";
+import { normalizeFal } from "./lib/normalize-fal.mjs";
 
 function parseArgs(argv) {
   const out = { workdir: null, provider: null, align: null };
@@ -29,6 +31,13 @@ function parseArgs(argv) {
 const TTS_ADAPTERS = {
   cartesia:   { call: callCartesia,   normalize: normalizeCartesia },
   elevenlabs: { call: callElevenLabs, normalize: normalizeElevenLabs },
+  // fal is a gateway: `model` selects which of its hundreds of endpoints to hit,
+  // and it returns an audio URL rather than bytes.
+  fal: {
+    call: callFalTts,
+    normalize: (raw, ctx) => normalizeFal(raw, ctx),
+    remoteAudio: true,
+  },
 };
 
 export async function narrate({ workdir, providerFlag = null, alignProvider = null, fetchFn = fetch }) {
@@ -59,9 +68,14 @@ export async function narrate({ workdir, providerFlag = null, alignProvider = nu
     );
   }
 
-  console.log(`narrating ${clean_text.split(/\s+/).length} words via ${tts.provider} (timings: ${align.provider})...`);
-  const rawCall = await adapter.call({ text: clean_text, apiKey: tts.key, fetchFn });
-  const normalized = adapter.normalize(rawCall.raw);
+  const modelNote = tts.model ? ` [${tts.model}]` : "";
+  console.log(`narrating ${clean_text.split(/\s+/).length} words via ${tts.provider}${modelNote} (timings: ${align.provider})...`);
+  const rawCall = await adapter.call({
+    text: clean_text, apiKey: tts.key, fetchFn,
+    ...(tts.model ? { model: tts.model } : {}),
+    options: tts.options ?? {},
+  });
+  const normalized = adapter.normalize(rawCall.raw, { model: tts.model });
 
   const expectedWords = clean_text.split(/\s+/).filter(Boolean);
   reconcileWords(expectedWords, normalized.words);
@@ -81,8 +95,17 @@ export async function narrate({ workdir, providerFlag = null, alignProvider = nu
     withMarkers.push({ ...normalized.words[i], is_marker: false });
   }
 
-  // Write audio + timestamps
-  const audioBytes = Buffer.from(rawCall.audio_base64, "base64");
+  // Write audio + timestamps.
+  // Direct vendors hand back base64 bytes; gateways like fal hand back a URL, so
+  // the bytes need a second fetch before anything downstream can use them.
+  let audioBytes;
+  if (adapter.remoteAudio) {
+    const url = normalized.audio_url;
+    if (!url) throw new Error(`${tts.provider} returned no audio URL to download`);
+    audioBytes = await fetchFalAudio(url, { fetchFn });
+  } else {
+    audioBytes = Buffer.from(rawCall.audio_base64, "base64");
+  }
   await writeFile(join(workdir, "audio.mp3"), audioBytes);
   await writeFile(
     join(workdir, "word-timestamps.json"),

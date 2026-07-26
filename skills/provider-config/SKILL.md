@@ -87,6 +87,51 @@ node -e "import('./scripts/lib/providers.mjs').then(async m=>{
   console.log(m.resolveNarration({config:c, env:process.env, keys:k})); })"
 ```
 
+## fal.ai — one key, every capability
+
+fal is a **gateway**: a single `FAL_KEY` fronts hundreds of models across every
+capability we have. Verified live against fal's model-search API:
+
+| Capability | fal category | Active models | Default we ship |
+|---|---|---|---|
+| tts | `text-to-speech` | 33 | `fal-ai/elevenlabs/tts/turbo-v2.5` |
+| align | `speech-to-text` | 10 | `fal-ai/elevenlabs/speech-to-text/scribe-v2` |
+| image | `text-to-image` | 100+ | `fal-ai/flux/dev` |
+| music | `text-to-audio` ᵃ | 20+ | `fal-ai/elevenlabs/music` |
+| video | `text-to-video`, `image-to-video` | 100+ each | `fal-ai/kling-video/v3/standard/text-to-video` |
+| avatar | `audio-to-video` | 19 | `fal-ai/longcat-single-avatar/image-audio-to-video` |
+| lipsync | `video-to-video` ᵃ | 11+ | `fal-ai/sync-lipsync/v3` |
+
+ᵃ Category names had to be **probed, not assumed**: `text-to-music` and `lipsync`
+both return *zero* active models. Music lives under `text-to-audio` (alongside TTS,
+so the listing is filtered by `q=music`) and lipsync under `video-to-video`.
+
+Because it is a gateway, fal registers as **one provider with a per-capability
+model**, not one entry per model — fal ships models weekly and a vendored list
+would be stale within weeks.
+
+```bash
+node scripts/fal-models.mjs --capability tts        # browse live
+node scripts/fal-models.mjs --capability lipsync
+node scripts/fal-models.mjs --search "seedance"
+node scripts/fal-models.mjs --all
+```
+
+Pin a model per capability:
+
+```jsonc
+{ "capabilities": {
+    "tts":   { "pin": "fal", "options": { "model": "fal-ai/elevenlabs/tts/turbo-v2.5", "voice": "Rachel" } },
+    "image": { "pin": "fal", "options": { "model": "fal-ai/nano-banana-pro" } } } }
+```
+
+**Word timings caveat.** Only some fal TTS models emit per-word timestamps. The
+adapter requests `timestamps: true` for models known to support it and **fails
+loudly** if a model returns none, naming the alternatives — it never silently
+produces a narration with no timing. If you want an untimestamped voice (minimax,
+qwen, chatterbox…), set the `align` capability to `fal` and timings are recovered
+from the generated audio by scribe-v2.
+
 ## Adding a provider
 
 1. Add a registry entry in `providers.default.json` (or your own `providers.json`):
@@ -109,7 +154,7 @@ extension point and the documentation of intent. `narrate.mjs` fails with an
 explicit "no adapter is implemented, here is what is" rather than silently
 pretending support.
 
-Currently implemented TTS adapters: **cartesia, elevenlabs**. Everything else in
+Currently implemented TTS adapters: **cartesia, elevenlabs, fal**. Everything else in
 the registry resolves but will tell you it needs an adapter.
 
 ## Model IDs are not in this repo

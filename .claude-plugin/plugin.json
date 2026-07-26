@@ -1,6 +1,6 @@
 {
   "name": "video-gen",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Generate short animated videos — explainers, deep-research videos, product launches, demos, codebase walkthroughs, presenter+animation composites, and animated story/book summaries — via a 5-stage pipeline. Structure, visual style, and narration voice are independent choices. Manim for math scenes and HyperFrames for everything else, mixable in one video. Pluggable model providers for TTS, alignment, image, music, and video.",
   "author": {
     "name": "Marmik Pandya",
@@ -38,6 +38,10 @@
     "youtube",
     "soundtrack",
     "providers",
-    "multi-provider"
+    "multi-provider",
+    "fal",
+    "fal.ai",
+    "avatar",
+    "lipsync"
   ]
 }

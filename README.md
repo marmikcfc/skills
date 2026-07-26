@@ -62,7 +62,8 @@ Restart Claude Code so the plugin's commands, skills, and agents load, then run 
 | Style skills | `vox-style` (kinetic motion graphics) — optional, default is clean/on-brand |
 | Composite / footage | `talking-head-composite` (presenter + generated visuals; cut/stack/pip/split, 16:9 + 9:16) |
 | Audio | `soundtrack` (music bed, ducking against word timings, SFX) |
-| Providers | `provider-config` (capability→provider config; swap or add any model vendor) |
+| Providers | `provider-config` (incl. **fal.ai gateway** — one key for tts/align/image/music/video/avatar/lipsync; browse with `scripts/fal-models.mjs`)
+| Providers (detail) | `provider-config` (capability→provider config; swap or add any model vendor) |
 | Voice skills | `voice-3b1b` (discovery-order narration), `voice-gaurav-sen` (contract-first), `explaining-technical-concepts` (neutral, L0→L3 depth tiers), `voice-extractor` (build a profile from samples) |
 | Craft skills | `choosing-the-tool`, `manim-essentials`, `narration-writing`, `voice-driven-timing`, `soundtrack`, `using-claude-memory` |
 | Composition contract | delegated to HyperFrames' own `hyperframes-core` / `hyperframes-animation` skills — we keep no local copy |

@@ -66,6 +66,17 @@ export function credentialFor(providerId, registry, { env = {}, keys = {} } = {}
 const ENV_PIN = (cap) => `VIDEO_GEN_${cap.toUpperCase()}_PROVIDER`;
 
 /**
+ * Which concrete model a gateway provider should use for a capability.
+ * Direct vendors (cartesia, runway…) are one model per provider and return null.
+ * Precedence: capability options.model → registry default for that capability.
+ */
+export function modelFor(capability, providerId, config) {
+  const spec = config.capabilities?.[capability] ?? {};
+  const meta = config.registry?.[providerId] ?? {};
+  return spec.options?.model ?? meta.models?.[capability] ?? null;
+}
+
+/**
  * Resolve one capability to a concrete provider.
  * Precedence: flag → env pin → config pin → chain order, filtered by
  * `require` assertions, `policy.offline`, and credential availability.
@@ -102,7 +113,8 @@ export function resolveCapability(capability, { config, env = {}, keys = {}, fla
     const cred = credentialFor(explicit, registry, { env, keys });
     if (!cred.ok) throw new Error(`provider "${explicit}" pinned for ${capability} but ${cred.reason}`);
     return { capability, provider: explicit, key: cred.key, local: !!cred.local,
-             options: spec.options ?? {}, reason: "pinned" };
+             options: spec.options ?? {}, model: modelFor(capability, explicit, config),
+             reason: "pinned" };
   }
 
   const tried = [];
@@ -113,7 +125,8 @@ export function resolveCapability(capability, { config, env = {}, keys = {}, fla
     const cred = credentialFor(id, registry, { env, keys });
     if (!cred.ok) { tried.push(`${id} (${cred.reason})`); continue; }
     return { capability, provider: id, key: cred.key, local: !!cred.local,
-             options: spec.options ?? {}, reason: "chain" };
+             options: spec.options ?? {}, model: modelFor(capability, id, config),
+             reason: "chain" };
   }
 
   throw new Error(
