@@ -1,0 +1,28 @@
+s01t01 CONSTRUCT anchor=N dens=high
+s01t02 BLANK anchor=N dens=none
+s01t03 CONSTRUCT anchor=N dens=low
+s01t04 TALKING_HEAD anchor=N dens=none
+s01t05 TALKING_HEAD anchor=Y dens=none
+s01t06 ANNOTATE anchor=Y dens=high
+s01t07 TALKING_HEAD anchor=Y dens=none
+s01t08 ANNOTATE anchor=Y dens=high
+s01t09 ANNOTATE anchor=Y dens=high
+s01t10 TALKING_HEAD anchor=N dens=high
+s01t11 TALKING_HEAD anchor=Y dens=none
+s01t12 ANNOTATE anchor=Y dens=high
+s01t13 TALKING_HEAD anchor=N dens=none
+s01t14 ANNOTATE anchor=Y dens=high
+s01t15 TITLE anchor=Y dens=high
+s01t16 TALKING_HEAD anchor=Y dens=none
+s02t01 CONSTRUCT anchor=N dens=high
+s02t02 CONSTRUCT anchor=N dens=high
+
+BLOCKS — TALKING_HEAD x3 (s01t04-s01t05-s01t07), ANNOTATE x4 (s01t06-s01t08-s01t09, s01t12-s01t14)
+
+ANCHOR — The man in the suit remains on-screen in fixed position across s01t04-s01t09 and again s01t13-s01t16, becoming the visual anchor as text and annotations overlay around him.
+
+EMPHASIS — Hand-drawn question marks and arrow annotations in cyan/white over dialogue scenes (s01t06, s01t08, s01t09). Bright yellow bar highlighting equations and formulas. High-contrast text overlays (white on black) draw attention to key claims.
+
+TRANSITIONS — Hard cut from intimate man-on-camera (s01t09) to three-person group scene (s01t10) signals shift to collaborative context. Seamless continuation of annotation style across both contexts. Final equation card (s01t15) uses largest text to punctuate concept.
+
+UNSURE — s01t02 appears to be padding or transition frame; marked BLANK but may contain faint content.

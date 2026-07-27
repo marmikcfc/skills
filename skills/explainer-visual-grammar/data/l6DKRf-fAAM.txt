@@ -1,0 +1,37 @@
+s01t01 CONSTRUCT anchor=N dens=high
+s01t02 FOOTAGE anchor=N dens=low
+s01t03 ANNOTATE anchor=N dens=high
+s01t04 CONSTRUCT anchor=N dens=high
+s01t05 CONSTRUCT anchor=N dens=high
+s01t06 CONSTRUCT anchor=N dens=none
+s01t07 CONSTRUCT anchor=Y dens=low
+s01t08 CONSTRUCT anchor=Y dens=low
+s01t09 CONSTRUCT anchor=Y dens=low
+s01t10 CONSTRUCT anchor=Y dens=none
+s01t11 CONSTRUCT anchor=Y dens=low
+s01t12 TALKING_HEAD anchor=Y dens=none
+s01t13 CONSTRUCT anchor=Y dens=low
+s01t14 TALKING_HEAD anchor=Y dens=none
+s01t15 CONSTRUCT anchor=Y dens=low
+s01t16 CONSTRUCT anchor=Y dens=low
+s02t01 CONSTRUCT anchor=Y dens=low
+s02t02 CONSTRUCT anchor=Y dens=none
+s02t03 CONSTRUCT anchor=Y dens=none
+s02t04 BLANK anchor=N dens=none
+s02t05 CONSTRUCT anchor=N dens=high
+s02t06 CONSTRUCT anchor=N dens=high
+s02t07 BRAND anchor=N dens=none
+s02t08 BRAND anchor=N dens=none
+s02t09 BRAND anchor=N dens=none
+s02t10 BRAND anchor=N dens=none
+s02t11 BRAND anchor=N dens=none
+
+BLOCKS — CONSTRUCT x11 (s01t06-s01t11, s01t13-s01t16, s02t01-s02t03), BRAND x5 (s02t07-s02t11)
+
+ANCHOR — Pair of white curved organic forms (abstract hands/frames) persist from s01t06 through s02t03, anchoring the entire middle and upper portion. Two men in suits appear within this frame structure at s01t12 and s01t14.
+
+EMPHASIS — White hand/frame silhouettes against black background create high-contrast focal point; internal geometric shapes (hourglass, arrows) shift position to guide attention. Neon cyan and pink color coding in equation diagram (s02t06) emphasizes data/entropy relationship. Company logos in final tiles (s02t07-s02t11) use white text overlay on photographic backgrounds for brand prominence.
+
+TRANSITIONS — Hard cut from abstract animation frame to Teal bar chart (s02t05) resets visual context to pure data. People scenes (BRAND) follow without intermediate animation, signaling shift from concept to real-world application/endorsement.
+
+UNSURE — s02t03 is heavily darkened; appears intentionally obscured construct rather than blank, maintaining anchor continuity.

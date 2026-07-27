@@ -1,0 +1,59 @@
+s01t01 BLANK anchor=N dens=none
+s01t02 FOOTAGE anchor=N dens=none
+s01t03 FOOTAGE anchor=Y dens=none
+s01t04 FOOTAGE anchor=N dens=none
+s01t05 FOOTAGE anchor=Y dens=none
+s01t06 DOCUMENT anchor=N dens=high
+s01t07 FOOTAGE anchor=N dens=none
+s01t08 FOOTAGE anchor=Y dens=none
+s01t09 TITLE anchor=N dens=high
+s01t10 CONSTRUCT anchor=N dens=low
+s01t11 FOOTAGE anchor=N dens=none
+s01t12 FOOTAGE anchor=N dens=none
+s01t13 TALKING_HEAD anchor=N dens=low
+s01t14 TALKING_HEAD anchor=N dens=low
+s01t15 FOOTAGE anchor=N dens=none
+s01t16 DOCUMENT anchor=N dens=high
+s02t01 DOCUMENT anchor=N dens=high
+s02t02 CONSTRUCT anchor=N dens=high
+s02t03 FOOTAGE anchor=N dens=none
+s02t04 FOOTAGE anchor=N dens=none
+s02t05 TALKING_HEAD anchor=N dens=low
+s02t06 FOOTAGE anchor=N dens=none
+s02t07 FOOTAGE anchor=N dens=none
+s02t08 CAPTURE anchor=N dens=high
+s02t09 CAPTURE anchor=Y dens=high
+s02t10 CONSTRUCT anchor=N dens=low
+s02t11 FOOTAGE anchor=N dens=none
+s02t12 FOOTAGE anchor=N dens=none
+s02t13 BLANK anchor=N dens=none
+s02t14 CONSTRUCT anchor=N dens=none
+s02t15 CONSTRUCT anchor=Y dens=none
+s02t16 CONSTRUCT anchor=Y dens=none
+s03t01 CONSTRUCT anchor=N dens=high
+s03t02 CONSTRUCT anchor=Y dens=low
+s03t03 FOOTAGE anchor=N dens=low
+s03t04 FOOTAGE anchor=N dens=low
+s03t05 FOOTAGE anchor=N dens=none
+
+BLOCKS
+FOOTAGE x4 (s01t02-s01t05)
+FOOTAGE x3 (s01t07-s01t08, s01t11-s01t12)
+CONSTRUCT x3 (s02t14-s02t16)
+
+ANCHOR
+Sydney Opera House with bridge and yellow highlights maintains screen position across s02t14-s02t16.
+
+EMPHASIS
+Yellow highlight overlays mark key data in DOCUMENT tiles (yellow box on s01t16). Chart bars use cyan/turquoise colour-coding for demographic categories on s02t02. Yellow banner text on s01t09 emphasizes chapter heading.
+
+TRANSITIONS
+s01t08 to s01t09: FOOTAGE of people transitions to TITLE with chapter heading via overlay on video background.
+s01t16 to s02t01: DOCUMENT to DOCUMENT (continuity of evidence mode).
+s02t13 to s02t14: Hard cut from black frame to architectural graphic overlay.
+
+UNSURE
+s02t05 classification uncertain between TALKING_HEAD and FOOTAGE—appears to be interview context but shot composition suggests group scene documentation.
+
+DOCUMENT tiles with visible highlight: 2 with highlight (s01t16 yellow, s02t01 green), 1 without clear highlight (s01t06).
+No sponsor/BRAND tiles detected.

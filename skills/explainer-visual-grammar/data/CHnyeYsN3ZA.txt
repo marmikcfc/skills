@@ -1,0 +1,57 @@
+s01t01 CONSTRUCT anchor=N dens=low
+s01t02 CONSTRUCT anchor=Y dens=low
+s01t03 DOCUMENT anchor=N dens=high
+s01t04 CAPTURE anchor=N dens=low
+s01t05 CONSTRUCT anchor=N dens=low
+s01t06 CONSTRUCT anchor=Y dens=low
+s01t07 CONSTRUCT anchor=N dens=low
+s01t08 DOCUMENT anchor=N dens=high
+s01t09 CONSTRUCT anchor=N dens=low
+s01t10 CONSTRUCT anchor=Y dens=low
+s01t11 CONSTRUCT anchor=Y dens=low
+s01t12 CAPTURE anchor=N dens=high
+s01t13 CAPTURE anchor=Y dens=high
+s01t14 CAPTURE anchor=Y dens=high
+s01t15 CAPTURE anchor=Y dens=high
+s01t16 CAPTURE anchor=Y dens=high
+s01t17 CAPTURE anchor=Y dens=high
+s01t18 CAPTURE anchor=N dens=high
+s02t01 CAPTURE anchor=Y dens=high
+s02t02 CAPTURE anchor=N dens=high
+s02t03 CAPTURE anchor=Y dens=high
+s02t04 CAPTURE anchor=Y dens=high
+s02t05 CAPTURE anchor=Y dens=high
+s02t06 CAPTURE anchor=N dens=high
+s02t07 CAPTURE anchor=N dens=high
+s02t08 CAPTURE anchor=N dens=high
+s02t09 CAPTURE anchor=N dens=high
+s02t10 TITLE anchor=N dens=low
+s02t11 BRAND anchor=N dens=low
+s02t12 BRAND anchor=Y dens=low
+s02t13 CAPTURE anchor=N dens=high
+s02t14 CONSTRUCT anchor=N dens=low
+s02t15 DOCUMENT anchor=N dens=high
+s02t16 FOOTAGE anchor=N dens=none
+s03t01 BRAND anchor=N dens=low
+s03t02 CONSTRUCT anchor=N dens=low
+s03t03 CONSTRUCT anchor=N dens=high
+s03t04 CONSTRUCT anchor=Y dens=low
+
+BLOCKS
+CONSTRUCT x3 (s01t01-s01t03)
+CONSTRUCT x3 (s01t09-s01t11)
+CAPTURE x9 (s01t12-s01t20 spans sheets)
+CONSTRUCT x4 (s02t06-s02t09 partial)
+
+ANCHOR
+The blue website header (TOP DEALS bar) holds screen position consistently through s01t12-s01t17, staying in roughly the same layout slot.
+
+EMPHASIS
+Colour coding by category (CPU, GPU, Storage categories in blue/orange headers) and animated column highlighting in bar charts. High-contrast foreground/background in website UI with orange call-to-action buttons anchoring user attention.
+
+TRANSITIONS
+Hard cuts dominate: s01t02→s01t03 jumps from diagram to document; s01t04→s01t05 cuts from IDE to chart; s01t08→s01t09 document to chart. Website sequence s01t12 onward maintains continuous scroll/navigation within same domain but content shifts (product categories, promotions).
+
+UNSURE
+s01t04: Person visible in dark screen could be TALKING_HEAD, but framing suggests IDE/CAPTURE screenshot context.
+s02t14: Illustrated botanical elements with transparent background; borderline CONSTRUCT vs FOOTAGE (stock/illustrative).

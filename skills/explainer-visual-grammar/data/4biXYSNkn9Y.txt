@@ -1,0 +1,42 @@
+s01t01 FOOTAGE anchor=N dens=none
+s01t02 FOOTAGE anchor=Y dens=none
+s01t03 CAPTURE anchor=N dens=high
+s01t04 DOCUMENT anchor=N dens=high
+s01t05 FOOTAGE anchor=Y dens=none
+s01t06 BLANK anchor=N dens=none
+s01t07 CAPTURE anchor=N dens=high
+s01t08 CAPTURE anchor=Y dens=high
+s01t09 CAPTURE anchor=N dens=high
+s01t10 CAPTURE anchor=N dens=high
+s01t11 CAPTURE anchor=N dens=high
+s01t12 CAPTURE anchor=Y dens=high
+s01t13 CAPTURE anchor=Y dens=high
+s01t14 CAPTURE anchor=Y dens=high
+s01t15 CAPTURE anchor=Y dens=high
+s01t16 CAPTURE anchor=Y dens=high
+s02t01 CONSTRUCT anchor=N dens=high
+s02t02 CONSTRUCT anchor=Y dens=high
+s02t03 CAPTURE anchor=N dens=high
+s02t04 CAPTURE anchor=N dens=high
+s02t05 CONSTRUCT anchor=Y dens=high
+s02t06 BRAND anchor=N dens=low
+s02t07 CONSTRUCT anchor=N dens=high
+s02t08 CAPTURE anchor=N dens=high
+s02t09 CAPTURE anchor=N dens=high
+s02t10 ANNOTATE anchor=N dens=medium
+s02t11 CONSTRUCT anchor=N dens=high
+s02t12 DOCUMENT anchor=N dens=high
+s02t13 CONSTRUCT anchor=Y dens=high
+s02t14 TALKING_HEAD anchor=N dens=none
+s02t15 BLANK anchor=N dens=none
+s02t16 BLANK anchor=N dens=none
+
+BLOCKS: CAPTURE x6 (s01t09-s01t14); CAPTURE x4 (s01t15-s01t16 + s02t03-s02t04); CAPTURE x3 (s02t08-s02t09 overlapping with s02t11 disruption)
+
+ANCHOR: Verda website branding and layout holds across s01t07-s01t08. Website navigation/header elements persist through multiple CAPTURE transitions (s01t09-s01t16, s02t03-s02t04). Green/yellow graphical accent appears consistently in bottom-right region from s02t05 onward.
+
+EMPHASIS: Bright green/yellow geometric shapes and logos used as persistent visual accent across website and interface screenshots. Text highlighting via viewport positioning and color contrast. Company logos (OpenAI, ANTHROPIC) displayed large and centered for brand emphasis in s02t06.
+
+TRANSITIONS: Hard cut from hardware footage (s01t05) to website content (s01t07). Website screenshots transition fluidly between pages (s01t07-s01t16) with shared chrome/navigation. Abrupt switch from Verda site to chat interface (s02t03-s02t04). Chart content (s02t01-s02t02, s02t05, s02t07, s02t11, s02t13) interspersed with interface captures; no layering or accumulation within runs.
+
+UNSURE: s01t04 could be CAPTURE if showing page functionality vs DOCUMENT if showing page as evidence. s02t10 (handwritten annotation diagram) might be CONSTRUCT with hand-drawn markers rather than pure ANNOTATE.

@@ -1,0 +1,46 @@
+s01t01 CONSTRUCT anchor=N dens=low
+s01t02 DOCUMENT anchor=N dens=high
+s01t03 CAPTURE anchor=N dens=low
+s01t04 CONSTRUCT anchor=N dens=low
+s01t05 CONSTRUCT anchor=N dens=low
+s01t06 CAPTURE anchor=N dens=high
+s01t07 CONSTRUCT anchor=Y dens=low
+s01t08 CONSTRUCT anchor=Y dens=high
+s01t09 ANNOTATE anchor=Y dens=high
+s01t10 CAPTURE anchor=N dens=low
+s01t11 TITLE anchor=N dens=low
+s01t12 CAPTURE anchor=N dens=low
+s01t13 CONSTRUCT anchor=N dens=low
+s01t14 CONSTRUCT anchor=Y dens=low
+s01t15 CONSTRUCT anchor=Y dens=low
+s01t16 DOCUMENT anchor=N dens=high
+s02t01 ANNOTATE anchor=N dens=high
+s02t02 CONSTRUCT anchor=N dens=low
+s02t03 CONSTRUCT anchor=Y dens=low
+s02t04 CAPTURE anchor=N dens=low
+s02t05 CAPTURE anchor=Y dens=high
+s02t06 CAPTURE anchor=Y dens=high
+s02t07 CAPTURE anchor=Y dens=high
+s02t08 BLANK anchor=N dens=none
+s02t09 CONSTRUCT anchor=N dens=low
+s02t10 CONSTRUCT anchor=Y dens=low
+s02t11 CONSTRUCT anchor=Y dens=low
+s02t12 BLANK anchor=N dens=none
+
+BLOCKS
+CONSTRUCT x3 (s01t01-s01t07 includes mix but x4 pure CONSTRUCT s01t05,07,13-15)
+CONSTRUCT x4 (s01t13-s01t15 span, plus s02t02-s02t03)
+CAPTURE x4 (s02t04-s02t07)
+
+ANCHOR
+The Agentic search performance chart (white canvas with line graph) holds position from s01t05 through s01t09, with progressive annotation layers (grid → colours → labels) building atop the same graph baseline.
+
+EMPHASIS
+Coloured bars in bar charts with category legend (red/green/blue for model tiers); handwritten-style arrows and text annotations layered in magenta/yellow highlight comparison callouts; green emphasis text in terminal code (s02t09 "aaaaaa"). Creatures (Fable 5, GPT 4o, etc.) use colour-coded positioning to denote model tiers.
+
+TRANSITIONS
+Chart sequence s01t05-s01t09 maintains visual continuity with progressive overlays (same graph, new marks). Hard cuts at s01t09→s01t10 (chart to IDE), s01t12→s01t13 (title to diagram), s02t03→s02t04 (construction to IDE). IDE sequence s02t04-s02t07 is a continuous software walkthrough with same interface persisting.
+
+UNSURE
+s02t01: Coloured marks on a chart could be DOCUMENT (evidence) or ANNOTATE (marks added); treated as ANNOTATE since overlaid labels read as annotation.
+s02t09: Red arrow on terminal — borderline CAPTURE (terminal content) vs ANNOTATE (if hand-drawn). Treated as CONSTRUCT since the whole diagram is built for this video.

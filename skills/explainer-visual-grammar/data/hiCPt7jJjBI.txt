@@ -1,0 +1,47 @@
+s01t01 DOCUMENT anchor=N dens=high
+s01t02 DOCUMENT anchor=N dens=high
+s01t03 FOOTAGE anchor=N dens=low
+s01t04 FOOTAGE anchor=N dens=none
+s01t05 FOOTAGE anchor=N dens=none
+s01t06 FOOTAGE anchor=N dens=none
+s01t07 FOOTAGE anchor=N dens=none
+s01t08 FOOTAGE anchor=N dens=none
+s01t09 FOOTAGE anchor=N dens=none
+s01t10 FOOTAGE anchor=N dens=none
+s01t11 FOOTAGE anchor=N dens=none
+s01t12 FOOTAGE anchor=N dens=none
+s01t13 FOOTAGE anchor=Y dens=none
+s01t14 FOOTAGE anchor=N dens=none
+s01t15 BLANK anchor=N dens=none
+s01t16 TALKING_HEAD anchor=N dens=none
+s02t01 FOOTAGE anchor=N dens=none
+s02t02 FOOTAGE anchor=N dens=none
+s02t03 FOOTAGE anchor=N dens=none
+s02t04 CONSTRUCT anchor=N dens=none
+s02t05 FOOTAGE anchor=N dens=none
+s02t06 TALKING_HEAD anchor=N dens=low
+s02t07 FOOTAGE anchor=N dens=none
+s02t08 TALKING_HEAD anchor=N dens=none
+s02t09 TALKING_HEAD anchor=N dens=none
+
+BLOCKS
+DOCUMENT x2 (s01t01-s01t02)
+FOOTAGE x9 (s01t05-s01t14)
+FOOTAGE x5 (s02t01-s02t05, s02t07)
+
+ANCHOR
+None. Scenes shift rapidly across different subject matter—no recurring visual element maintains position.
+
+EMPHASIS
+Yellow subtitle bars on news footage (s01t01-s01t02) highlight headline text: "How the Iran war is impacting food production lines across Europe" and "How Demand destruction: How the Iran war could rattle or break the US economy". News broadcasts frame key claims in bright yellow.
+
+TRANSITIONS
+s01t02 to s01t03: DOCUMENT news footage hard cuts to industrial FOOTAGE (gas station, Shell branding).
+s01t16 to s02t01: TALKING_HEAD portrait transitions to street scene FOOTAGE.
+s02t03 to s02t04: Real protest/street FOOTAGE transitions abruptly to CONSTRUCT graphic overlay (artistic rendering with red/blue colour scheme).
+
+UNSURE
+s01t13 classification—appears to be weapons/military systems FOOTAGE but could be archival or satellite-derived material; classified as FOOTAGE.
+
+DOCUMENT tiles with visible highlight: 2 (both s01t01-s01t02 carry bright yellow subtitle bars highlighting text), 0 without highlight.
+Sponsor/BRAND tiles: none detected (news broadcast logos are part of DOCUMENT framing, not promotional branding).

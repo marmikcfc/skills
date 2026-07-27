@@ -1,0 +1,61 @@
+s01t01 CAPTURE anchor=N dens=high
+s01t02 DOCUMENT anchor=N dens=high
+s01t03 FOOTAGE anchor=N dens=low
+s01t04 FOOTAGE anchor=N dens=low
+s01t05 FOOTAGE anchor=N dens=low
+s01t06 FOOTAGE anchor=N dens=low
+s01t07 CONSTRUCT anchor=N dens=high
+s01t08 FOOTAGE anchor=N dens=low
+s01t09 FOOTAGE anchor=N dens=low
+s01t10 FOOTAGE anchor=N dens=low
+s01t11 FOOTAGE anchor=N dens=low
+s01t12 FOOTAGE anchor=N dens=low
+s01t13 FOOTAGE anchor=N dens=low
+s01t14 FOOTAGE anchor=N dens=low
+s01t15 FOOTAGE anchor=N dens=low
+s01t16 FOOTAGE anchor=N dens=low
+s02t01 CAPTURE anchor=N dens=high
+s02t02 DOCUMENT anchor=N dens=high
+s02t03 FOOTAGE anchor=N dens=low
+s02t04 FOOTAGE anchor=N dens=low
+s02t05 CONSTRUCT anchor=N dens=low
+s02t06 FOOTAGE anchor=N dens=low
+s02t07 FOOTAGE anchor=N dens=low
+s02t08 FOOTAGE anchor=N dens=low
+s02t09 FOOTAGE anchor=N dens=low
+s02t10 FOOTAGE anchor=N dens=low
+s02t11 FOOTAGE anchor=N dens=low
+s02t12 FOOTAGE anchor=N dens=low
+s02t13 FOOTAGE anchor=N dens=low
+s02t14 FOOTAGE anchor=N dens=low
+s02t15 FOOTAGE anchor=N dens=low
+s02t16 FOOTAGE anchor=N dens=low
+s03t01 FOOTAGE anchor=N dens=low
+s03t02 FOOTAGE anchor=N dens=low
+s03t03 FOOTAGE anchor=N dens=low
+s03t04 FOOTAGE anchor=N dens=low
+s03t05 FOOTAGE anchor=N dens=low
+s03t06 CONSTRUCT anchor=N dens=medium
+s03t07 FOOTAGE anchor=N dens=low
+s03t08 FOOTAGE anchor=N dens=low
+s03t09 FOOTAGE anchor=N dens=low
+s03t10 FOOTAGE anchor=N dens=low
+s03t11 FOOTAGE anchor=N dens=low
+s03t12 FOOTAGE anchor=N dens=low
+
+BLOCKS
+FOOTAGE x13 (s01t03-s01t06, s01t08-s01t16)
+FOOTAGE x9 (s02t03-s02t04, s02t06-s02t12)
+FOOTAGE x8 (s03t01-s03t05, s03t07-s03t12)
+
+ANCHOR
+None; each frame transitions to unrelated real-world subject matter.
+
+EMPHASIS
+Quantitative data graphics (chart in s02t01 showing "31% 68%" survey results); constructed comparison diagram (s03t06: "1965 vs 2026" with illustrated figures). No text highlighting; emphasis via color-coding figures orange and blue in temporal comparison.
+
+TRANSITIONS
+Hard cuts throughout. News/economic data graphic → economic report document (s02t01-s02t02); constructed supply-demand diagram → real-world grocery/retail footage (s01t07-s01t08); diagram showing wealth/income metaphor (1965 vs 2026) → real-world work footage (s03t06-s03t07).
+
+UNSURE
+s01t02 classified as DOCUMENT (Bloomberg article with ChatGPT chart) but layout suggests hybrid CAPTURE element; s02t05 classified as CONSTRUCT but may be stock footage of 3D rendered buildings.

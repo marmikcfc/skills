@@ -1,0 +1,31 @@
+s01t01 ANNOTATE anchor=N dens=none
+s01t02 ANNOTATE anchor=Y dens=none
+s01t03 TITLE anchor=N dens=high
+s02t01 CONSTRUCT anchor=N dens=low
+s02t02 CONSTRUCT anchor=N dens=low
+s02t03 CONSTRUCT anchor=N dens=low
+s02t04 CONSTRUCT anchor=N dens=low
+s02t05 CONSTRUCT anchor=Y dens=low
+s02t06 CONSTRUCT anchor=Y dens=low
+s02t07 CONSTRUCT anchor=N dens=low
+s02t08 CONSTRUCT anchor=Y dens=low
+s02t09 CONSTRUCT anchor=N dens=low
+s02t10 CONSTRUCT anchor=N dens=low
+s02t11 CONSTRUCT anchor=N dens=low
+s02t12 CONSTRUCT anchor=N dens=none
+s02t13 TITLE anchor=N dens=high
+
+BLOCKS
+CONSTRUCT x12 (s02t01-s02t12)
+
+ANCHOR
+Chord/circle geometric diagrams with consistent scaling and layout—circle frame holds position across tiles s02t01-s02t12; red-highlighted intersection points recur as visual target
+
+EMPHASIS
+Color-coded point markers on circles: yellow for specific chords, green/red for counted intersections, with the same color assignments repeated to show pattern structure; red circles highlighting intersection clusters to draw attention to density; white text labels ("Expected number of intersections?") contrasting dark background
+
+TRANSITIONS
+Hard cut from Escher/logarithm context (s01) to pure chord combinatorics (s02); no visual carryover between sheets
+
+UNSURE
+s01t03 could be DOCUMENT (explanatory passage) rather than TITLE—reading it as TITLE due to text-dominant frame structure

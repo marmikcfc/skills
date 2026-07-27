@@ -1,0 +1,31 @@
+s01t01 BLANK anchor=N dens=none
+s01t02 DOCUMENT anchor=N dens=high
+s01t03 FOOTAGE anchor=N dens=none
+s01t04 FOOTAGE anchor=N dens=none
+s01t05 BLANK anchor=N dens=none
+s01t06 BLANK anchor=N dens=none
+s01t07 FOOTAGE anchor=N dens=none
+s01t08 CONSTRUCT anchor=N dens=none
+s01t09 FOOTAGE anchor=Y dens=none
+s01t10 FOOTAGE anchor=Y dens=none
+s01t11 FOOTAGE anchor=Y dens=low
+s01t12 FOOTAGE anchor=Y dens=none
+s01t13 FOOTAGE anchor=Y dens=none
+s01t14 ANNOTATE anchor=N dens=low
+s01t15 DOCUMENT anchor=N dens=high
+s01t16 FOOTAGE anchor=Y dens=none
+
+BLOCKS
+FOOTAGE x3 (s01t03-s01t04, s01t07), FOOTAGE x5 (s01t09-s01t13), FOOTAGE x1 (s01t16)
+
+ANCHOR
+M.C. Escher print imagery—The Print Gallery and architectural prints recurring across s01t07-s01t13, serving as visual center of the video; red circle markers on tiles s01t13-s01t14 draw eye to specific regions
+
+EMPHASIS
+Red circle/marker annotations overlaid on Escher artworks to highlight architectural detail and recursive structure (s01t13); white quote text in serif font on dark background (s01t14) creating strong contrast; document imagery framed to emphasize scholarly context (s01t02, s01t15)
+
+TRANSITIONS
+Hard cut from Escher article (s01t02) to archival prints (s01t03); documentary photographs blend into annotated close-ups via shared visual palette (sepia/grey tones); geometric grid (s01t08) interrupts footage with analytical overlay suggesting computational/mathematical analysis of Escher's work
+
+UNSURE
+none

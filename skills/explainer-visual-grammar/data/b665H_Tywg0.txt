@@ -1,0 +1,58 @@
+s01t01 FOOTAGE anchor=N dens=high
+s01t02 CONSTRUCT anchor=N dens=none
+s01t03 CONSTRUCT anchor=N dens=none
+s01t04 FOOTAGE anchor=N dens=none
+s01t05 CONSTRUCT anchor=N dens=low
+s01t06 TALKING_HEAD anchor=N dens=low
+s01t07 FOOTAGE anchor=N dens=none
+s01t08 FOOTAGE anchor=N dens=low
+s01t09 FOOTAGE anchor=N dens=low
+s01t10 FOOTAGE anchor=N dens=none
+s01t11 FOOTAGE anchor=N dens=none
+s01t12 FOOTAGE anchor=N dens=none
+s01t13 FOOTAGE anchor=N dens=none
+s01t14 FOOTAGE anchor=Y dens=none
+s01t15 FOOTAGE anchor=N dens=none
+s01t16 TALKING_HEAD anchor=N dens=low
+s02t01 FOOTAGE anchor=N dens=none
+s02t02 FOOTAGE anchor=N dens=none
+s02t03 FOOTAGE anchor=N dens=none
+s02t04 FOOTAGE anchor=N dens=low
+s02t05 FOOTAGE anchor=N dens=none
+s02t06 FOOTAGE anchor=N dens=none
+s02t07 FOOTAGE anchor=N dens=none
+s02t08 CONSTRUCT anchor=N dens=low
+s02t09 FOOTAGE anchor=N dens=none
+s02t10 DOCUMENT anchor=N dens=high
+s02t11 FOOTAGE anchor=N dens=none
+s02t12 TALKING_HEAD anchor=N dens=low
+s02t13 FOOTAGE anchor=N dens=none
+s02t14 FOOTAGE anchor=N dens=none
+s02t15 FOOTAGE anchor=N dens=none
+s02t16 BLANK anchor=N dens=none
+s03t01 DOCUMENT anchor=N dens=high
+s03t02 CONSTRUCT anchor=N dens=low
+s03t03 CONSTRUCT anchor=Y dens=low
+s03t04 CONSTRUCT anchor=Y dens=low
+
+BLOCKS
+FOOTAGE x6 (s01t09-s01t12, s01t14-s01t15)
+FOOTAGE x7 (s02t01-s02t07)
+CONSTRUCT x3 (s03t02-s03t04)
+
+ANCHOR
+Property tax building with "PROPERTY TAX" label holds position across s03t02-s03t04, with recurring red dollar figure overlay.
+
+EMPHASIS
+Red text "$15,000" emphasizes tax amount on building graphic (s03t02-s03t04). Yellow highlight on DOCUMENT article title (s03t01) marks evidence source. Chart/graphic overlays use warm reds and blues for contrast against neutral buildings.
+
+TRANSITIONS
+s02t07 to s02t08: FOOTAGE city aerial transitions to CONSTRUCT graphic of illustrated figures with labeled icons.
+s02t15 to s02t16: FOOTAGE suburban houses abruptly transitions to black BLANK frame.
+s03t01 to s03t02: DOCUMENT to CONSTRUCT—evidence piece transitions directly into visualization of that evidence (tax policy as building cost).
+
+UNSURE
+None.
+
+DOCUMENT tiles with visible highlight: 2 (s03t01 yellow title highlight, s02t10 currency document), 1 without clear highlight (none—all DOCUMENT tiles have visible emphasis).
+Sponsor/BRAND tiles: none detected.

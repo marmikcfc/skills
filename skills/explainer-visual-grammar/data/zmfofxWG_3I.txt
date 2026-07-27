@@ -1,0 +1,45 @@
+s01t01 DOCUMENT anchor=N dens=high
+s01t02 DOCUMENT anchor=Y dens=high
+s01t03 CONSTRUCT anchor=N dens=low
+s01t04 DOCUMENT anchor=Y dens=high
+s01t05 CONSTRUCT anchor=N dens=low
+s01t06 BRAND anchor=N dens=low
+s01t07 CAPTURE anchor=N dens=low
+s01t08 CAPTURE anchor=Y dens=low
+s01t09 CAPTURE anchor=Y dens=low
+s01t10 FOOTAGE anchor=N dens=none
+s01t11 CAPTURE anchor=N dens=low
+s01t12 FOOTAGE anchor=N dens=none
+s01t13 CAPTURE anchor=N dens=high
+s01t14 CAPTURE anchor=Y dens=low
+s01t15 FOOTAGE anchor=N dens=none
+s01t16 CAPTURE anchor=N dens=high
+s02t01 CAPTURE anchor=N dens=high
+s02t02 CAPTURE anchor=Y dens=high
+s02t03 CAPTURE anchor=Y dens=low
+s02t04 TITLE anchor=N dens=low
+s02t05 TITLE anchor=Y dens=low
+s02t06 DOCUMENT anchor=N dens=high
+s02t07 DOCUMENT anchor=Y dens=high
+s02t08 DOCUMENT anchor=Y dens=high
+s02t09 DOCUMENT anchor=Y dens=high
+s02t10 DOCUMENT anchor=Y dens=high
+
+BLOCKS
+DOCUMENT x2 (s01t01-s01t02)
+CAPTURE x4 (s01t07-s01t09 partial, s01t13-s01t14, s02t01-s02t03)
+DOCUMENT x5 (s02t06-s02t10)
+
+ANCHOR
+The headshot grid (6-person layout in Anam interface) persists from s01t07→s01t09 (dark-to-light theme shift but same grid structure maintained). Document charts and tables hold position within s02t06-s02t10, showing iterative visualization of the same dataset.
+
+EMPHASIS
+Colour-coded model performance bars in chart (rainbow spectrum from brown to blue); orange accent buttons in interface UI for calls-to-action (upload, submit, etc.); red circles in portrait selection UI highlight selected individuals. White text on dark backgrounds creates high contrast in form interfaces.
+
+TRANSITIONS
+Document sequence s01t01-s01t04 alternates between text-heavy reports and visual diagrams with creature overlays (content accumulated within topic). Hard cut s01t04→s01t05 (document to diagram). Capture s01t07-s01t14 cycles through different views of the Anam application (headshot grid → single portrait → form interface), with no carryover between portrait/photo tiles (s01t10, s01t12, s01t15 are standalone FOOTAGE interruptions). Document sequence s02t06-s02t10 is continuous report pages, same vertical scroll context throughout.
+
+UNSURE
+s01t03: Creatures/virus shapes on graph — could be CONSTRUCT (animated diagram) or FOOTAGE (stylized graphics). Treated as CONSTRUCT since rendered for the video.
+s01t04: Text document with creature overlay — borderline DOCUMENT (cited report) vs ANNOTATE (marks added). Classified as DOCUMENT since the layout is primarily the research document.
+s02t04: "Anam" text on black background — TITLE vs BRAND; treated as TITLE (text card without logo/promotional context).

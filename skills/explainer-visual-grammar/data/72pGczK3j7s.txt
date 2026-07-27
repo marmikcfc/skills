@@ -1,0 +1,53 @@
+s01t01 FOOTAGE anchor=N dens=low
+s01t02 FOOTAGE anchor=N dens=low
+s01t03 FOOTAGE anchor=N dens=low
+s01t04 DOCUMENT anchor=N dens=high
+s01t05 CAPTURE anchor=N dens=high
+s01t06 DOCUMENT anchor=N dens=high
+s01t07 ANNOTATE anchor=Y dens=high
+s01t08 FOOTAGE anchor=N dens=low
+s01t09 FOOTAGE anchor=N dens=low
+s01t10 FOOTAGE anchor=N dens=low
+s01t11 FOOTAGE anchor=N dens=low
+s01t12 FOOTAGE anchor=N dens=low
+s01t13 TALKING_HEAD anchor=N dens=low
+s01t14 DOCUMENT anchor=N dens=high
+s01t15 DOCUMENT anchor=Y dens=high
+s01t16 FOOTAGE anchor=N dens=low
+s02t01 FOOTAGE anchor=N dens=low
+s02t02 DOCUMENT anchor=N dens=high
+s02t03 DOCUMENT anchor=Y dens=high
+s02t04 DOCUMENT anchor=Y dens=high
+s02t05 DOCUMENT anchor=Y dens=high
+s02t06 CAPTURE anchor=N dens=high
+s02t07 CAPTURE anchor=N dens=high
+s02t08 DOCUMENT anchor=N dens=high
+s02t09 FOOTAGE anchor=N dens=low
+s02t10 TALKING_HEAD anchor=N dens=low
+s02t11 FOOTAGE anchor=N dens=low
+s02t12 CAPTURE anchor=N dens=medium
+s02t13 BRAND anchor=N dens=low
+s02t14 CAPTURE anchor=N dens=high
+s02t15 FOOTAGE anchor=N dens=low
+s02t16 FOOTAGE anchor=N dens=low
+s02t17 FOOTAGE anchor=N dens=low
+s03t01 FOOTAGE anchor=N dens=low
+s03t02 BLANK anchor=N dens=none
+
+BLOCKS
+FOOTAGE x3 (s01t01-s01t03)
+FOOTAGE x6 (s01t08-s01t13)
+DOCUMENT x4 (s02t02-s02t05)
+FOOTAGE x3 (s02t15-s02t17)
+
+ANCHOR
+International Business Times article continues as s01t07 annotated with red handwritten text overlay; Helms-Burton Act document reference visible in both s01t14-s01t15.
+
+EMPHASIS
+Yellow highlight boxes frame key passages in news articles (s01t04: Trump administration quote) and legal documents (s01t14-s01t15: yellow/green boxes around Helms-Burton text). Red handwritten annotations layer over the IBT article in s01t07.
+
+TRANSITIONS
+Hard cuts dominate. Archive/news footage → website documentation (s01t04); International Business Times article → annotated version of same article (s01t07); multi-page report sequence (s02t02-s02t05) → website with embedded data (s02t06).
+
+UNSURE
+s02t13 classified as BRAND but could be CAPTURE (mobile magazine promo with QR code unclear if marketing or instructional).

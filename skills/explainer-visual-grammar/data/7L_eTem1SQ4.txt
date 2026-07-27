@@ -1,0 +1,22 @@
+s01t01 CONSTRUCT anchor=N dens=high
+s01t02 BLANK anchor=N dens=none
+s01t03 FOOTAGE anchor=N dens=low
+s01t04 FOOTAGE anchor=Y dens=low
+s01t05 ANNOTATE anchor=Y dens=high
+s01t06 ANNOTATE anchor=Y dens=high
+s01t07 ANNOTATE anchor=N dens=high
+s01t08 CONSTRUCT anchor=N dens=low
+s01t09 CONSTRUCT anchor=N dens=high
+s01t10 BLANK anchor=N dens=none
+s01t11 CONSTRUCT anchor=N dens=high
+s01t12 BLANK anchor=N dens=none
+
+BLOCKS — FOOTAGE x2 (s01t03-s01t04), ANNOTATE x3 (s01t05-s01t06-s01t07), CONSTRUCT x3 (s01t01, s01t08-s01t09-s01t11 with blanks between)
+
+ANCHOR — Lunar rover remains visible and in similar frame position across s01t03-s01t07, anchoring the illustration of compression through progressive data reduction shown as positional fractions.
+
+EMPHASIS — Bright yellow and cyan fractional arrows (1/2, 1/8, 1/4) overlaid on lunar surface draw eye to scale/efficiency concept. Geometric framing boxes in neon green outline the rover. Colored bar histograms (pink, cyan, yellow) in final diagram show data distribution with consistent color meaning across tiles.
+
+TRANSITIONS — Hard cut from lunar FOOTAGE to abstract blue CONSTRUCT (s01t08) pivots from physical demonstration to conceptual visualization. Equation/text frames (s01t01, s01t09) bookend the lunar sequence, reinforcing mathematical foundation.
+
+UNSURE — s01t07 positioning unclear; appears to be new annotated scene rather than continuation of rover sequence.

@@ -1,0 +1,50 @@
+s01t01 CONSTRUCT anchor=N dens=low
+s01t02 CONSTRUCT anchor=Y dens=high
+s01t03 ANNOTATE anchor=Y dens=high
+s01t04 CONSTRUCT anchor=N dens=low
+s01t05 CONSTRUCT anchor=N dens=low
+s01t06 ANNOTATE anchor=Y dens=medium
+s01t07 ANNOTATE anchor=Y dens=medium
+s01t08 CONSTRUCT anchor=N dens=medium
+s01t09 ANNOTATE anchor=N dens=medium
+s01t10 ANNOTATE anchor=Y dens=medium
+s01t11 ANNOTATE anchor=Y dens=high
+s01t12 CONSTRUCT anchor=Y dens=medium
+s01t13 ANNOTATE anchor=Y dens=medium
+s01t14 ANNOTATE anchor=Y dens=medium
+s01t15 ANNOTATE anchor=Y dens=high
+s01t16 CAPTURE anchor=N dens=high
+s02t01 ANNOTATE anchor=Y dens=high
+s02t02 ANNOTATE anchor=Y dens=high
+s02t03 ANNOTATE anchor=Y dens=high
+s02t04 CAPTURE anchor=N dens=high
+s02t05 ANNOTATE anchor=Y dens=low
+s02t06 ANNOTATE anchor=Y dens=medium
+s02t07 ANNOTATE anchor=Y dens=medium
+s02t08 CONSTRUCT anchor=N dens=medium
+s02t09 ANNOTATE anchor=N dens=high
+s02t10 DOCUMENT anchor=N dens=high
+s02t11 ANNOTATE anchor=N dens=high
+s02t12 ANNOTATE anchor=Y dens=high
+s02t13 CAPTURE anchor=Y dens=high
+s02t14 CAPTURE anchor=N dens=high
+s02t15 ANNOTATE anchor=Y dens=high
+s02t16 CAPTURE anchor=Y dens=high
+s03t01 ANNOTATE anchor=N dens=high
+s03t02 DOCUMENT anchor=N dens=high
+s03t03 ANNOTATE anchor=Y dens=high
+s03t04 CONSTRUCT anchor=N dens=low
+s03t05 CONSTRUCT anchor=Y dens=low
+s03t06 BLANK anchor=N dens=none
+s03t07 BLANK anchor=N dens=none
+s03t08 BLANK anchor=N dens=none
+
+BLOCKS: ANNOTATE x5 (s01t13-s01t15 + s02t01-s02t03); ANNOTATE x5 (s02t05-s02t07 + s02t11-s02t12)
+
+ANCHOR: The "Atoms of Epigenetics" molecule structure (labeled K with nested circles) persists in center-left across s01t09-s01t15; the China map outline remains fixed in top-left position through s01t05-s01t07. Second sheet shifts focus to academic diagrams with the molecule structure recurring at s02t01-s02t03, then system schematics dominate s02t13-s02t16.
+
+EMPHASIS: Magenta/pink handwritten annotations layer over constructed diagrams to highlight additions or corrections. Structured equations and labels use green text and white boxes. Colored boxes (pink, blue, green) denote different component types in circuit/flow diagrams.
+
+TRANSITIONS: Hard cut from annotated molecular studies (s01t15) to dark interface screenshot (s01t16). Scale annotations build progressively on molecule structure (s02t01-s02t03), then abrupt shift to academic paper (s02t10), followed by transition back to annotated content (s02t11). Grid/checkerboard patterns appear as content accumulates within runs.
+
+UNSURE: s02t04 may be DOCUMENT (screenshot of interface documentation) rather than CAPTURE. s02t08 borderline CONSTRUCT vs ANNOTATE.

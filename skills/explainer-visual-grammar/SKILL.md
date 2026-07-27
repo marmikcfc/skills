@@ -1,171 +1,165 @@
 ---
 name: explainer-visual-grammar
-description: Choose and execute a complete explainer video style — how narration, visuals, and chaptering work together to build an idea in the viewer's head. Covers three measured grammars (constructed-object / accumulating-whiteboard / evidence-collage) and maps each to concrete engines (Manim, HyperFrames, talking head, fal AI generation). Use when planning a video's look and structure together, deciding which engine renders which scene, or asking how a creator makes their explanations land.
+description: Build an explainer video in the production style of a known creator by mixing screen modes in measured proportions. Covers what material each mode requires (constructed animation, hand annotation, screen capture, cited document, stock footage, talking head), measured mode mixes for 3Blue1Brown / Caleb Writes Code / Economics Explained, and the rules for assembling a shot list in each style. Use when deciding what actually goes on screen shot by shot, or when asked to make something "in the style of" one of these creators.
 ---
 
 # Explainer visual grammar
 
-Derived from frame-level analysis of three creators plus stylometry over 30 videos,
-367 min of runtime, 92k words (3Blue1Brown, Economics Explained, Caleb Writes Code).
+Measured from **504 classified frames across 18 videos** (3Blue1Brown 6, Caleb
+Writes Code 7, Economics Explained 5). Frames were sampled at scene-change
+boundaries and classified into production modes by a fixed taxonomy.
 
-## The core finding
+**No creator has one style.** That is the central finding. Each works a
+*repertoire* of modes and varies the mix per video. Style is the **proportion and
+sequencing**, not a single look.
 
-**The pronoun profile predicts the visual grammar.** They are not independent
-choices — measured across the three corpora, how the narrator addresses the viewer
-determines what the screen has to do:
+## The mode vocabulary
 
-| | `I`/1k | `we`/1k | `you`/1k | Visual consequence |
-|---|---|---|---|---|
-| **3Blue1Brown** | 8.6 | 6.5 | **22.2** | "You and I build this" → an object is *constructed* on screen |
-| **Caleb Writes Code** | 5.0 | **9.1** | 7.0 | "Look at what we have" → a board *accumulates* and is pointed at |
-| **Economics Explained** | **0.96** | 3.5 | 4.8 | Narrator absent → *evidence* must speak; sourced footage and documents |
+A mode is defined by *what you must make or source* to fill the screen:
 
-If narration says *you*, the screen owes the viewer something to do. If narration
-says *we*, the screen owes a shared artifact to point at. If narration says neither,
-the screen owes proof.
+| Mode | What it costs you |
+|---|---|
+| `CONSTRUCT` | Purpose-built animation — Manim, motion graphics, a diagram authored for this video |
+| `ANNOTATE` | Hand-drawn marks layered on a canvas that already had content |
+| `CAPTURE` | Screenshot or screen recording of real software, a site, a repo |
+| `DOCUMENT` | A paper/article/report shown as *evidence for a claim* |
+| `FOOTAGE` | Borrowed real-world video or stills — stock, archival, news |
+| `TALKING_HEAD` | A person on camera |
+| `TITLE` | Text-dominant card |
+| `BRAND` | Sponsor or channel promotion |
 
-Picking a look without matching the pronoun profile is why videos feel "off" in a
-way people can't name.
+`CAPTURE` vs `DOCUMENT` is the distinction people collapse and shouldn't: is the
+software **the subject**, or is the page **proof of an assertion**?
 
----
+## Measured mode mixes
 
-## Grammar 1 — Constructed object (3Blue1Brown)
+Share of non-blank frames:
 
-**Thesis:** the viewer should feel they could have discovered it. So the screen
-*builds* a mathematical object step by step; narration labels what is already visible.
+| Mode | 3Blue1Brown | Caleb Writes Code | Economics Explained |
+|---|---|---|---|
+| CONSTRUCT | **50%** | 28% | 11% |
+| CAPTURE | — | **35%** | 5% |
+| FOOTAGE | 9% | 5% | **65%** |
+| ANNOTATE | 11% | 14% | 1% |
+| DOCUMENT | 3% | 12% | 11% |
+| TALKING_HEAD | 15% | 1% | 7% |
+| BRAND | 8% | 4% | 1% |
+| **Anchor carry-over** | **39%** | **42%** | **9%** |
 
-**Measured:** 22.0 words/sentence · CV 0.61 · 32% conjunction openers ·
-analogy 3.6/1k (3× the others) · **4.4 sections/video**
+**Anchor carry-over is the most useful single number** — the share of frames where
+something from the previous frame is still on screen in the same place. It is a
+proxy for whether the video *builds* or *cuts*. 3b1b and Caleb build; Economics
+Explained replaces the screen almost every time.
 
-**Visual vocabulary** (from frames):
-- Black canvas, LaTeX-typeset math, semantic colour that persists (a concept keeps
-  its colour across scenes)
-- **Side-by-side comparison circles** — two labelled discs contrasting a pair of
-  ideas. Recurs constantly; it is the signature composition
-- 3D bar landscapes for distributions; camera moves *through* them
-- Embedded prose panels for asides — a paragraph typeset on canvas, not spoken
-- **Character proxies** (the pi-creatures) standing in for the audience: they react,
-  get confused, ask the question the viewer is forming
-- Sponsor/interview footage strictly quarantined at the end, never mid-explanation
+Two things worth noting that contradict the obvious reading:
 
-**Chaptering:** ~4 sections. Concrete instance → play → generalise → name it →
-open question.
+- **Caleb is primarily a screen-capture creator, not a whiteboard one.** Hand
+  annotation is 14% across seven videos. It reaches 56% in exactly one of them.
+- **A quarter of 3b1b's frames are talking-head plus sponsor**, not mathematics.
 
-**Engines:** Manim for anything with a coordinate system, equation, or continuous
-transform. HyperFrames for title cards, prose panels, and the outro. Talking head
-only in the sponsor segment. **Do not** use AI video generation — invented imagery
-contradicts the "this is exactly true" contract of a constructed object.
+## Per-video spread — the range is the point
 
----
+| Creator | Range across videos |
+|---|---|
+| 3Blue1Brown | CONSTRUCT 7%→75%; one video is 69% FOOTAGE; another 41% TALKING_HEAD |
+| Caleb | CAPTURE 0%→51%; ANNOTATE 0%→56% |
+| Economics Explained | FOOTAGE 47%→84% — **much tighter** |
 
-## Grammar 2 — Accumulating whiteboard (Caleb Writes Code)
+So: **Economics Explained runs one recipe consistently. The other two switch recipe
+by video type.** If you are imitating a creator, pick which of their recipes you're
+imitating; the channel average is not a style anyone actually executes.
 
-**Thesis:** the diagram *is* the argument. Nothing is erased; by the end the whole
-model is on one board and the viewer can see how the parts connect.
+## The recipes
 
-**Measured:** 23.4 words/sentence · CV 0.52 · **51.4% conjunction openers** (the
-highest of any corpus measured) · `we` 9.1/1k · **5.0 sections/video** · 8–13 min
+### 3Blue1Brown
 
-**The deictic signature:** `as you can see` at **62×** the comparison rate,
-plus `look at the` and `you can see`. The narration *points*. This only works
-because the referent is still on screen — which is exactly why nothing gets erased.
+- **Deep explainer** (the flagship): CONSTRUCT ~55–65%, BRAND/TALKING_HEAD ~20–25%
+  concentrated at the end, ANNOTATE for asides. Long — cut rate is low.
+- **Puzzle / short**: CONSTRUCT 75%+, almost nothing else, high cut rate.
+- **Art or history piece**: mostly FOOTAGE and DOCUMENT — photographs of the
+  artefact, scanned articles. Very little constructed animation.
 
-**Visual vocabulary** (from frames):
-- Pure black canvas, handwritten-style vector strokes, hand-drawn arrows
-- **Persistent spatial anchor:** one glyph (the model stack) holds its position for
-  the whole video; everything else accretes around it
-- Colour as semantics, applied consistently: green = new/benefit, magenta/pink =
-  cost/problem, yellow = label, blue = named concept
-- Hand-drawn country outlines, stick figures, small icon glyphs for actors
-- **Cuts to the real artifact** — the actual paper figure or screenshot — when a
-  claim needs external authority, then straight back to the board
-- Bracket-and-label annotation: `[` grouping several items, labelled to one side
+Anchoring device: a recurring character/glyph pair holds screen position while the
+content above it swaps. Colour carries persistent meaning across scenes.
 
-**Chaptering:** 5 sections, each adding a region to the board rather than replacing it.
+### Caleb Writes Code
 
-**Engines:** HyperFrames for the whole board — SVG stroke-reveal is exactly this.
-Manim only where a real algorithm needs animating. Talking head is absent (voice
-only). **fal image generation** is a poor fit; the hand-drawn consistency is the
-brand, and generated art breaks it.
+- **Product/news breakdown** (most common): CAPTURE ~40–50%, CONSTRUCT ~20–30%,
+  DOCUMENT for the source paper.
+- **Paper deep-dive**: ANNOTATE up to 56% — a single anchor diagram held in place
+  for ~20 consecutive frames while colour-coded annotation accretes around it.
+  Content accumulates *within a section*, then resets between topics.
+- **Ranking/benchmark piece**: CONSTRUCT-led charts, DOCUMENT ~30%.
 
----
+Emphasis: magenta handwritten overlay on top of machine-rendered diagrams; colour
+per model/tier held consistently.
 
-## Grammar 3 — Evidence collage (Economics Explained)
+### Economics Explained
 
-**Thesis:** the narrator is a documentarian, not a teacher. Claims are carried by
-*sourced material*, and the viewer is persuaded by accumulating proof.
+One recipe: FOOTAGE 47–84%, with CONSTRUCT and DOCUMENT punctuating. Anchor
+carry-over 9% — nothing persists, the video is a cut sequence.
 
-**Measured:** 19.6 words/sentence · CV 0.55 · **MATTR 0.75** (widest vocabulary
-measured) · `I` **0.96**/1k — effectively absent · 21 min avg · **5.0 sections**
+The load-bearing device is the **cited document with a yellow highlight** on the
+specific sentence being claimed. Across the sample, document frames are rarely bare;
+they carry a yellow (occasionally green or cyan) emphasis bar.
 
-**Visual vocabulary** (from frames):
-- Sourced footage: news, archival, street scenes — slow Ken Burns push, never static
-- **Browser windows floating on dark background** showing the actual article, with
-  the key sentence **highlighted in yellow**. This is the single most repeated
-  device and the load-bearing one: the claim is *shown*, not asserted
-- Source attribution in the corner of every borrowed clip
-- Black-and-white archival for historical context; colour for present day
-- Animated maps with routes/flows for trade and supply
-- Occasional data chart, but far less than the genre suggests
+## Generation rules
 
-**Chaptering:** 5 sections. Situation → mechanism → complication → consequence →
-outlook. Long-form (15–30 min) with chapter markers.
+**1. Pick the recipe, not the creator.** Decide which of their video types you're
+making, then take that recipe's mix.
 
-**Engines:** **fal video generation is the natural fit here** — b-roll that would
-otherwise need licensing. HyperFrames for the document-highlight device, maps, and
-charts. Manim is wrong for this register. Talking head optional.
+**2. Set the anchor rate first — it dictates engine.**
+- High (≈40%): one element holds position across many shots, content accretes
+  around it. HyperFrames sub-composition persisting across scene slots.
+- Low (≈10%): every shot replaces the last. A cut list of clips.
 
-> **Sourcing caution.** This grammar depends on real documents and real footage.
-> Generating synthetic "news article" imagery would fabricate evidence — don't.
-> Use fal for *ambient* b-roll (city scenes, abstract texture), never for anything
-> that reads as a document, a quote, or a record.
+**3. Budget modes as a shot count.** For an N-shot video, multiply N by the mix.
+A 30-shot Caleb-style breakdown ≈ 12 CAPTURE, 8 CONSTRUCT, 4 DOCUMENT, 4 ANNOTATE,
+2 TITLE. Fill that budget rather than improvising per scene.
 
----
+**4. Never leave a DOCUMENT bare.** If a document is on screen it is evidence, so
+emphasise the exact span that supports the claim. Yellow is the observed default.
 
-## Choosing
+**5. Assign colour meaning once, then hold it.** All three attach fixed meaning to
+specific hues and keep it for the whole video.
 
-```
-Is the subject exactly true and constructible (math, algorithm, proof)?
-    → Constructed object.  Manim-led.
-Is the subject a system whose parts must be seen together (architecture, model)?
-    → Accumulating whiteboard.  HyperFrames-led.
-Is the subject contested, real-world, and needs proof (economics, news, policy)?
-    → Evidence collage.  Sourced footage + document highlight.
-```
+**6. Quarantine BRAND.** Where sponsor material exists it sits in a contiguous block
+at the end, never interleaved with explanation.
 
-Then **match the narration pronoun profile to the grammar** — that is the step
-people skip, and it is what makes a style read as coherent.
+**7. Match mode to engine:**
 
-## Engine map
+| Mode | Engine |
+|---|---|
+| CONSTRUCT (math, coordinates, continuous transform) | **Manim** |
+| CONSTRUCT (charts, kinetic type, layout) | **HyperFrames** |
+| ANNOTATE | **HyperFrames** — SVG stroke reveal over a persistent sub-composition |
+| CAPTURE | Real screen recording. Do not synthesise a fake UI |
+| DOCUMENT | Real source + highlight overlay. **Never generate this** |
+| FOOTAGE | Licensed stock, or **fal** `video` for ambient shots only |
+| TALKING_HEAD | Recorded presenter — see `talking-head-composite` |
 
-| Element | Engine | Notes |
-|---|---|---|
-| Equations, coordinate systems, continuous transforms | **Manim** | The only engine that does this well |
-| Persistent board, stroke reveal, annotation, labels | **HyperFrames** | SVG + GSAP; the accumulating grammar is native here |
-| Document highlight, maps, charts, lower-thirds | **HyperFrames** | |
-| Ambient b-roll, texture, establishing shots | **fal** (`video`) | Never for documents or records |
-| Reference stills, icons, illustration | **fal** (`image`) | Check it doesn't break a hand-drawn look |
-| Presenter, credibility, sponsor read | **Talking head** | See `talking-head-composite` |
-| Narration + word timings | **fal** / cartesia / elevenlabs | See `provider-config` |
+**8. Two hard limits on generation.** A `DOCUMENT` must be a real source; a
+generated one fabricates evidence. A `CAPTURE` must be a real interface; a
+generated one misrepresents a product. Use `fal` for ambient b-roll, texture, and
+establishing shots — not for anything that reads as a record.
 
-## How the screen builds thought alongside narration
+## Method and its limits
 
-Common to all three, and the actual transferable craft:
+Frames were sampled at scene-change boundaries — not uniformly — on the reasoning
+that an explainer's teaching moves happen at cuts. Classification was done by
+subagents against a fixed taxonomy, then aggregated.
 
-1. **One idea per visual state.** A state changes only when the idea does.
-2. **Show before naming.** All three put the object on screen before the term.
-3. **Persistence is pedagogy.** What stays on screen is what the viewer is expected
-   to hold in mind. Caleb never erases; 3b1b keeps colour identity; EE keeps the
-   highlighted quote up while narrating past it.
-4. **The screen carries the load the words can't.** If narration and visual say the
-   same thing, one is redundant — usually the visual.
-5. **Give the eye somewhere to go before the ear needs it.** The visual lands
-   ~0.5–1s ahead of the sentence that explains it.
-6. **Evidence needs a source; construction needs a derivation.** Both are the same
-   move: showing your work.
+Known limits, so the numbers aren't over-trusted:
+- Frames per video were **capped at 48**, so cut-rate figures are a floor, not a
+  true rate, for longer videos.
+- Short videos fell back to uniform sampling; consecutive frames there may be
+  mid-animation rather than distinct shots.
+- Two 3b1b videos may have swapped labels in one classifier's output; creator-level
+  totals are unaffected, per-video rows for those two are lower confidence.
+- **Everything here is visual.** No audio was analysed — nothing in this skill
+  describes music, pacing, pauses, or how visuals time against narration.
 
 ## Related
 
 - `voice-3b1b`, `voice-caleb-writes-code`, `voice-economics-explained` — narration
-- `explainer-structure` — the beat structure underneath any grammar
-- `choosing-the-tool`, `talking-head-composite`, `provider-config` — execution
+- `explainer-structure` — beat structure · `choosing-the-tool` · `provider-config`

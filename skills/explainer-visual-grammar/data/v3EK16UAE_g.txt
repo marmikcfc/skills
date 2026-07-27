@@ -1,0 +1,35 @@
+s01t01 DOCUMENT anchor=N dens=high
+s01t02 CONSTRUCT anchor=N dens=low
+s01t03 CONSTRUCT anchor=Y dens=low
+s01t04 BRAND anchor=N dens=low
+s01t05 CAPTURE anchor=N dens=low
+s01t06 CAPTURE anchor=N dens=low
+s01t07 CAPTURE anchor=N dens=low
+s01t08 CAPTURE anchor=N dens=low
+s01t09 TITLE anchor=N dens=low
+s01t10 BRAND anchor=N dens=low
+s01t11 CAPTURE anchor=N dens=low
+s01t12 DOCUMENT anchor=N dens=high
+s01t13 CAPTURE anchor=N dens=high
+s01t14 CONSTRUCT anchor=N dens=low
+s01t15 DOCUMENT anchor=N dens=high
+s01t16 DOCUMENT anchor=Y dens=high
+s02t01 DOCUMENT anchor=N dens=high
+s02t02 BLANK anchor=N dens=none
+
+BLOCKS
+CAPTURE x4 (s01t05-s01t08)
+DOCUMENT x3 (s01t12, s01t15-s01t16)
+
+ANCHOR
+The Artificial Analysis Intelligence Index bar chart persists in identical layout from s01t15→s01t16, showing the same coloured category bars in the same screen position.
+
+EMPHASIS
+Colour-coded model rankings in bar charts (distinct hues per model: purple, blue, orange, green, red range); "make" logo uses magenta/pink to stand out on white. Creature sprites use colour differentiation to denote model tiers (visual hierarchy by tone).
+
+TRANSITIONS
+Hard cuts throughout: document→diagram (s01t01→s01t02), diagram→brand (s01t03→s01t04), brand→interface (s01t04→s01t05). Capture sequence s01t05-s01t08 shows different states of the same application (Afternoon Caleb interface) but canvas appearance shifts (purple sidebar → white dot interface → dark theme). Document s01t15→s01t16 is a visual continuation (exact chart repeated, likely same dataset viewed twice).
+
+UNSURE
+s01t07: Dots on white with "Afternoon, Caleb" text — could be CONSTRUCT (purpose-built UI) or CAPTURE (app screenshot). Treated as CAPTURE since it appears to be a UI state.
+s01t09: Partial "e" text on black — classified as TITLE (text fragment) but could be padding/BLANK.

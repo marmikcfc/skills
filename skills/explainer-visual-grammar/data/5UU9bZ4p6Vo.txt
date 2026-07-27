@@ -1,0 +1,18 @@
+s01t01 CONSTRUCT anchor=N dens=high
+s01t02 CONSTRUCT anchor=Y dens=high
+s01t03 FOOTAGE anchor=N dens=medium
+s01t04 CONSTRUCT anchor=N dens=high
+s01t05 CONSTRUCT anchor=Y dens=high
+s01t06 BLANK anchor=N dens=none
+s01t07 BLANK anchor=N dens=none
+s01t08 BLANK anchor=N dens=none
+
+BLOCKS: CONSTRUCT x4 (s01t01-s01t02 + s01t04-s01t05 with FOOTAGE interrupt at s01t03)
+
+ANCHOR: Line graph chart showing "Open models lag state-of-art closed models by 4 months" appears in s01t01-s01t02 and s01t05, maintaining same axis layout and trajectory across these tiles. No other persistent on-screen elements carry between tiles.
+
+EMPHASIS: Line charts use color-coding (teal/green and pink/red lines) to distinguish model families. X/Y axis labels and legend text positioned consistently. Phone display in s01t03 highlights the app interface with bright on-screen elements against dark device frame.
+
+TRANSITIONS: Hard cut from chart (s01t02) to real-world device photo (s01t03), then back to chart (s01t04). No content carries over; each chart presentation is independent display of same underlying data with minimal frame-to-frame variation.
+
+UNSURE: None.
