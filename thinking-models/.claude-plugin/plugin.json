@@ -1,0 +1,11 @@
+{
+  "name": "thinking-models",
+  "version": "0.1.0",
+  "description": "40 mental models as invokable Claude skills — first principles, inversion, Bayesian updating, systems thinking, TRIZ, theory of constraints, pre-mortem, red team, steel-manning, and a forming-opinions discipline for taking and stress-testing positions. The thinking-model-router skill is the entry point when you don't know which model fits.",
+  "author": {
+    "name": "Marmik Pandya",
+    "url": "https://github.com/marmikcfc"
+  },
+  "license": "MIT",
+  "keywords": ["thinking", "mental-models", "reasoning", "decision-making", "epistemics", "opinions", "first-principles", "bayesian"]
+}

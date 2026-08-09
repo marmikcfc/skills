@@ -1,90 +1,109 @@
-# video-gen
+# skills
 
-A Claude Code plugin for generating short animated videos for almost any communication use case: hard-concept explainers, deep-research videos, product launches, demos, codebase walkthroughs, and animated story/book-summary videos. Description in, MP4 out — via a 5-stage pipeline you can checkpoint, edit, and resume.
+A Claude Code marketplace hosting four independent plugins — **64 skills** for making videos, thinking clearly, generating ideas, and growing on X.
 
-## What it does
-
-```
-/generate "why does ice float"                       # hard-concept explainer
-/generate "deep research video on AI agents in 2026" # research synthesis
-/generate "launch video for my CLI tool, Acme"       # product launch
-/generate "what The Beginning of Infinity says"      # book/idea story
-/generate "how auth works in this codebase"          # codebase walkthrough
-```
-
-The director picks the right **narrative structure** (explainer = 5-beat pedagogy, research = question→evidence→synthesis, launch = 4-beat problem→reveal→CTA, story = premise→conflict→takeaway, etc.) and **visual style** (MinutePhysics/3Blue1Brown clarity, Kurzgesagt-like illustrated systems, punchy Vox-style motion graphics, or a clean on-brand look) for what you asked for. These are independent choices — not every video is a Vox-style explainer.
-
-Runs five stages:
-1. **Brief** — director reads your Claude memory, gathers source material (a codebase, a product page), asks 1–2 questions, picks structure + style.
-2. **Storyboard** — beat-by-beat plan with per-scene engine (Manim vs HyperFrames).
-3. **Narrate** — Cartesia or ElevenLabs TTS with word-level timestamps. Scenes' timing is derived from those timestamps.
-4. **Animate** — engineer subagents generate Manim Python or HyperFrames HTML, parallelized per scene.
-5. **Render** — HyperFrames composes audio + visuals into a single MP4.
-
-You approve cheap artifacts (storyboard, voice) before expensive ones (animation, render). You can edit any artifact and re-run from that stage.
+Each plugin is self-contained and installs on its own. Install only what you want.
 
 ## Install
 
 ```bash
-# In Claude Code
+# In Claude Code — add the marketplace once
 /plugin marketplace add marmikcfc/skills
+
+# then install whichever plugins you want
 /plugin install video-gen@skills
+/plugin install thinking-models@skills
+/plugin install creativity@skills
+/plugin install x-growth@skills
 ```
 
-Restart Claude Code so the plugin's commands, skills, and agents load, then run the one-time setup:
-```
-/video-gen-setup
-```
+Restart Claude Code so commands, skills, and agents load.
 
-`/video-gen-setup` verifies HyperFrames and stores your TTS key (Cartesia or ElevenLabs) in `~/.config/video-gen/keys.json` (chmod 600) — the key is never written into the repo or a video.
+| Plugin | Skills | What it is |
+|---|---|---|
+| **[video-gen](./video-gen)** | 20 | Description in, MP4 out. A 5-stage animated-video pipeline you can checkpoint, edit, and resume. |
+| **[thinking-models](./thinking-models)** | 40 | Mental models as invokable skills — for deciding, debugging, estimating, and stress-testing beliefs. |
+| **[creativity](./creativity)** | 3 | Divergent idea generation that fights mode-collapse and anchoring. |
+| **[x-growth](./x-growth)** | 1 | X/Twitter growth through researched, gated replies. |
 
-## Requirements
+---
 
-- **Node.js ≥22** + **FFmpeg** (HyperFrames requirements)
-- **[HyperFrames](https://github.com/heygen-com/hyperframes)** — `npm i -g hyperframes` (or via its skills package)
-- **Manim Community Edition + LaTeX** — only when a video uses math scenes
-- **TTS API key** — Cartesia or ElevenLabs
+## video-gen — 20 skills
 
-## Surface
+Generate short animated videos: explainers, research syntheses, product launches, demos, codebase walkthroughs, animated stories. Requires a one-time `/video-gen-setup`.
 
-| Surface | What it is |
+**Surface:** `/generate` (full pipeline) · `/storyboard` · `/narrate` · `/animate` · `/render` · `/video-gen-setup` · agents `video-director`, `manim-engineer`, `hyperframes-engineer`
+
+The pipeline treats **narrative structure**, **visual style**, and **narration voice** as three independent choices — so a research video can borrow an explainer's visual grammar without inheriting its script shape.
+
+| Group | Skills |
 |---|---|
-| `/generate <description>` | Full 5-stage pipeline |
-| `/storyboard <description>` | Stages 1+2 only |
-| `/narrate` | Re-run Stage 3 |
-| `/animate` | Re-run Stage 4 |
-| `/render` | Re-run Stage 5 |
-| `/video-gen-setup` | One-time setup |
-| `video-director` agent | Memory-aware storyboarding; picks structure + visual style + narration voice |
-| `manim-engineer` agent | Math scene → Manim Python |
-| `hyperframes-engineer` agent | Narrative scene → HyperFrames HTML |
-| Structure skills | `explainer-structure` (5-beat explainer), `research-video-structure` (research synthesis), `animated-story-structure` (book/idea story), `launch-video-structure` (4-beat launch) |
-| Style skills | `vox-style` (kinetic motion graphics) — optional, default is clean/on-brand |
-| Composite / footage | `talking-head-composite` (presenter + generated visuals; cut/stack/pip/split, 16:9 + 9:16) |
-| Audio | `soundtrack` (music bed, ducking against word timings, SFX) |
-| Providers | `provider-config` (incl. **fal.ai gateway** — one key for tts/align/image/music/video/avatar/lipsync; browse with `scripts/fal-models.mjs`)
-| Providers (detail) | `provider-config` (capability→provider config; swap or add any model vendor) |
-| Visual grammar | `explainer-visual-grammar` — three measured styles (constructed-object / accumulating-whiteboard / evidence-collage) mapped to Manim / HyperFrames / talking-head / fal |
-| Voice skills | `voice-3b1b` (discovery-order narration), `voice-gaurav-sen` (contract-first), `explaining-technical-concepts` (neutral, L0→L3 depth tiers), `voice-caleb-writes-code`, `voice-economics-explained`, `voice-extractor` (build a profile from samples) |
-| Craft skills | `choosing-the-tool`, `manim-essentials`, `narration-writing`, `voice-driven-timing`, `soundtrack`, `using-claude-memory` |
-| Composition contract | delegated to HyperFrames' own `hyperframes-core` / `hyperframes-animation` skills — we keep no local copy |
+| **Structure** — how the script is shaped | `explainer-structure` (5-beat hook→tension→metaphor→reveal→recap), `research-video-structure` (thesis→evidence→implications), `launch-video-structure` (problem→why-now→reveal→CTA), `animated-story-structure` (book/idea/parable → narrative arc) |
+| **Voice** — how the narration sounds | `voice-3b1b` (discovery-order, visual-first), `voice-gaurav-sen` (contract-first systems explainer), `voice-caleb-writes-code` (deictic, accumulating diagram), `voice-economics-explained` (documentary register, sourced claims), `voice-extractor` (derive a reusable voice profile from samples) |
+| **Look** — how it reads on screen | `vox-style` (kinetic typography, flat illustration), `explainer-visual-grammar` (screen modes in measured proportions, from 504 classified frames) |
+| **Craft** — writing and timing | `narration-writing` (scene markers, TTS pacing, pronunciation), `voice-driven-timing` (word timestamps → scene boundaries), `explaining-technical-concepts` (engineering audiences at any depth), `using-claude-memory` (personalize without leaking memory) |
+| **Production** — engines and assets | `choosing-the-tool` (Manim vs HyperFrames per scene), `manim-essentials`, `soundtrack` (music beds, ducking, stingers), `talking-head-composite` (presenter footage + generated visuals), `provider-config` (swap TTS/image/music/video/LLM providers) |
 
-## Working directory
+## thinking-models — 40 skills
 
-Each video gets its own directory under cwd: `.video-gen/<topic-slug>/`. State on disk — no hidden state, no in-memory persistence. You can inspect, edit, archive, or commit anything in there.
+Each skill is a process with examples, a template, and a verification checklist.
 
-## Privacy
+**Start with [`thinking-model-router`](./thinking-models/skills/thinking-model-router)** when you don't know which model fits — it routes by domain and problem type. If you already know the model, invoke it directly.
 
-The plugin reads your Claude memory (`~/.claude/projects/.../memory/`) to personalize narration tone and framing. **It never embeds raw memory content in the storyboard, narration, or final video.** Memory references are listed by filename in `audience-brief.md` for traceability.
+| Family | Skills |
+|---|---|
+| **Decision & analysis** | `thinking-first-principles`, `thinking-second-order`, `thinking-inversion`, `thinking-pre-mortem`, `thinking-kepner-tregoe`, `thinking-reversibility`, `thinking-regret-minimization`, `thinking-opportunity-cost` |
+| **Cognitive & behavioral** | `thinking-bayesian`, `thinking-debiasing`, `thinking-dual-process`, `thinking-bounded-rationality`, `thinking-socratic`, `thinking-probabilistic`, `thinking-steel-manning` |
+| **Systems & strategy** | `thinking-systems`, `thinking-feedback-loops`, `thinking-archetypes`, `thinking-ooda`, `thinking-leverage-points`, `thinking-theory-of-constraints`, `thinking-cynefin` |
+| **Problem-solving** | `thinking-occams-razor`, `thinking-map-territory`, `thinking-circle-of-competence`, `thinking-triz`, `thinking-five-whys-plus`, `thinking-scientific-method`, `thinking-thought-experiment` |
+| **Estimation & risk** | `thinking-fermi-estimation`, `thinking-margin-of-safety`, `thinking-lindy-effect`, `thinking-via-negativa`, `thinking-red-team` |
+| **Product** | `thinking-jobs-to-be-done`, `thinking-effectuation` |
+| **Meta** | `thinking-model-router`, `thinking-model-selection`, `thinking-model-combination` |
+| **Opinions** | `forming-opinions` — surface the gut reaction, audit it for motivated reasoning, assign a credence, write the falsifier |
 
-## Testing
+## creativity — 3 skills
 
-```bash
-npm test               # Layer 1 unit tests (fast, CI)
-npm run test:fixtures  # Layers 1 + 2 (still fast, no network)
+| Skill | What it does |
+|---|---|
+| **`creative-generation`** | The orchestrator. Runs several *distinct* generators — cross-domain analogical transfer, conceptual blending, remote association, constraint injection, abductive gap-finding — then converges on mechanism-distinct candidates. Optimizes the *set* for spread rather than the single most-likely answer, which is what fights mode-collapse. |
+| **`constraint-based-creativity`** | Turns limitations into fuel: resource/format/rule/perspective constraints, limitation sprints, the subtraction game, format flips. |
+| **`creativity-sampler`** | Probability-weighted options across typicality zones (conventional → wild card), surfacing the hidden assumptions behind the "obvious" choice. Best at a decision point. |
+
+## x-growth — 1 skill
+
+| Surface | What it does |
+|---|---|
+| `/x-growth-setup` | One-time install and auth for [`twitter-cli`](https://github.com/public-clis/twitter-cli) (reads browser cookies, no API keys). |
+| **`x-reply-strategist`** | Profile niche → search posts → monitor → brief → research → form an opinion (steelman + strawman + web evidence) → draft replies. Never drafts a reply until you've seen the briefing and picked a post. |
+
+---
+
+## How they compose
+
+The packs are built to be used together, not in isolation:
+
+```
+creativity          → generate widely, mechanism-diverse       (divergent)
+thinking-models     → evaluate, decide, commit with a credence (convergent)
+   └─ forming-opinions is the hinge between the two
+x-growth            → uses forming-opinions to earn a reply worth posting
+video-gen           → uses explaining-technical-concepts + a voice profile to earn a script
 ```
 
-Layers 3 (smoke) and 4 (agent evals) are manual checklists in `tests/SMOKE.md` and `tests/agent-evals/`.
+Generate widely with `creative-generation`, then pick and stand behind a choice with `forming-opinions`.
+
+## Structure
+
+```
+.
+├── .claude-plugin/marketplace.json   # lists the four plugins below
+├── video-gen/       # plugin — skills/ commands/ agents/ scripts/ tests/
+├── thinking-models/ # plugin — skills/
+├── creativity/      # plugin — skills/
+└── x-growth/        # plugin — skills/ commands/
+```
+
+Every plugin carries its own `.claude-plugin/plugin.json`. See each plugin's README for detail and attribution — several skills are imported from other MIT-licensed packs and credited there.
 
 ## License
 

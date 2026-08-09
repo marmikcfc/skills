@@ -1,0 +1,11 @@
+{
+  "name": "creativity",
+  "version": "0.1.0",
+  "description": "Divergent idea-generation skills. creative-generation orchestrates multiple distinct generators (cross-domain analogical transfer, conceptual blending, remote association, constraint injection, abductive gap-finding) then converges on mechanism-distinct candidates. constraint-based-creativity turns limitations into fuel. creativity-sampler surfaces probability-weighted unconventional options against anchoring bias.",
+  "author": {
+    "name": "Marmik Pandya",
+    "url": "https://github.com/marmikcfc"
+  },
+  "license": "MIT",
+  "keywords": ["creativity", "ideation", "divergent-thinking", "brainstorming", "analogy", "novelty", "hypothesis-generation"]
+}

@@ -1,6 +1,6 @@
 {
   "name": "skills",
-  "description": "Marmik's Claude Code plugins and skills.",
+  "description": "Marmik's Claude Code plugins and skills — video generation, mental models, creative generation, and X growth.",
   "owner": {
     "name": "Marmik Pandya",
     "url": "https://github.com/marmikcfc"
@@ -8,8 +8,23 @@
   "plugins": [
     {
       "name": "video-gen",
-      "source": "./",
-      "description": "5-stage explainer video pipeline (HyperFrames + Manim + Cartesia/ElevenLabs), with structure / visual-style / narration-voice decoupled."
+      "source": "./video-gen",
+      "description": "5-stage explainer video pipeline (HyperFrames + Manim + Cartesia/ElevenLabs/fal), with narrative structure, visual style, and narration voice as independent choices."
+    },
+    {
+      "name": "thinking-models",
+      "source": "./thinking-models",
+      "description": "40 mental models as invokable skills — first principles, inversion, Bayesian updating, systems thinking, TRIZ, pre-mortem, red team, plus a forming-opinions discipline. Start with thinking-model-router."
+    },
+    {
+      "name": "creativity",
+      "source": "./creativity",
+      "description": "Divergent idea generation — a creative-generation orchestrator (analogical transfer, conceptual blending, abductive gap-finding), constraint-based creativity, and a probability-weighted option sampler."
+    },
+    {
+      "name": "x-growth",
+      "source": "./x-growth",
+      "description": "X/Twitter growth via strategic replies — niche profiling, post discovery through twitter-cli, opinion formation, and gated reply drafting."
     }
   ]
 }

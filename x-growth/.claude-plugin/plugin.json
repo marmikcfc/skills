@@ -1,0 +1,11 @@
+{
+  "name": "x-growth",
+  "version": "0.1.0",
+  "description": "X/Twitter growth via strategic reply engagement. Uses twitter-cli (browser-cookie auth, no API keys). Run /x-growth-setup first to install and authenticate. Then /x-reply-strategist to find posts, form opinions, and draft gated replies.",
+  "author": {
+    "name": "Marmik Pandya",
+    "url": "https://github.com/marmikcfc"
+  },
+  "license": "MIT",
+  "keywords": ["twitter", "x", "growth", "reply", "engagement", "social-media", "twitter-cli", "steelmanning"]
+}
