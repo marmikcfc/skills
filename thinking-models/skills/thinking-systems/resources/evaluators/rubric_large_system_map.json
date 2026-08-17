@@ -1,0 +1,177 @@
+{
+  "name": "Large System Map Quality",
+  "applies_to": "Multi-tier, multi-firm, or capital-intensive systems mapped with resources/large-systems.md — supply chains, industries, markets, capital cycles. Use IN ADDITION TO rubric_systems_thinking_leverage.json, which still scores the underlying loop and leverage work.",
+  "criteria": [
+    {
+      "name": "Tier Decomposition & Boundary",
+      "weight": 1.3,
+      "description": "Is the chain decomposed into concrete tiers, with boundary decisions that reach genuine end demand?",
+      "levels": {
+        "5": "Chain decomposed into concrete, named tiers (not abstractions like 'compute' or 'the market'). Each tier records operators, concentration, capacity, expansion lead time, stocks held, and margin capture. Upstream boundary set where inputs become genuinely unconstrained; downstream boundary reaches actual end demand where someone pays for a benefit rather than for capacity. Capital-market boundary decided explicitly (in or out, with rationale). Boundary rationale stated for each decision.",
+        "4": "Tiers concrete and mostly complete. Most tier attributes recorded. Boundary reaches end demand. Rationale given. Minor gaps in one or two tier attributes.",
+        "3": "Tiers identified but some are abstractions rather than operators. Attributes patchy — lead times or capacities missing. Downstream boundary stops at an intermediate buyer. Rationale thin.",
+        "2": "Tiers vague or collapsed (2-3 blocks for a 10-tier chain). Boundary arbitrary. Stops well short of end demand, so demand and inventory build are indistinguishable. No rationale.",
+        "1": "No tier decomposition, or the map is drawn around a single firm and presented as the system."
+      }
+    },
+    {
+      "name": "Three-Ledger Separation",
+      "weight": 1.4,
+      "description": "Are physical, financial and informational flows mapped separately, with their differing directions and delays, and their coupling points marked?",
+      "levels": {
+        "5": "Physical, financial and informational ledgers mapped separately over the same tier stack. Directions correct (goods downstream, payment upstream, orders/expectations upstream plus a public-expectation loop). Characteristic delay stated per ledger, and the order-of-magnitude difference between them is used analytically. Coupling points explicitly marked, with the pathology each enables (bullwhip, phantom demand, circular revenue, commitment write-downs). Ledger-3 quantities (backlog, announcements) never treated as ledger-1 or ledger-2 facts.",
+        "4": "Three ledgers separated with correct directions and delays. Coupling points marked. Ledger confusion avoided. Some pathologies not drawn out.",
+        "3": "Some separation attempted — usually physical vs. financial — but informational flows are folded in with one of the others. Delays not differentiated across ledgers. Few coupling points marked. Occasional ledger confusion.",
+        "2": "Single merged network. Money and material shown on one diagram without direction discipline. Orders and shipments conflated. Announced capacity treated as real.",
+        "1": "No ledger distinction. Backlog treated as demand, announcements treated as capacity, revenue treated interchangeably with cash."
+      }
+    },
+    {
+      "name": "Quantification & Unit Discipline",
+      "weight": 1.5,
+      "description": "Does every stock and flow carry a unit, a basis, a confidence and a date, with derived ratios computed?",
+      "levels": {
+        "5": "Every stock and flow carries a unit; stocks in quantities, flows in quantity-per-time. All figures in one table with basis (sourced vs. estimated), confidence, and as-of date. Conversion factors between tier-native units and the common unit stated explicitly with sources, and flagged as assumptions. Derived quantities computed: residence time, coverage, utilization, growth-vs-capacity-growth, capex/depreciation. Conservation checks run on units, money and capacity. Error bars stated, with the conclusion-sensitive numbers identified.",
+        "4": "Units throughout. Most figures dated and sourced. Conversion factors stated. Several derived ratios computed. Some conservation checking. Minor gaps in confidence or vintage marking.",
+        "3": "Some quantification but inconsistent. Units present for stocks, missing for flows or vice versa. Dates and basis often absent. Few derived ratios. Conversion factors used without being stated. No conservation check.",
+        "2": "Mostly qualitative with occasional numbers of unstated origin. No dates. Estimated and sourced figures indistinguishable. No derived ratios. Run-rates treated as stocks.",
+        "1": "No numbers. A diagram of arrows with no magnitudes, so no loop can be sized and no dominance claim is supportable."
+      }
+    },
+    {
+      "name": "Constraint Identification & Migration",
+      "weight": 1.5,
+      "description": "Is the binding constraint identified in a common unit, evidenced, and its migration path forecast?",
+      "levels": {
+        "5": "All tier capacities converted to a common downstream unit and compared; chain throughput correctly derived as the minimum. Binding constraint identified and corroborated by symptoms (utilization near capacity, pricing power, queue upstream, starvation downstream). Inventory accumulation pattern checked against the constraint location. Constraint migration explained: which tier binds next, why, and on what lead time. Leverage explicitly located at the constraint, with the note that interventions elsewhere are invisible. Terminal constraint identified from the lead-time ordering.",
+        "4": "Constraint identified in a common unit with supporting evidence. Next constraint named. Leverage located at the constraint. Migration logic present but not fully developed.",
+        "3": "A bottleneck is asserted but comparison across tiers is qualitative rather than in a common unit. Limited corroborating evidence. Migration mentioned but not forecast. Leverage not clearly tied to the constraint.",
+        "2": "Constraint named by reputation or headline rather than analysis. No common-unit comparison. Treated as fixed. Interventions proposed at non-binding tiers without acknowledging they change nothing.",
+        "1": "No constraint analysis. The chain is treated as uniformly capacity-limited or uniformly elastic."
+      }
+    },
+    {
+      "name": "Actor & Incentive Modeling",
+      "weight": 1.2,
+      "description": "Are actors modeled as adaptive optimizers with distinct objectives, horizons, blind spots and stress behavior?",
+      "levels": {
+        "5": "Every significant actor has a revealed objective (not the stated one), a planning horizon, a stated blind spot, and a predicted behavior under stress. Horizon mismatch across tiers is identified as a cycle driver. Concentration assessed per tier, with tiers noted where one actor's decision is the system's behavior. Actors modeled as adaptive: the analysis anticipates how they respond to the proposed intervention, including double-ordering, hoarding, cancellation and escalation.",
+        "4": "Actors tabled with objectives, horizons and stress behavior. Concentration noted. Adaptation considered. Minor gaps for secondary actors.",
+        "3": "Main actors listed with rough objectives. Horizons or blind spots missing. Concentration mentioned but not per tier. Adaptation to intervention barely considered.",
+        "2": "Actors named without differentiated incentives. All assumed to want the same thing. Modeled as passive — they receive the intervention rather than respond to it.",
+        "1": "No actor modeling. The system is treated as a mechanism rather than a population of optimizers."
+      }
+    },
+    {
+      "name": "Capital Loop Rigor",
+      "weight": 1.4,
+      "description": "Are capital structures — capex/depreciation lag, working capital, commitments, backlog, circular financing — modeled with their delays and without double-counting?",
+      "levels": {
+        "5": "Capital loops modeled explicitly with delays: capex-to-depreciation lag, revenue recognition vs. cash, payment terms. The buyer's return-on-capital loop is modeled from the buyer's unit economics and identified as the cycle terminator where applicable. Circular financing is sized, not merely flagged: revenue bucketed by funding source, circularity ratio and trend computed, hops traced to an external origin, unwind test run. Backlog interrogated for cancellability, deposit backing, duplicate-adjustment and vintage before use. Purchase commitments treated as forward exposure. No double-counting of money traversing a loop. Economic life distinguished from accounting life.",
+        "4": "Capital loops modeled with delays. Buyer economics considered. Circularity sized approximately. Backlog qualified. No obvious double-counting. Some structures treated more lightly.",
+        "3": "Capital flows present but delays under-modeled — depreciation lag or recognition timing missing. Circular financing flagged without sizing. Backlog used with some caveats. Buyer's return not modeled.",
+        "2": "Capital treated as instantaneous. Backlog used as demand. Circularity noted as a talking point or ignored. Revenue and cash conflated. Depreciation ignored.",
+        "1": "No capital modeling in a capital-intensive system, or money traversing the loop is counted at each pass as independent demand."
+      }
+    },
+    {
+      "name": "Reflexivity & Expectation Dynamics",
+      "weight": 1.2,
+      "description": "Are expectation loops modeled, and is an exogenous anchor identified and tracked?",
+      "levels": {
+        "5": "Expectation loops explicitly mapped: valuation to cost of capital to funded capacity to results. Bidirectionality noted, including that reflexive loops reverse faster than they build. An exogenous anchor is identified — the quantity generated outside the loop (typically genuine end-demand revenue) — and the analysis turns on its growth rate versus the loop's. The reality-check loop is modeled as dormant-then-abrupt, with its trigger stated as a monitorable threshold. Narrative-to-allocation dynamics distinguished from return.",
+        "4": "Expectation loops mapped with an anchor identified and tracked. Reversal asymmetry noted. Trigger stated.",
+        "3": "Expectations acknowledged as influential but not modeled as a closed loop. Anchor mentioned vaguely or not quantified. No trigger threshold.",
+        "2": "Expectations treated purely as a readout of fundamentals rather than as an input to them. No anchor. Capital availability treated as exogenous when it is endogenous.",
+        "1": "No expectation dynamics in a system where valuation demonstrably funds capacity. Activity treated as equivalent to return."
+      }
+    },
+    {
+      "name": "Data Provenance & Vintage",
+      "weight": 1.2,
+      "description": "Is every load-bearing number sourced, dated, and distinguished from estimation?",
+      "levels": {
+        "5": "Every load-bearing figure carries a source and an as-of date. Sourced and estimated figures visibly distinguished, and estimates never acquire authority through reuse. Announced/planned quantities kept separate from operational ones, with the historical conversion rate tracked. Physical units preferred over currency where price and volume would otherwise be blended. Numbers whose publisher has an incentive to shade them are flagged. Decay acknowledged: the map states how quickly its figures go stale and what to re-check.",
+        "4": "Most figures sourced and dated. Estimates marked. Announced vs. operational distinguished. Incentive-shaded figures mostly flagged.",
+        "3": "Some sourcing, inconsistent dating. Estimates and sourced figures blur in places. Announced capacity occasionally treated as operational. Decay not addressed.",
+        "2": "Numbers appear without origin or date. No estimate marking. Headline and announced figures used as fact.",
+        "1": "Undated, unsourced figures throughout, presented with unearned precision."
+      }
+    },
+    {
+      "name": "Scenario & Stress Testing",
+      "weight": 1.3,
+      "description": "Are multiple scenarios and structural stress tests run, with dominance thresholds rather than point forecasts?",
+      "levels": {
+        "5": "At least three scenarios built on distinct premises (continuation, constraint shift, cycle turn), each with its dominant loop, leading indicators, first failure point and timing. Standard stress tests run: demand shock, constraint relief, capital withdrawal, substitution, demand doubling. Each identifies which actors and loops are load-bearing. Output is expressed as dominance thresholds and trigger conditions rather than point forecasts. Interventions with opposite signs on different loops are surfaced rather than netted into one verdict.",
+        "4": "Multiple scenarios with indicators and timing. Most stress tests run. Thresholds stated. Some netting of opposing effects.",
+        "3": "Two scenarios, or three that are variations of one premise. Few stress tests. Some indicators. Drifts toward point forecasting.",
+        "2": "A single base case with optimistic and pessimistic tweaks to a number rather than a change of dominant loop. No stress tests. Point forecast presented as the output.",
+        "1": "One deterministic path. No uncertainty handling in a system with multi-year delays and adaptive actors."
+      }
+    },
+    {
+      "name": "Falsifiability & Monitoring",
+      "weight": 1.3,
+      "description": "Does the map state what would prove it wrong and what specifically to watch?",
+      "levels": {
+        "5": "Explicit falsifiers: concrete observations that would invalidate the map, each tied to the specific structural claim it would break. Monitoring set specifies observable indicators for every dominance threshold, separated into leading and lagging, with the reason each leads. The ordering point is made — that by the time lagging indicators move, the handoff has happened. Review cadence stated. Indicators are constructible from available data, and where they are not, the construction method is given.",
+        "4": "Falsifiers stated and tied to claims. Monitoring set with leading/lagging separation and cadence. Indicators mostly constructible.",
+        "3": "Some falsifiers, loosely tied to claims. Monitoring list present but leading and lagging blurred. Constructibility not addressed.",
+        "2": "Vague falsifiers ('if growth slows') or a monitoring list of whatever is easily available rather than what is diagnostic. Mostly lagging indicators.",
+        "1": "No falsifiers and no monitoring set. The map cannot be checked, only believed."
+      }
+    }
+  ],
+  "guidance": {
+    "complexity": {
+      "moderate": "3-5 tiers, one dominant constraint, limited capital circularity. Target average >= 3.5. All criteria >= 3.",
+      "complex": "6+ tiers, constraint migration in play, capital markets endogenous, multi-year delays. Target average >= 4.0. All criteria >= 3.",
+      "high_stakes": "The map informs capital allocation, policy, or a strategic commitment. Target average >= 4.5, with Quantification, Constraint Identification, Capital Loop Rigor and Data Provenance all >= 4."
+    },
+    "minimum_thresholds": {
+      "critical_criteria": "Quantification & Unit Discipline (>=3), Constraint Identification & Migration (>=3), Three-Ledger Separation (>=3) and Capital Loop Rigor (>=3, where capital is involved) are CRITICAL. Below 3 on any of these means the map cannot support a dominance claim and should not be used for a decision.",
+      "overall_average": "Must be >= 3.5 before delivering; >= 4.0 for complex systems; >= 4.5 where the map informs a material commitment."
+    },
+    "weight_interpretation": "Quantification (1.5x) and Constraint Identification (1.5x) are highest-weighted because loop dominance and leverage location both depend entirely on them. Three-Ledger Separation (1.4x) and Capital Loop Rigor (1.4x) follow, as most large-system pathologies live in ledger mismatch and capital delay. Tier Decomposition, Scenario Testing and Falsifiability (1.3x) are highly important. Actor Modeling, Reflexivity and Data Provenance (1.2x) are important but more often partially recoverable."
+  },
+  "common_failure_modes": {
+    "single_firm_boundary": "Tier Decomposition: 1-2. The map is drawn around one company and presented as the system, so the governing loop — which closes through customers' customers — is outside the frame. Fix: map the chain first; locate the firm within it.",
+    "backlog_as_demand": "Three-Ledger Separation and Capital Loop Rigor: 1-2. Order book treated as demand without checking cancellability, deposits, duplicate-adjustment or vintage. Fix: backlog is a ledger-3 quantity with its own inflation dynamics; cross-check against units shipped and cash received.",
+    "announced_as_operational": "Data Provenance: 1-2. Announced datacenters, planned capacity and signed agreements counted as real capacity. Fix: track the historical announced-to-operational conversion rate and discount accordingly.",
+    "unsized_diagram": "Quantification: 1. Arrows without magnitudes, followed by a confident dominance claim. Fix: two opposing loops tell you nothing until you know which is larger. Size them or withhold the claim.",
+    "fixed_constraint": "Constraint Identification: 2. Today's bottleneck assumed permanent. Fix: constraints migrate as capacity lands; sort tiers by expansion lead time to see where it ends up.",
+    "circular_revenue_double_count": "Capital Loop Rigor: 1-2. The same money traversing a financing loop counted as independent demand at each pass. Fix: trace funds back to where they enter the system from outside; bucket revenue by funding source.",
+    "run_rate_as_stock": "Quantification: 2. An annualized run-rate treated as a level. Fix: a run-rate is a flow with a flow's volatility, not a stock.",
+    "depreciation_ignored": "Capital Loop Rigor: 1-2. Analysis on current earnings while a contractually scheduled depreciation drag from boom-era capex is ignored. Fix: model the capex-to-depreciation lag and distinguish economic life from accounting life.",
+    "passive_actors": "Actor Modeling: 1-2. Actors modeled as receiving the intervention rather than adapting to it. Fix: double-ordering, hoarding and cancellation are responses, not anomalies. Model the response.",
+    "no_exogenous_anchor": "Reflexivity: 1-2. Every quantity in the analysis is generated inside the loop, so growth appears self-validating. Fix: identify the one quantity produced outside the loop and compare its growth rate to the loop's.",
+    "point_forecast": "Scenario Testing: 1-2. A single deterministic path in a system with multi-year delays and adaptive actors. Fix: deliver dominance thresholds and trigger conditions, not levels.",
+    "precision_without_accuracy": "Data Provenance and Quantification: 2. Four significant figures resting on an unverified conversion factor. Fix: state error bars and identify which numbers the conclusion is actually sensitive to.",
+    "netted_verdicts": "Scenario Testing: 2-3. An intervention with opposite signs on two loops (constraint relief raises volume, cuts pricing power) collapsed into a single good/bad verdict. Fix: surface both signs and say which dominates and when.",
+    "unfalsifiable_map": "Falsifiability: 1-2. No statement of what would prove the map wrong, so it can only be believed. Fix: tie a concrete observation to each structural claim."
+  },
+  "self_check_questions": [
+    "Tiers: is every tier a concrete set of operators rather than an abstraction, with capacity and expansion lead time?",
+    "Boundary: does the map reach genuine end demand — someone paying for a benefit, not for capacity?",
+    "Ledgers: are physical, financial and informational flows separate, with their different directions and delays?",
+    "Coupling: have I marked where the ledgers touch, and named the pathology each coupling enables?",
+    "Units: does every stock and flow have a unit, and is every conversion factor stated as the assumption it is?",
+    "Provenance: is every load-bearing number sourced, dated, and marked as sourced or estimated?",
+    "Constraint: did I convert all tiers to a common unit and take the minimum, or did I assert a bottleneck?",
+    "Migration: where does the constraint go next, and which tier binds last given its lead time?",
+    "Actors: does each have a revealed objective, a horizon, a blind spot, and a stress behavior?",
+    "Adaptation: how do actors respond to my proposed intervention?",
+    "Capital: are the capex-to-depreciation lag and the buyer's return-on-capital loop modeled with their delays?",
+    "Circularity: have I bucketed revenue by funding source and run the unwind test, rather than just flagging it?",
+    "Backlog: cancellable, deposit-backed, duplicate-adjusted, dated?",
+    "Conservation: does the map leak — does any money or material appear or vanish?",
+    "Anchor: what quantity is generated outside the loop, and how does its growth compare to the loop's?",
+    "Dominance: which loop runs the system now, and what specific threshold flips it?",
+    "Scenarios: do my scenarios differ in which loop dominates, or only in the size of a number?",
+    "Stress: which actors and loops turn out to be load-bearing under demand shock and capital withdrawal?",
+    "Falsifiers: what observation would show this map is wrong, and which claim would it break?",
+    "Overall: would someone who operates inside this chain recognize their own tier in my description of it?"
+  ],
+  "evaluation_notes": "Large-system maps fail on quantification and constraint analysis far more often than on loop structure, which is why those two criteria carry the highest weight. The characteristic failures are structural rather than careless: drawing the boundary around one firm so the governing loop falls outside the frame; treating ledger-3 quantities (backlog, announcements, guidance) as ledger-1 or ledger-2 facts; asserting a bottleneck instead of deriving it from capacities in a common unit; assuming the constraint is fixed when constraint migration is the central dynamic of any chain; and double-counting money that traverses a financing loop. A strong map decomposes concrete tiers with lead times, separates the three ledgers and marks their coupling points, puts a dated and sourced number with a unit on every stock and flow, derives the binding constraint arithmetically and forecasts its migration, models actors as adaptive optimizers with mismatched horizons, treats capital structures with their real delays, identifies an exogenous anchor for any reflexive loop, and closes with falsifiers and a monitoring set built from leading indicators. Score this rubric alongside rubric_systems_thinking_leverage.json, which continues to assess the underlying loop, leverage and intervention work."
+}
