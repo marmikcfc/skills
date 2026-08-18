@@ -1,6 +1,6 @@
 # skills
 
-A Claude Code marketplace hosting four independent plugins — **64 skills** for making videos, thinking clearly, generating ideas, and growing on X.
+A Claude Code marketplace hosting five independent plugins — **65 skills** for making videos, thinking clearly, generating ideas, pressure-testing product ideas, and growing on X.
 
 Each plugin is self-contained and installs on its own. Install only what you want.
 
@@ -15,6 +15,7 @@ Each plugin is self-contained and installs on its own. Install only what you wan
 /plugin install thinking-models@skills
 /plugin install creativity@skills
 /plugin install x-growth@skills
+/plugin install proven-better-new@skills
 ```
 
 Restart Claude Code so commands, skills, and agents load.
@@ -25,6 +26,7 @@ Restart Claude Code so commands, skills, and agents load.
 | **[thinking-models](./thinking-models)** | 40 | Mental models as invokable skills — for deciding, debugging, estimating, and stress-testing beliefs. |
 | **[creativity](./creativity)** | 3 | Divergent idea generation that fights mode-collapse and anchoring. |
 | **[x-growth](./x-growth)** | 1 | X/Twitter growth through researched, gated replies. |
+| **[proven-better-new](./proven-better-new)** | 1 | Pressure-test a product idea with Mark Pincus's Proven-Better-New framework. |
 
 ---
 
@@ -76,6 +78,12 @@ Each skill is a process with examples, a template, and a verification checklist.
 | `/x-growth-setup` | One-time install and auth for [`twitter-cli`](https://github.com/public-clis/twitter-cli) (reads browser cookies, no API keys). |
 | **`x-reply-strategist`** | Profile niche → search posts → monitor → brief → research → form an opinion (steelman + strawman + web evidence) → draft replies. Never drafts a reply until you've seen the briefing and picked a post. |
 
+## proven-better-new — 1 skill
+
+| Surface | What it does |
+|---|---|
+| **`proven-better-new`** (`/proven-better-new <idea>`) | Pressure-tests a product/startup idea with Mark Pincus's Proven-Better-New framework: proven business model + mechanics (evidence-grounded via web research), a Better checklist gated on 10/10 user consensus, and a New bet checked against the MVP trap with 2-4 backup bets required. |
+
 ---
 
 ## How they compose
@@ -96,11 +104,12 @@ Generate widely with `creative-generation`, then pick and stand behind a choice 
 
 ```
 .
-├── .claude-plugin/marketplace.json   # lists the four plugins below
-├── video-gen/       # plugin — skills/ commands/ agents/ scripts/ tests/
-├── thinking-models/ # plugin — skills/
-├── creativity/      # plugin — skills/
-└── x-growth/        # plugin — skills/ commands/
+├── .claude-plugin/marketplace.json   # lists the five plugins below
+├── video-gen/          # plugin — skills/ commands/ agents/ scripts/ tests/
+├── thinking-models/    # plugin — skills/
+├── creativity/         # plugin — skills/
+├── x-growth/           # plugin — skills/ commands/
+└── proven-better-new/  # plugin — skills/
 ```
 
 Every plugin carries its own `.claude-plugin/plugin.json`. See each plugin's README for detail and attribution — several skills are imported from other MIT-licensed packs and credited there.

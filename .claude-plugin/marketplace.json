@@ -1,6 +1,6 @@
 {
   "name": "skills",
-  "description": "Marmik's Claude Code plugins and skills — video generation, mental models, creative generation, and X growth.",
+  "description": "Marmik's Claude Code plugins and skills — video generation, mental models, creative generation, product-idea pressure-testing, and X growth.",
   "owner": {
     "name": "Marmik Pandya",
     "url": "https://github.com/marmikcfc"
@@ -25,6 +25,11 @@
       "name": "x-growth",
       "source": "./x-growth",
       "description": "X/Twitter growth via strategic replies — niche profiling, post discovery through twitter-cli, opinion formation, and gated reply drafting."
+    },
+    {
+      "name": "proven-better-new",
+      "source": "./proven-better-new",
+      "description": "Pressure-test a product/startup idea with Mark Pincus's Proven-Better-New framework — isolate the risky novel bet so an idea doesn't die for the wrong reasons before the market sees it."
     }
   ]
 }
