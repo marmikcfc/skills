@@ -1,6 +1,6 @@
 {
   "name": "skills",
-  "description": "Marmik's Claude Code plugins and skills — video generation, mental models, creative generation, product-idea pressure-testing, and X growth.",
+  "description": "Marmik's Claude Code plugins and skills — video generation, mental models, creative generation, product-idea pressure-testing, code-change explainers, and X growth.",
   "owner": {
     "name": "Marmik Pandya",
     "url": "https://github.com/marmikcfc"
@@ -30,6 +30,11 @@
       "name": "proven-better-new",
       "source": "./proven-better-new",
       "description": "Pressure-test a product/startup idea with Mark Pincus's Proven-Better-New framework — isolate the risky novel bet so an idea doesn't die for the wrong reasons before the market sees it."
+    },
+    {
+      "name": "explain-diff",
+      "source": "./explain-diff",
+      "description": "Turn a diff, branch, or PR into a teaching artifact — background, intuition, a conceptual code walkthrough, and five interactive quiz questions whose options can't be pattern-matched. HTML or Notion output."
     },
     {
       "name": "voice-canvas",

@@ -1,0 +1,11 @@
+{
+  "name": "explain-diff",
+  "version": "0.1.0",
+  "description": "Turn a diff, branch, or PR into a rich teaching artifact — background, intuition, a conceptual code walkthrough, and five interactive quiz questions. Ships an HTML variant and a Notion variant.",
+  "author": {
+    "name": "Marmik Pandya",
+    "url": "https://github.com/marmikcfc"
+  },
+  "license": "MIT",
+  "keywords": ["code-review", "diff", "pull-request", "explanation", "onboarding", "teaching", "documentation"]
+}
