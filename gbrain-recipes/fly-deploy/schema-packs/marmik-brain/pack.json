@@ -1,0 +1,1007 @@
+{
+  "api_version": "gbrain-schema-pack-v1",
+  "name": "marmik-brain",
+  "version": "1.0.0",
+  "description": "Founder brain: base-v2 taxonomy plus code/conversation/meeting/learning borrowed from base+engineer, idea+task new. Wires the five subsystems base-v2 leaves undeclared — link inference, frontmatter links, enrichment rubrics, atom/concept phases, and calibration domains.",
+  "gbrain_min_version": "0.42.0",
+  "extends": null,
+  "borrow_from": [],
+  "page_types": [
+    {
+      "name": "person",
+      "primitive": "entity",
+      "path_prefixes": [
+        "people/",
+        "person/"
+      ],
+      "aliases": [
+        "people",
+        "contact",
+        "individual",
+        "founder",
+        "partner",
+        "partner-profile"
+      ],
+      "extractable": false,
+      "expert_routing": true
+    },
+    {
+      "name": "company",
+      "primitive": "entity",
+      "path_prefixes": [
+        "companies/",
+        "company/",
+        "products/",
+        "orgs/"
+      ],
+      "aliases": [
+        "yc-company",
+        "product",
+        "org",
+        "people-org",
+        "organization",
+        "startup",
+        "business"
+      ],
+      "extractable": false,
+      "expert_routing": true,
+      "subtypes": [
+        {
+          "name": "company",
+          "when": {
+            "path_pattern": "^companies/"
+          }
+        },
+        {
+          "name": "product",
+          "when": {
+            "path_pattern": "^products/"
+          }
+        },
+        {
+          "name": "org",
+          "when": {
+            "path_pattern": "^orgs/"
+          }
+        }
+      ]
+    },
+    {
+      "name": "media",
+      "primitive": "media",
+      "path_prefixes": [
+        "media/",
+        "videos/",
+        "articles/",
+        "essays/",
+        "books/",
+        "podcasts/",
+        "blog/",
+        "posts/"
+      ],
+      "aliases": [
+        "article",
+        "video",
+        "essay",
+        "book",
+        "podcast",
+        "blog-post",
+        "youtube-video",
+        "podcast-episode"
+      ],
+      "extractable": true,
+      "expert_routing": false,
+      "subtypes": [
+        {
+          "name": "video",
+          "when": {
+            "path_pattern": "^videos/"
+          }
+        },
+        {
+          "name": "article",
+          "when": {
+            "path_pattern": "^articles/"
+          }
+        },
+        {
+          "name": "essay",
+          "when": {
+            "path_pattern": "^essays/"
+          }
+        },
+        {
+          "name": "book",
+          "when": {
+            "path_pattern": "^books/"
+          }
+        },
+        {
+          "name": "podcast",
+          "when": {
+            "path_pattern": "^podcasts/"
+          }
+        },
+        {
+          "name": "blog",
+          "when": {
+            "path_pattern": "^(blog|posts)/"
+          }
+        }
+      ]
+    },
+    {
+      "name": "tweet",
+      "primitive": "media",
+      "path_prefixes": [
+        "tweets/",
+        "twitter/"
+      ],
+      "aliases": [
+        "tweet-single",
+        "tweet-thread",
+        "tweet-bundle",
+        "tweet-stub",
+        "twitter-post"
+      ],
+      "extractable": true,
+      "expert_routing": false,
+      "subtypes": [
+        {
+          "name": "single",
+          "when": {
+            "frontmatter_field": "thread_length",
+            "frontmatter_value": 1
+          }
+        },
+        {
+          "name": "bundle",
+          "when": {
+            "frontmatter_field": "bundle",
+            "frontmatter_value": true
+          }
+        },
+        {
+          "name": "stub",
+          "when": {
+            "frontmatter_field": "stub",
+            "frontmatter_value": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "social-digest",
+      "primitive": "temporal",
+      "path_prefixes": [
+        "digests/social/"
+      ],
+      "aliases": [
+        "social-digest-daily",
+        "social-digest-monthly"
+      ],
+      "extractable": false,
+      "expert_routing": false,
+      "subtypes": [
+        {
+          "name": "daily",
+          "when": {
+            "path_pattern": "/daily/"
+          }
+        },
+        {
+          "name": "monthly",
+          "when": {
+            "path_pattern": "/monthly/"
+          }
+        }
+      ]
+    },
+    {
+      "name": "analysis",
+      "primitive": "media",
+      "path_prefixes": [
+        "wiki/analysis/",
+        "analysis/"
+      ],
+      "aliases": [
+        "pricing-analysis",
+        "hiring-analysis",
+        "market-analysis",
+        "competitive-analysis",
+        "research",
+        "organization-research"
+      ],
+      "extractable": true,
+      "expert_routing": false
+    },
+    {
+      "name": "atom",
+      "primitive": "annotation",
+      "path_prefixes": [
+        "atoms/"
+      ],
+      "aliases": [
+        "atom-extraction",
+        "atom-manual",
+        "atom-lore",
+        "content-atom",
+        "lore"
+      ],
+      "extractable": false,
+      "expert_routing": false,
+      "subtypes": [
+        {
+          "name": "extraction",
+          "when": {
+            "frontmatter_field": "origin",
+            "frontmatter_value": "extraction"
+          }
+        },
+        {
+          "name": "manual",
+          "when": {
+            "frontmatter_field": "origin",
+            "frontmatter_value": "manual"
+          }
+        },
+        {
+          "name": "lore",
+          "when": {
+            "frontmatter_field": "origin",
+            "frontmatter_value": "lore"
+          }
+        }
+      ]
+    },
+    {
+      "name": "concept",
+      "primitive": "concept",
+      "path_prefixes": [
+        "wiki/concepts/",
+        "wiki/concept/"
+      ],
+      "aliases": [
+        "concept-stub",
+        "definition"
+      ],
+      "extractable": true,
+      "expert_routing": false
+    },
+    {
+      "name": "source",
+      "primitive": "media",
+      "path_prefixes": [
+        "sources/",
+        "source/"
+      ],
+      "aliases": [
+        "sources/article",
+        "source/article",
+        "transcript",
+        "ref"
+      ],
+      "extractable": true,
+      "expert_routing": false
+    },
+    {
+      "name": "deal",
+      "primitive": "temporal",
+      "path_prefixes": [
+        "deals/",
+        "deal/"
+      ],
+      "aliases": [
+        "investment",
+        "term-sheet",
+        "pipeline",
+        "opportunity",
+        "customer"
+      ],
+      "extractable": false,
+      "expert_routing": false
+    },
+    {
+      "name": "email",
+      "primitive": "temporal",
+      "path_prefixes": [
+        "emails/",
+        "email/"
+      ],
+      "aliases": [
+        "email-thread"
+      ],
+      "extractable": true,
+      "expert_routing": false
+    },
+    {
+      "name": "slack",
+      "primitive": "temporal",
+      "path_prefixes": [
+        "slack/"
+      ],
+      "aliases": [
+        "slack-message",
+        "slack-thread"
+      ],
+      "extractable": true,
+      "expert_routing": false
+    },
+    {
+      "name": "writing",
+      "primitive": "media",
+      "path_prefixes": [
+        "writing/"
+      ],
+      "aliases": [
+        "draft",
+        "post-draft"
+      ],
+      "extractable": true,
+      "expert_routing": false
+    },
+    {
+      "name": "project",
+      "primitive": "concept",
+      "path_prefixes": [
+        "projects/",
+        "project/"
+      ],
+      "aliases": [
+        "initiative",
+        "workstream"
+      ],
+      "extractable": false,
+      "expert_routing": false
+    },
+    {
+      "name": "note",
+      "primitive": "concept",
+      "path_prefixes": [
+        "notes/",
+        "note/"
+      ],
+      "aliases": [
+        "memo",
+        "anecdote",
+        "insight",
+        "principle",
+        "framework"
+      ],
+      "extractable": true,
+      "expert_routing": false
+    },
+    {
+      "name": "event",
+      "primitive": "temporal",
+      "path_prefixes": [
+        "life/events/"
+      ],
+      "aliases": [],
+      "extractable": false,
+      "expert_routing": false
+    },
+    {
+      "name": "diary",
+      "primitive": "temporal",
+      "path_prefixes": [
+        "life/diary/"
+      ],
+      "aliases": [],
+      "extractable": false,
+      "expert_routing": false
+    },
+    {
+      "name": "idea",
+      "primitive": "concept",
+      "path_prefixes": [
+        "ideas/"
+      ],
+      "aliases": [
+        "hypothesis",
+        "bet-idea",
+        "product-idea"
+      ],
+      "extractable": true,
+      "expert_routing": false
+    },
+    {
+      "name": "task",
+      "primitive": "temporal",
+      "path_prefixes": [
+        "tasks/"
+      ],
+      "aliases": [
+        "todo",
+        "action-item"
+      ],
+      "extractable": false,
+      "expert_routing": false
+    },
+    {
+      "name": "code",
+      "primitive": "media",
+      "path_prefixes": [],
+      "aliases": [],
+      "extractable": false,
+      "expert_routing": false
+    },
+    {
+      "name": "conversation",
+      "primitive": "temporal",
+      "path_prefixes": [
+        "conversations/"
+      ],
+      "aliases": [],
+      "extractable": true,
+      "expert_routing": false
+    },
+    {
+      "name": "meeting",
+      "primitive": "temporal",
+      "path_prefixes": [
+        "meetings/",
+        "meeting/"
+      ],
+      "aliases": [],
+      "extractable": true,
+      "expert_routing": false
+    },
+    {
+      "name": "learning",
+      "primitive": "annotation",
+      "path_prefixes": [
+        "learnings/",
+        "engineering/learnings/"
+      ],
+      "aliases": [],
+      "extractable": false,
+      "expert_routing": false
+    }
+  ],
+  "link_types": [
+    {
+      "name": "partner_of",
+      "inverse": "partner_of"
+    },
+    {
+      "name": "relates_to",
+      "inverse": "relates_to"
+    },
+    {
+      "name": "mentions"
+    },
+    {
+      "name": "discusses"
+    },
+    {
+      "name": "founded",
+      "inverse": "founded_by",
+      "inference": {
+        "regex": "\\b(founded|founder of|co-?founded|started)\\b"
+      }
+    },
+    {
+      "name": "works_at",
+      "inverse": "employs",
+      "inference": {
+        "regex": "\\b(works? at|employed by|works? for|joined|hired by|ceo of|cto of|cmo of)\\b"
+      }
+    },
+    {
+      "name": "invested_in",
+      "inverse": "investor_of",
+      "inference": {
+        "regex": "\\b(invested in|backed|seeded|funded|wrote a check)\\b"
+      }
+    },
+    {
+      "name": "sourced_from"
+    },
+    {
+      "name": "derived_from"
+    },
+    {
+      "name": "supersedes"
+    },
+    {
+      "name": "redirects_to"
+    },
+    {
+      "name": "attended",
+      "inverse": "attended_by",
+      "inference": {
+        "page_type": "meeting"
+      }
+    },
+    {
+      "name": "authored",
+      "inverse": "authored_by"
+    },
+    {
+      "name": "attributed_to"
+    },
+    {
+      "name": "advises",
+      "inference": {
+        "regex": "\\b(advises|advisor|advising|advisor to)\\b"
+      }
+    }
+  ],
+  "frontmatter_links": [
+    {
+      "page_type": "person",
+      "fields": [
+        "company",
+        "companies"
+      ],
+      "link_type": "works_at"
+    },
+    {
+      "page_type": "person",
+      "fields": [
+        "founded"
+      ],
+      "link_type": "founded"
+    },
+    {
+      "page_type": "company",
+      "fields": [
+        "key_people"
+      ],
+      "link_type": "works_at"
+    },
+    {
+      "page_type": "company",
+      "fields": [
+        "investors"
+      ],
+      "link_type": "invested_in"
+    },
+    {
+      "page_type": "company",
+      "fields": [
+        "partner",
+        "partners"
+      ],
+      "link_type": "partner_of"
+    },
+    {
+      "page_type": "deal",
+      "fields": [
+        "investors"
+      ],
+      "link_type": "invested_in"
+    },
+    {
+      "page_type": "meeting",
+      "fields": [
+        "attendees"
+      ],
+      "link_type": "attended"
+    }
+  ],
+  "takes_kinds": [
+    "fact",
+    "take",
+    "bet",
+    "hunch"
+  ],
+  "enrichable_types": [
+    {
+      "type": "person",
+      "rubric": "person-default"
+    },
+    {
+      "type": "company",
+      "rubric": "company-default"
+    },
+    {
+      "type": "deal",
+      "rubric": "deal-default"
+    }
+  ],
+  "filing_rules": [
+    {
+      "kind": "learning",
+      "directory": "learnings/",
+      "examples": [
+        "learnings/2026-08/pooler-prepared-statements"
+      ],
+      "description": "Engineering learnings. learning_type: pattern|pitfall|preference|architecture|tool|operational|investigation."
+    },
+    {
+      "kind": "idea",
+      "directory": "ideas/",
+      "examples": [
+        "ideas/agent-shared-drive"
+      ],
+      "description": "Product and company ideas under evaluation. idea-lineage traces evolution; idea_conviction scores the calls."
+    },
+    {
+      "kind": "task",
+      "directory": "tasks/",
+      "examples": [
+        "tasks/2026-08-14-wire-chat-model"
+      ],
+      "description": "Actionable items. daily-task-manager owns the lifecycle."
+    },
+    {
+      "kind": "conversation",
+      "directory": "conversations/",
+      "examples": [
+        "conversations/chatgpt/2026-05-01-retrieval-pipeline"
+      ],
+      "description": "Imported chat transcripts. chats-to-brain writes here."
+    }
+  ],
+  "migration_from": {
+    "pack": "gbrain-base",
+    "version": "1.x"
+  },
+  "mapping_rules": [
+    {
+      "kind": "retype",
+      "from_type": "tweet-single",
+      "to_type": "tweet",
+      "subtype": "single",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "tweet-thread",
+      "to_type": "tweet",
+      "subtype": "bundle",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "tweet-bundle",
+      "to_type": "tweet",
+      "subtype": "bundle",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "tweet-stub",
+      "to_type": "tweet",
+      "subtype": "stub",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "media/x-tweet/bundle",
+      "to_type": "tweet",
+      "subtype": "bundle",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "media/x-account",
+      "to_type": "social-digest",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "media/x-account/daily",
+      "to_type": "social-digest",
+      "subtype": "daily",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "media/x-account/monthly",
+      "to_type": "social-digest",
+      "subtype": "monthly",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "article",
+      "to_type": "media",
+      "subtype": "article",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "media/article",
+      "to_type": "media",
+      "subtype": "article",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "sources/article",
+      "to_type": "source",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "source/article",
+      "to_type": "source",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "yc-company",
+      "to_type": "company",
+      "subtype": "company",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "product",
+      "to_type": "company",
+      "subtype": "product",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "organization",
+      "to_type": "company",
+      "subtype": "org",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "atom-extraction",
+      "to_type": "atom",
+      "subtype": "extraction",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "content-atom",
+      "to_type": "atom",
+      "subtype": "manual",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "lore",
+      "to_type": "atom",
+      "subtype": "lore",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "page_to_link",
+      "from_type": "atom-partner-link",
+      "link_type": "partner_of",
+      "source_slug_from": {
+        "frontmatter_field": "source"
+      },
+      "target_slug_from": {
+        "frontmatter_field": "target"
+      }
+    },
+    {
+      "kind": "page_to_link",
+      "from_type": "partner-atom-link",
+      "link_type": "partner_of",
+      "source_slug_from": {
+        "frontmatter_field": "source"
+      },
+      "target_slug_from": {
+        "frontmatter_field": "target"
+      }
+    },
+    {
+      "kind": "retype",
+      "from_type": "video",
+      "to_type": "media",
+      "subtype": "video",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "youtube-video",
+      "to_type": "media",
+      "subtype": "video",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "essay",
+      "to_type": "media",
+      "subtype": "essay",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "blog-post",
+      "to_type": "media",
+      "subtype": "blog",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "book",
+      "to_type": "media",
+      "subtype": "book",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "podcast",
+      "to_type": "media",
+      "subtype": "podcast",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "media/analysis",
+      "to_type": "analysis",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "media-analysis",
+      "to_type": "analysis",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "media/x-account/analysis",
+      "to_type": "analysis",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "research",
+      "to_type": "analysis",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "organization-research",
+      "to_type": "analysis",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "competitive-intel",
+      "to_type": "analysis",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "retype",
+      "from_type": "yc/competitive-intel",
+      "to_type": "analysis",
+      "subtype_field": "subtype"
+    },
+    {
+      "kind": "page_to_alias",
+      "from_type": "concept-redirect",
+      "canonical_from": "body_first_link",
+      "alias_slug_from": "slug",
+      "notes_from": "body_excerpt"
+    },
+    {
+      "kind": "retype",
+      "from_type": "civic",
+      "to_type": "note",
+      "subtype": "civic",
+      "subtype_field": "legacy_type"
+    },
+    {
+      "kind": "retype",
+      "from_type": "framework",
+      "to_type": "note",
+      "subtype": "framework",
+      "subtype_field": "legacy_type"
+    },
+    {
+      "kind": "retype",
+      "from_type": "insight",
+      "to_type": "note",
+      "subtype": "insight",
+      "subtype_field": "legacy_type"
+    },
+    {
+      "kind": "retype",
+      "from_type": "anecdote",
+      "to_type": "note",
+      "subtype": "anecdote",
+      "subtype_field": "legacy_type"
+    },
+    {
+      "kind": "retype",
+      "from_type": "principle",
+      "to_type": "note",
+      "subtype": "principle",
+      "subtype_field": "legacy_type"
+    },
+    {
+      "kind": "retype",
+      "from_type": "memo",
+      "to_type": "note",
+      "subtype": "memo",
+      "subtype_field": "legacy_type"
+    },
+    {
+      "kind": "page_to_link",
+      "from_type": "symlink",
+      "link_type": "relates_to",
+      "source_slug_from": "body_first_link",
+      "target_slug_from": {
+        "frontmatter_field": "target"
+      }
+    },
+    {
+      "kind": "page_to_link",
+      "from_type": "partner-symlink",
+      "link_type": "partner_of",
+      "source_slug_from": {
+        "frontmatter_field": "source"
+      },
+      "target_slug_from": {
+        "frontmatter_field": "target"
+      }
+    },
+    {
+      "kind": "page_to_link",
+      "from_type": "symlink-manifest",
+      "link_type": "relates_to",
+      "source_slug_from": "body_first_link",
+      "target_slug_from": {
+        "frontmatter_field": "target"
+      }
+    },
+    {
+      "kind": "retype",
+      "from_type": "*unknown*",
+      "to_type": "note",
+      "subtype": "*original_type*",
+      "subtype_field": "legacy_type"
+    }
+  ],
+  "phases": [
+    "extract_atoms",
+    "synthesize_concepts"
+  ],
+  "calibration_domains": [
+    {
+      "name": "architecture_calls",
+      "aggregator": "scalar_brier",
+      "page_types": [
+        "code",
+        "learning"
+      ]
+    },
+    {
+      "name": "effort_estimates",
+      "aggregator": "weighted_brier",
+      "page_types": [
+        "project"
+      ]
+    },
+    {
+      "name": "risk_assessment",
+      "aggregator": "scalar_brier",
+      "page_types": [
+        "project"
+      ]
+    },
+    {
+      "name": "concept_themes",
+      "aggregator": "cluster_summary",
+      "page_types": [
+        "concept"
+      ]
+    },
+    {
+      "name": "idea_conviction",
+      "aggregator": "weighted_brier",
+      "page_types": [
+        "idea"
+      ]
+    },
+    {
+      "name": "pipeline_calls",
+      "aggregator": "scalar_brier",
+      "page_types": [
+        "deal"
+      ]
+    }
+  ]
+}

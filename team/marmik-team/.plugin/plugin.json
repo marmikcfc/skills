@@ -1,0 +1,26 @@
+{
+  "$schema": "https://open-plugin-spec.org/schema/v1/plugin.json",
+  "id": "com.marmikcfc.agent-team",
+  "name": "Marmik Agent Team",
+  "version": "0.1.0",
+  "description": "Four-agent founder team: Atlas orchestrates, Scout researches, Forge builds, Warden reviews. Claude and Codex mixed by task shape.",
+  "keywords": ["team", "founder", "research", "build", "review"],
+  "personas": [
+    "agents/atlas.persona.md",
+    "agents/scout.persona.md",
+    "agents/forge.persona.md",
+    "agents/warden.persona.md"
+  ],
+  "pack_instructions": "instructions.md",
+  "defaults": {
+    "model": "anthropic:claude-sonnet-5",
+    "temperature": 0.7,
+    "triggers": {
+      "mentions": true,
+      "keywords": [],
+      "all_messages": false
+    },
+    "thread_replies": true,
+    "broadcast_replies": false
+  }
+}

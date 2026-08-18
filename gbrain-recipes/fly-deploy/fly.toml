@@ -1,0 +1,124 @@
+# gbrain remote MCP server — Fly.io, scale-to-zero.
+#
+#   fly launch --no-deploy --name gbrain-marmik
+#   fly volumes create gbrain_data --size 3 --region syd
+#   fly secrets set ...          # see README.md
+#   fly deploy
+#
+# Region: put the machine near Supabase. This brain lives in
+# ap-southeast-2 (Sydney), so `syd` keeps the DB round-trip short — it
+# dominates cold-start latency far more than CPU does.
+
+app = "gbrain-marmik"
+primary_region = "syd"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8080"
+  GBRAIN_HOME = "/data"
+  BRAIN_REPO_PATH = "/data/brain"
+  GBRAIN_NO_ONBOARD_NUDGE = "1"
+  GBRAIN_SCHEMA_PACK = "marmik-brain"
+  CODEX_HOME = "/data/.codex"
+  # Under /run, never /data — see the Dockerfile: a readiness verdict stored on
+  # the volume would outlive the boot that earned it.
+  GBRAIN_READY_MARKER = "/run/gbrain.ready"
+
+# The volume is not optional. put_page is write-through to disk, so without
+# persistent storage every markdown file an agent writes is destroyed on the
+# next scale-to-zero cycle. It also caches the cloned brain repo, so cold
+# starts skip a full clone.
+[[mounts]]
+  source = "gbrain_data"
+  destination = "/data"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "suspend"   # suspend resumes faster than a cold boot
+  auto_start_machines = true
+  min_machines_running = 0         # ← scale to zero
+  processes = ["app"]
+
+  # Cold start pays Bun boot + a Postgres connect. One concurrent request is
+  # enough to wake it; the soft limit only governs when Fly adds machines.
+  [http_service.concurrency]
+    type = "requests"
+    soft_limit = 20
+    hard_limit = 40
+
+  # Fly does NOT run the Dockerfile's HEALTHCHECK — machine checks come from
+  # here, and only from here. (The Dockerfile one still earns its keep for
+  # `docker run` and for anything else that reads container health.)
+  #
+  # This check can only prove the port answers, and `/` answers 200 from a
+  # gbrain whose schema never migrated. What actually keeps Fly from routing to
+  # a broken machine is that start.sh is fail-closed: a degraded boot exits
+  # before `gbrain serve`, so there is no listener for this check to find and
+  # the machine never goes healthy. The check is how Fly observes that; the
+  # entrypoint is what guarantees it.
+  #
+  # grace_period is CAPPED AT 60s by Fly — `fly config validate` warns and
+  # silently lowers anything higher, so asking for 90s bought nothing. Declared
+  # at the real ceiling so the file says what actually happens.
+  #
+  # A first boot (migrations + full clone + authenticated push-probe) can
+  # genuinely exceed 60s. If Fly marks the machine unhealthy while it is still
+  # legitimately starting, the fix is NOT a longer grace period — that lever
+  # does not exist. Pre-seed the volume instead: run the clone once via
+  # `fly ssh console`, after which every later boot only re-verifies an
+  # existing tree and returns in seconds.
+  # `/` is NOT a route gbrain serves — it 404s, which Fly reads as unhealthy,
+  # which suspends the machine, which makes the public URL 503 while the brain
+  # itself is perfectly fine. gbrain's startup banner names the real surfaces:
+  # /admin, /mcp, and /health. Probe /health.
+  [[http_service.checks]]
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "60s"
+    method = "GET"
+    path = "/health"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  # 1GB, not 512MB: the image carries Claude Code so gbrain's `claude-cli`
+  # recipe works here, and that recipe dispatches by SPAWNING a whole CLI per
+  # call. gbrain's own footprint plus a Node child process does not fit in
+  # 512MB, and the failure mode is an OOM kill mid-cycle rather than a clean
+  # error. Scale-to-zero means the extra memory is only billed while awake.
+  memory = "1gb"
+  processes = ["app"]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# The web server CANNOT run the dream cycle. `dream` is in CLI_ONLY and in
+# THIN_CLIENT_REFUSED_COMMANDS — there is no MCP op for it. A scale-to-zero
+# web machine is also asleep at 2am by definition.
+#
+# Two ways to close that, pick one:
+#
+#   A) Scheduled machine (simplest — no always-on worker):
+#        fly machine run . --schedule daily --region syd \
+#          --env GBRAIN_HOME=/data --volume gbrain_data:/data \
+#          --entrypoint "" -- gbrain dream --json
+#
+#   B) Minions worker + webhook cron. Enqueue over MCP with
+#      submit_job(autopilot-cycle) — returns in milliseconds, the worker does
+#      the 30-minute cycle out of band. Requires the worker to actually exist:
+#      without it jobs queue forever while the API cheerfully returns 200.
+#
+#        [processes]
+#          app    = ""                                # Dockerfile ENTRYPOINT
+#          worker = "gbrain jobs supervisor --concurrency 2"
+#
+#      Then: fly scale count worker=1   (this defeats scale-to-zero for the
+#      worker machine — that is the cost of option B.)
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Two scale-to-zero caveats worth knowing before you debug them:
+#
+#  · The rate limiter is a bounded in-memory LRU. Buckets reset on every wake.
+#    Fine for single-user; meaningless as a defence at scale.
+#  · The /admin SSE activity feed holds a connection open, which prevents the
+#    machine from ever idling out. Close the tab when you are done watching.
