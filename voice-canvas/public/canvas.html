@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>voice-canvas</title>
+<style>
+  html { color-scheme: light dark; }
+  body {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  #messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .msg {
+    max-width: 70%;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: light-dark(#eee, #2a2a2a);
+    align-self: flex-start;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .msg.user {
+    align-self: flex-end;
+    background: light-dark(#2563eb, #2563eb);
+    color: white;
+  }
+  form {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    border-top: 1px solid light-dark(#ddd, #333);
+  }
+  input[type="text"] {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid light-dark(#ccc, #444);
+    font-size: 14px;
+    background: light-dark(#fff, #1a1a1a);
+    color: inherit;
+  }
+  button {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  button:disabled { opacity: 0.5; cursor: default; }
+  .notice {
+    align-self: center;
+    font-size: 12.5px;
+    color: #6b6860;
+    font-style: italic;
+    padding: 2px 0;
+  }
+  @media (prefers-color-scheme: dark) { .notice { color: #8b92a8; } }
+</style>
+</head>
+<body>
+  <div id="messages"></div>
+  <form id="composer">
+    <input id="input" type="text" placeholder="Say something…" autocomplete="off" />
+    <button type="submit">Send</button>
+    <button type="button" id="dispatch" title="Send the framed brief to the coding agent in the live session">Dispatch</button>
+  </form>
+
+<script>
+  const canvasId = location.pathname.split("/").filter(Boolean).pop();
+  const messagesEl = document.getElementById("messages");
+  const form = document.getElementById("composer");
+  const input = document.getElementById("input");
+
+  const seenClientMsgIds = new Set();
+
+  function addMessage(role, text) {
+    const div = document.createElement("div");
+    div.className = "msg " + (role === "user" ? "user" : "agent");
+    div.textContent = text;
+    messagesEl.appendChild(div);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return div;
+  }
+
+  function addNotice(text) {
+    const div = document.createElement("div");
+    div.className = "notice";
+    div.textContent = text;
+    messagesEl.appendChild(div);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return div;
+  }
+
+  // messageId -> element, for streaming assistant replies
+  const streaming = new Map();
+
+  async function loadHistory() {
+    const res = await fetch(`/api/canvas/${canvasId}/events`);
+    const events = await res.json();
+    for (const e of events) {
+      if (e.type === "transcript") addMessage(e.payload.role, e.payload.text);
+    }
+  }
+
+  function connectStream() {
+    const es = new EventSource(`/api/canvas/${canvasId}/stream`);
+    es.onmessage = (ev) => {
+      const data = JSON.parse(ev.data);
+
+      // Assistant reply is streaming in — open an empty bubble to fill.
+      if (data.type === "transcript_start") {
+        streaming.set(data.messageId, addMessage(data.role, ""));
+        return;
+      }
+
+      if (data.type === "transcript_delta") {
+        const el = streaming.get(data.messageId);
+        if (el) {
+          el.textContent += data.text;
+          messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+        return;
+      }
+
+      // The model decided to act. Show it immediately — running the tool takes
+      // a moment, and a silent gap reads as a hang.
+      if (data.type === "tool_call") {
+        addNotice(
+          data.name === "dispatch_to_agent"
+            ? "→ dispatching to the agent…"
+            : `→ ${data.name}…`
+        );
+        return;
+      }
+
+      if (data.type === "status") {
+        addNotice(`status: ${data.status}`);
+        return;
+      }
+
+      if (data.type !== "transcript") return;
+
+      // Final message: reconcile against the streamed bubble if there was one.
+      if (data.messageId && streaming.has(data.messageId)) {
+        streaming.get(data.messageId).textContent = data.payload.text;
+        streaming.delete(data.messageId);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+        return;
+      }
+
+      const cid = data.payload.clientMsgId;
+      if (cid && seenClientMsgIds.has(cid)) {
+        seenClientMsgIds.delete(cid); // already rendered optimistically, skip echo
+        return;
+      }
+      addMessage(data.payload.role, data.payload.text);
+    };
+    es.onerror = () => {
+      // Browser auto-reconnects EventSource by default; nothing to do.
+    };
+  }
+
+  form.addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = "";
+    const clientMsgId = crypto.randomUUID();
+    seenClientMsgIds.add(clientMsgId);
+    addMessage("user", text); // optimistic render
+    await fetch(`/api/canvas/${canvasId}/message`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ text, clientMsgId }),
+    });
+  });
+
+  // The button and the model's dispatch_to_agent tool hit the same server code.
+  // Here the brief is whatever is typed, or the last thing the agent proposed.
+  document.getElementById("dispatch").addEventListener("click", async () => {
+    const typed = input.value.trim();
+    const lastAgent = [...messagesEl.querySelectorAll(".msg.agent")].pop();
+    const brief = typed || lastAgent?.textContent?.trim() || "";
+    if (!brief) {
+      addNotice("Nothing to dispatch yet — frame the problem first.");
+      return;
+    }
+    input.value = "";
+    addNotice("→ dispatching to the agent…");
+    const res = await fetch(`/api/canvas/${canvasId}/dispatch`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ brief }),
+    });
+    if (!res.ok) {
+      const { error } = await res.json().catch(() => ({ error: "dispatch failed" }));
+      addNotice(`dispatch failed: ${error}`);
+    }
+  });
+
+  loadHistory().then(connectStream);
+</script>
+</body>
+</html>

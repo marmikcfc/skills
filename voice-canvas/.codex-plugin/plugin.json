@@ -1,0 +1,11 @@
+{
+  "name": "voice-canvas",
+  "version": "0.0.1",
+  "description": "A per-session canvas: brainstorm on a webpage, dispatch into the live Claude Code/Codex session you're already in, and check in on what it did.",
+  "author": {
+    "name": "Marmik Pandya",
+    "url": "https://github.com/marmikcfc"
+  },
+  "license": "MIT",
+  "keywords": ["canvas", "voice", "dispatch", "codex", "claude-code"]
+}
