@@ -7,7 +7,7 @@ description: Route to the right mental model based on your domain and problem ty
 
 ## Overview
 
-This is the **master routing skill** for all mental models. Instead of knowing 38 frameworks, start here. Identify your domain and problem type, and this skill points you to the right model(s). Think of it as the "which tool do I use?" guide.
+This is the **master routing skill** for all mental models. Instead of knowing 39 frameworks, start here. Identify your domain and problem type, and this skill points you to the right model(s). Think of it as the "which tool do I use?" guide.
 
 **Core Principle:** Don't memorize models—memorize how to find the right one. Domain + Problem Type → Model.
 
@@ -94,9 +94,11 @@ Should we pivot?                 → Regret Minimization, Reversibility
 Product-market fit               → Jobs to be Done, Bayesian
 Roadmap planning                 → Theory of Constraints, Opportunity Cost
 A/B test interpretation          → Bayesian, Probabilistic
+What's our MVP / what ships first? → Skateboard Model
+Roadmap looks like disconnected parts → Skateboard Model
 ```
 
-**Default for product:** Start with **Jobs to be Done** (what job is the user hiring this for?).
+**Default for product:** Start with **Jobs to be Done** (what job is the user hiring this for?) to find the real need, then **Skateboard Model** to sequence the build.
 
 ---
 
@@ -202,6 +204,7 @@ Removing complexity              → Via Negativa, Occam's Razor
 │  "Why is this broken?"        → 5 Whys Plus, Scientific Method  │
 │  "How does this system work?" → Systems Thinking, Feedback Loops│
 │  "What should we build?"      → Jobs to be Done                 │
+│  "What's our MVP?"            → Skateboard Model                 │
 │  "Should I do this?"          → Reversibility, Regret Min       │
 │  "What could go wrong?"       → Pre-mortem, Red Team            │
 │  "How do I innovate?"         → First Principles, TRIZ          │
@@ -305,6 +308,7 @@ START HERE
 
 ### Product Models (Build the right thing)
 - `Jobs to be Done` - What job is user hiring this for?
+- `Skateboard Model` - Build the smallest complete thing, evolve stage by stage
 - `Thought Experiment` - Structured imagination
 
 ### Estimation Models (Size unknowns)
@@ -357,4 +361,4 @@ Combination pattern: [Sequential/Parallel/Nested/None]
 
 ---
 
-**Remember:** You don't need to know all 38 models. You need to know how to find the right one. Start with domain, identify problem type, look it up, apply. That's it.
+**Remember:** You don't need to know all 39 models. You need to know how to find the right one. Start with domain, identify problem type, look it up, apply. That's it.
