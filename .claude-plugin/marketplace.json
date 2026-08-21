@@ -1,6 +1,6 @@
 {
   "name": "skills",
-  "description": "Marmik's Claude Code plugins and skills — video generation, mental models, creative generation, product-idea pressure-testing, code-change explainers, and X growth.",
+  "description": "Marmik's Claude Code plugins and skills \u2014 video generation, mental models, creative generation, product-idea pressure-testing, code-change explainers, codebase understanding, and X growth.",
   "owner": {
     "name": "Marmik Pandya",
     "url": "https://github.com/marmikcfc"
@@ -14,27 +14,32 @@
     {
       "name": "thinking-models",
       "source": "./thinking-models",
-      "description": "40 mental models as invokable skills — first principles, inversion, Bayesian updating, systems thinking, TRIZ, pre-mortem, red team, plus a forming-opinions discipline. Start with thinking-model-router."
+      "description": "40 mental models as invokable skills \u2014 first principles, inversion, Bayesian updating, systems thinking, TRIZ, pre-mortem, red team, plus a forming-opinions discipline. Start with thinking-model-router."
     },
     {
       "name": "creativity",
       "source": "./creativity",
-      "description": "Divergent idea generation — a creative-generation orchestrator (analogical transfer, conceptual blending, abductive gap-finding), constraint-based creativity, and a probability-weighted option sampler."
+      "description": "Divergent idea generation \u2014 a creative-generation orchestrator (analogical transfer, conceptual blending, abductive gap-finding), constraint-based creativity, and a probability-weighted option sampler."
     },
     {
       "name": "x-growth",
       "source": "./x-growth",
-      "description": "X/Twitter growth via strategic replies — niche profiling, post discovery through twitter-cli, opinion formation, and gated reply drafting."
+      "description": "X/Twitter growth via strategic replies \u2014 niche profiling, post discovery through twitter-cli, opinion formation, and gated reply drafting."
     },
     {
       "name": "proven-better-new",
       "source": "./proven-better-new",
-      "description": "Pressure-test a product/startup idea with Mark Pincus's Proven-Better-New framework — isolate the risky novel bet so an idea doesn't die for the wrong reasons before the market sees it."
+      "description": "Pressure-test a product/startup idea with Mark Pincus's Proven-Better-New framework \u2014 isolate the risky novel bet so an idea doesn't die for the wrong reasons before the market sees it."
     },
     {
       "name": "explain-diff",
       "source": "./explain-diff",
-      "description": "Turn a diff, branch, or PR into a teaching artifact — background, intuition, a conceptual code walkthrough, and five interactive quiz questions whose options can't be pattern-matched. HTML or Notion output."
+      "description": "Turn a diff, branch, or PR into a teaching artifact \u2014 background, intuition, a conceptual code walkthrough, and five interactive quiz questions whose options can't be pattern-matched. HTML or Notion output."
+    },
+    {
+      "name": "understanding",
+      "source": "./understanding",
+      "description": "Explain a codebase or a technical idea at whatever depth is asked for \u2014 ELI5, a five-level ladder from child to expert, an engineering-audience walkthrough, or a map of an unfamiliar repository."
     },
     {
       "name": "voice-canvas",

@@ -81,7 +81,7 @@ Pick by asking **why the viewer is watching**:
 |---|---|---|---|
 | To *understand* — build a mental model | discovery-order | `voice-3b1b` | Opens on a concrete anomaly, withholds the name until the thing is felt, ends on an open question. Long clause-chained sentences (mean ~22 words) kept navigable by opening ~32% of them with And/So/But/Now. |
 | To *decide or build* — act on it | contract-first | `voice-gaurav-sen` | States the guarantee, then the mechanism, then where it breaks. Short declarative beats (mean ~12 words, ~20% under 5 words), heavy second person. |
-| General technical audience, no strong pull | neutral | `explaining-technical-concepts` | Depth-tier guidance (L0 hook → L3 deep dive) and the moves common to both poles. |
+| General technical audience, no strong pull | neutral | `explaining-technical-concepts` (understanding plugin) | Depth-tier guidance (L0 hook → L3 deep dive) and the moves common to both poles. |
 | A specific person's voice the user names | custom | `voice-extractor` | Build a profile from samples first, then narrate against it. |
 
 Defaults by video type:

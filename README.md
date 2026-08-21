@@ -43,7 +43,7 @@ The pipeline treats **narrative structure**, **visual style**, and **narration v
 | **Structure** — how the script is shaped | `explainer-structure` (5-beat hook→tension→metaphor→reveal→recap), `research-video-structure` (thesis→evidence→implications), `launch-video-structure` (problem→why-now→reveal→CTA), `animated-story-structure` (book/idea/parable → narrative arc) |
 | **Voice** — how the narration sounds | `voice-3b1b` (discovery-order, visual-first), `voice-gaurav-sen` (contract-first systems explainer), `voice-caleb-writes-code` (deictic, accumulating diagram), `voice-economics-explained` (documentary register, sourced claims), `voice-extractor` (derive a reusable voice profile from samples) |
 | **Look** — how it reads on screen | `vox-style` (kinetic typography, flat illustration), `explainer-visual-grammar` (screen modes in measured proportions, from 504 classified frames) |
-| **Craft** — writing and timing | `narration-writing` (scene markers, TTS pacing, pronunciation), `voice-driven-timing` (word timestamps → scene boundaries), `explaining-technical-concepts` (engineering audiences at any depth), `using-claude-memory` (personalize without leaking memory) |
+| **Craft** — writing and timing | `narration-writing` (scene markers, TTS pacing, pronunciation), `voice-driven-timing` (word timestamps → scene boundaries), `using-claude-memory` (personalize without leaking memory) |
 | **Production** — engines and assets | `choosing-the-tool` (Manim vs HyperFrames per scene), `manim-essentials`, `soundtrack` (music beds, ducking, stingers), `talking-head-composite` (presenter footage + generated visuals), `provider-config` (swap TTS/image/music/video/LLM providers) |
 
 ## thinking-models — 40 skills
@@ -95,7 +95,7 @@ creativity          → generate widely, mechanism-diverse       (divergent)
 thinking-models     → evaluate, decide, commit with a credence (convergent)
    └─ forming-opinions is the hinge between the two
 x-growth            → uses forming-opinions to earn a reply worth posting
-video-gen           → uses explaining-technical-concepts + a voice profile to earn a script
+video-gen           → uses understanding/explaining-technical-concepts + a voice profile to earn a script
 ```
 
 Generate widely with `creative-generation`, then pick and stand behind a choice with `forming-opinions`.
