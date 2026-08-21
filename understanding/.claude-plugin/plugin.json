@@ -1,0 +1,11 @@
+{
+  "name": "understanding",
+  "version": "0.1.0",
+  "description": "Explain a codebase or a technical idea at whatever depth is asked for — a one-line answer, a five-level ladder from child to expert, a plain-language ELI5, or a map of an unfamiliar repository.",
+  "author": {
+    "name": "Marmik Pandya",
+    "url": "https://github.com/marmikcfc"
+  },
+  "license": "MIT",
+  "keywords": ["explanation", "onboarding", "codebase", "eli5", "teaching", "comprehension", "depth"]
+}

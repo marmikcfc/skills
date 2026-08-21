@@ -65,7 +65,7 @@ Restart Claude Code so the plugin's commands, skills, and agents load, then run 
 | Providers | `provider-config` (incl. **fal.ai gateway** — one key for tts/align/image/music/video/avatar/lipsync; browse with `scripts/fal-models.mjs`)
 | Providers (detail) | `provider-config` (capability→provider config; swap or add any model vendor) |
 | Visual grammar | `explainer-visual-grammar` — three measured styles (constructed-object / accumulating-whiteboard / evidence-collage) mapped to Manim / HyperFrames / talking-head / fal |
-| Voice skills | `voice-3b1b` (discovery-order narration), `voice-gaurav-sen` (contract-first), `explaining-technical-concepts` (neutral, L0→L3 depth tiers), `voice-caleb-writes-code`, `voice-economics-explained`, `voice-extractor` (build a profile from samples) |
+| Voice skills | `voice-3b1b` (discovery-order narration), `voice-gaurav-sen` (contract-first), `voice-caleb-writes-code`, `voice-economics-explained`, `voice-extractor` (build a profile from samples) |
 | Craft skills | `choosing-the-tool`, `manim-essentials`, `narration-writing`, `voice-driven-timing`, `soundtrack`, `using-claude-memory` |
 | Composition contract | delegated to HyperFrames' own `hyperframes-core` / `hyperframes-animation` skills — we keep no local copy |
 
@@ -89,3 +89,14 @@ Layers 3 (smoke) and 4 (agent evals) are manual checklists in `tests/SMOKE.md` a
 ## License
 
 MIT
+
+## Depends on
+
+`explaining-technical-concepts` moved to the **understanding** plugin. It was
+never a video skill — its own description covers PR descriptions, RFCs and
+codebase walkthroughs — and keeping it here meant it only loaded for people
+who had installed a video pipeline.
+
+video-gen still uses it by name, which resolves across plugins. Install
+`understanding` alongside video-gen to keep the neutral L0→L3 voice profile
+available to `video-director`.
